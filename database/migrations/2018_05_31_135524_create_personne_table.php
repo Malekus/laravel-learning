@@ -11,6 +11,7 @@ class CreatePersonneTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('personne', function (Blueprint $table) {
