@@ -11,6 +11,6 @@ class Probleme extends Model
 
     public function personne()
     {
-        return $this->belongsTo('App\Personne', 'personne_id');
+        return $this->belongsTo('App\Personne');
     }
 }
