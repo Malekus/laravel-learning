@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Personne extends Model
 {
 
+    protected $fillable = ['nom'];
+
     protected $table = 'personne';
 
     public function problemes()
     {
-        return $this->hasMany('App\Probleme', 'probleme_id');
+        return $this->hasMany(Probleme::class);
     }
 }

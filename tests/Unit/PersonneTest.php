@@ -21,10 +21,16 @@ class PersonneTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testCreatePersonne(){
-        $personne = factory(Personne::class)->create();
-        $probleme = factory(Probleme::class)->make(['personne_id'=> $personne]);
+   public function testIndexPersonne(){
+        $response = $this->get('/personnes');
+        $response->assertStatus(200);
 
-        dd($probleme);
-    }
+   }
+
+   public function testShowPersonne(){
+       $response = $this->call('GET', '/personnes/{id}', ['id' => 30]);
+       $personne = json_decode($response->getContent());
+       dd($personne->id);
+   }
+
 }

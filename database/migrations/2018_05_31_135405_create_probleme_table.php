@@ -19,6 +19,7 @@ class CreateProblemeTable extends Migration
             $table->string('type');
             $table->timestamps();
         });
+
     }
 
     /**

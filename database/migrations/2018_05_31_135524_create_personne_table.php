@@ -34,11 +34,6 @@ class CreatePersonneTable extends Migration
             $table->string('matricule_caf');      
             $table->timestamps();
         });
-
-        Schema::table('probleme', function (Blueprint $table) {
-            $table->integer('personne_id')->unsigned();
-            $table->foreign('personne_id')->references('id')->on('probleme');
-        });
     }
 
     /**
