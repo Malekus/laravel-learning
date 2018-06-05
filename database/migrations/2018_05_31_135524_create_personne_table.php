@@ -19,7 +19,7 @@ class CreatePersonneTable extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->date('date_naissance');
-            $table->string('sexe');
+            $table->string('sexe', 256);
             $table->integer('enfant');
             $table->string('csp');
             $table->string('categorie');

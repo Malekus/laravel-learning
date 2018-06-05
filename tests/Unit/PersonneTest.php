@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Http\Controllers\ProblemeController;
 use App\Personne;
 use App\Probleme;
+use Illuminate\Support\Facades\Crypt;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,15 +23,11 @@ class PersonneTest extends TestCase
     }
 
    public function testIndexPersonne(){
-        $response = $this->get('/personnes');
-        $response->assertStatus(200);
 
-   }
-
-   public function testShowPersonne(){
-       $response = $this->call('GET', '/personnes/{id}', ['id' => 30]);
-       $personne = json_decode($response->getContent());
-       dd($personne->id);
+        $response = $this->call('GET', '/api/personnes');
+        $personnes = $response->json();
+        $this->assertEquals(200, $response->getStatusCode());
+        dd(Crypt::decryptString($personnes[0]['sexe']));
    }
 
 }
