@@ -8,7 +8,7 @@ $factory->define(App\Personne::class, function (Faker $faker) {
         'nom' => $faker->lastName ,
         'prenom' => $faker->name ,
         'date_naissance' => $faker->dateTime ,
-        'sexe' => Crypt::encryptString($faker->randomElement(['homme', 'femme'])),
+        'sexe' => $faker->randomElement(['homme', 'femme']),
         'enfant' => $faker->numberBetween(0, 5) ,
         'csp' => $faker->randomElement(['formation', 'rsa', 'stagiaire', 'autre', 'cada', 'etudiant']) ,
         'categorie' => $faker->randomElement(['MDPH', 'PLI', 'RSA']) ,

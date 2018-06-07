@@ -1,7 +1,7 @@
 <div class="menubar">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
+            <a class="navbar-item" href="{{ route('index') }}">
                 <img src="http://banlieues-creatives.org/wp-content/uploads/2014/02/apcis.jpg" alt="Placeholder image">
             </a>
             {{--

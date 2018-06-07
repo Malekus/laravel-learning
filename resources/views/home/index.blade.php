@@ -74,11 +74,17 @@
 
     <div class="columns">
         <div class="column">
-            {!! $chart->container() !!}
+            <div class="card">
+                <div class="card-content">
+                    <div class="media-content">
+                        <p class="title is-4">Dernières activités</p>
+                    </div>
+                    <div class="content">
+                        {!! $chart->container() !!}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
     {!! $chart->script() !!}
-
-
 @endsection

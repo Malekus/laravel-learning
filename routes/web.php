@@ -20,3 +20,12 @@ Route::resource('/', 'HomeController');
 Route::resource('/personne', 'PersonneController');
 
 Route::resource('/probleme', 'ProblemeController');
+
+Route::resource('/partenaire', 'PartenaireController');
+
+Route::resource('/configuration', 'ConfigurationController');
+
+Route::resource('/exportation', 'ExportationController');
+
+Route::resource('/statistique', 'StatistiqueController');
+

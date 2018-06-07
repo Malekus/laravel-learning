@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Personne;
+use App\Http\Resources\Personne;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use \App\Http\Resources\Personne as PersonneResource;
 
-class PersonneController extends Controller
+
+class PersonneAPIController extends Controller
 {
+
     public function index()
     {
-        return view('personne.index', compact('personnes'));
+        return response()->json(PersonneResource::collection(Personne::all()), 200, [], JSON_NUMERIC_CHECK);
     }
 
 
@@ -20,6 +23,7 @@ class PersonneController extends Controller
         return response()->json(new PersonneResource($personne), 201, [], JSON_NUMERIC_CHECK);
     }
 
+
     public function show($id)
     {
         $personne = Personne::find($id);
@@ -27,9 +31,8 @@ class PersonneController extends Controller
             return response()->json(null, 404);
         }
         return response()->json(new PersonneResource($personne), 200, [], JSON_NUMERIC_CHECK);
-
-
     }
+
 
     public function update(Request $request, $id)
     {
@@ -40,6 +43,7 @@ class PersonneController extends Controller
         $personne->update($request->all());
         return new PersonneResource($personne);
     }
+
 
     public function destroy($id)
     {
