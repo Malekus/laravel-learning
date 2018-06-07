@@ -10,7 +10,8 @@ class PersonneController extends Controller
 {
     public function index()
     {
-        return view('personne.index', compact('personnes'));
+
+        return view('personne.index', ['personnes', Personne::all()]);
     }
 
 
