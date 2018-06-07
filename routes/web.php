@@ -11,7 +11,12 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
+Route::resource('/', 'HomeController');
+
+Route::resource('/personne', 'PersonneController');
+
+Route::resource('/probleme', 'ProblemeController');
