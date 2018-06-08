@@ -10,7 +10,7 @@ class PersonneController extends Controller
 {
     public function index()
     {
-        $personnes = Personne::all();
+        $personnes = Personne::index()->get(); //->paginate(15);
         return view('personne.index', compact('personnes'));
     }
 
@@ -45,7 +45,7 @@ class PersonneController extends Controller
             return response()->json(null, 404);
         }
         $personne->update($request->all());
-        return new PersonneResource($personne);
+        return redirect(route('personne.index'));
     }
 
     public function destroy($id)

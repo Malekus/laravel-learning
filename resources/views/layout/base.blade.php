@@ -15,13 +15,14 @@
         @include('layout.menubar')
 
         <div class="columns mainly">
-            <div class="column is-2 no-padding">
+            <div class="column is-2 no-padding columnSideBar">
                 <div class="sidebar">
                     @include('layout.sidebar')
                 </div>
             </div>
-            <div class="column">
+            <div class="column is-10 columnContent">
                 @yield('content')
+
             </div>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
         </div>

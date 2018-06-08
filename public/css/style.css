@@ -5,7 +5,7 @@
 }
 
 .menubar nav{
-    background-color: #68768A;
+    background-color: #73879C;
 }
 
 .sidebar{
@@ -18,7 +18,7 @@
 }
 
 .mainly{
-    background-color: #ecf0f1;
+    background-color: #D9DEE4; /*#ecf0f1;*/
     height: calc(100vh - 52px);
     width: 100%;
     margin: 0;
@@ -33,3 +33,20 @@
     background-color: #95a5a6;
 }
 
+.menubar{
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+}
+
+.columnSideBar{
+    position: fixed;
+    top: 52px;
+    z-index: 50;
+}
+
+.columnContent{
+    position: relative;
+    top: 52px;
+    left: 17%;
+}
