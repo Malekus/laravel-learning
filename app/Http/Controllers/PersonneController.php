@@ -10,15 +10,17 @@ class PersonneController extends Controller
 {
     public function index()
     {
-
-        return view('personne.index', ['personnes', Personne::all()]);
+        $personnes = Personne::all();
+        return view('personne.index', compact('personnes'));
     }
 
 
     public function store(Request $request)
     {
+
         $personne = Personne::create($request->all());
-        return response()->json(new PersonneResource($personne), 201, [], JSON_NUMERIC_CHECK);
+        //return response()->json(new PersonneResource($personne), 201, [], JSON_NUMERIC_CHECK);
+        return view('personne.create');
     }
 
     public function show($id)
@@ -29,7 +31,11 @@ class PersonneController extends Controller
         }
         return response()->json(new PersonneResource($personne), 200, [], JSON_NUMERIC_CHECK);
 
+    }
 
+    public function edit($id){
+        $personne = Personne::findOrFail($id);
+        return view('personne.edit', compact('personne'));
     }
 
     public function update(Request $request, $id)
