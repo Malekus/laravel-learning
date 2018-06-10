@@ -9,6 +9,10 @@
                 </div>
                 <div class="column is-8 is-offset-2">
                     {!! Form::open(['method' => 'put', 'url' => route('personne.update', $personne)]) !!}
+
+
+                    {{--
+
                     @foreach($personne->toArray() as $key => $value)
                         @if($key != 'id' && $key != 'created_at' && $key != 'updated_at')
                             <div class="field is-horizontal">
@@ -25,6 +29,10 @@
                             </div>
                         @endif
                     @endforeach
+
+                    --}}
+
+                    @include('personne.form', ['personne' => $personne])
 
                     <div class="field is-grouped is-grouped-centered">
                         <p class="control">
