@@ -11,16 +11,18 @@
                     <div class="column">
                         <div class="level">
                             <div class="level-left">
+                                {!! Form::open(['method' => 'get','url' => route('personne.index')]) !!}
                                 <div class="field is-grouped">
                                     <p class="control is-expanded">
-                                        <input class="input" type="text" placeholder="nom">
+                                        {!! Form::text('nom', null, ['class' => 'input', 'placeholder' => "Nom"]) !!}
                                     </p>
                                     <p class="control">
-                                        <a class="button is-info">
+                                        <button class="button is-info">
                                             Rechercher
-                                        </a>
+                                        </button>
                                     </p>
                                 </div>
+                                {!! Form::close() !!}
 
 
 
@@ -28,7 +30,7 @@
                             <div class="level-right">
                                 <div class="buttons">
                                     <p class="control">
-                                        <a href="{{ route('index') }}" class="button is-success"><span class="icon is-small"><i class="fas fa-plus"></i></span><span>Ajouter une personne</span></a>
+                                        <a href="{{ route('personne.create') }}" class="button is-success"><span class="icon is-small"><i class="fas fa-plus"></i></span><span>Ajouter une personne</span></a>
                                     </p>
                                 </div>
                             </div>
@@ -55,7 +57,7 @@
                                         <td>{{ \Carbon\Carbon::parse($personne->update_at)->format('d/m/Y') }}</td>
                                         <td>{{ $personne->matricule_caf  }}</td>
                                         <td class="has-text-centered">
-                                            <a href="{{ route('index') }}" class="button is-success">
+                                            <a href="{{ route('personne.show', $personne) }}" class="button is-success">
                                         <span class="icon">
                                           <i class="fas fa-search"></i>
                                         </span>

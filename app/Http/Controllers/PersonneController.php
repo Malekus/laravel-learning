@@ -8,29 +8,44 @@ use \App\Http\Resources\Personne as PersonneResource;
 
 class PersonneController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $personnes = Personne::index()->get(); //->paginate(15);
+
+        if($request->get('nom') == null){
+
+            $personnes = Personne::index()->get(); //->paginate(15);
+            return view('personne.index', compact('personnes'));
+        }
+
+
+        $personnes = Personne::index()->where('nom', 'like', '%'.$request->get('nom').'%')->get(); //->paginate(15);
         return view('personne.index', compact('personnes'));
+
     }
 
 
+    public function create(){
+        return view('personne.create');
+    }
+
     public function store(Request $request)
     {
-
         $personne = Personne::create($request->all());
         //return response()->json(new PersonneResource($personne), 201, [], JSON_NUMERIC_CHECK);
-        return view('personne.create');
+        return redirect(route('personne.index'));
     }
 
     public function show($id)
     {
+        /*
         $personne = Personne::find($id);
         if(!$personne){
             return response()->json(null, 404);
         }
         return response()->json(new PersonneResource($personne), 200, [], JSON_NUMERIC_CHECK);
-
+        */
+        $personne = Personne::findOrFail($id);
+        return view('personne.show', compact('personne'));
     }
 
     public function edit($id){
