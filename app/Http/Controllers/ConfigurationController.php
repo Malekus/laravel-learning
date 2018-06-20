@@ -30,7 +30,7 @@ class ConfigurationController extends Controller
      */
     public function create()
     {
-        //
+        return view('personne.create');
     }
 
     /**
@@ -41,7 +41,9 @@ class ConfigurationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $config = Configuration::create($request->all());
+        //return response()->json(new PersonneResource($personne), 201, [], JSON_NUMERIC_CHECK);
+        return redirect(route('configuration.index'));
     }
 
     /**

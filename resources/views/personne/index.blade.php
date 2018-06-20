@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <h1>Personne</h1>
+                            <h1><i class="fas fa-user"></i>  Personne</h1>
                         </div>
                     </div>
 
@@ -61,25 +61,25 @@
                                         <span class="icon">
                                           <i class="fas fa-search"></i>
                                         </span>
-                                                    <span>Afficher</span>
+                                                    <span></span>
                                                 </a>
                                                 <a href="{{ route('personne.edit', $personne) }}" class="btn btn-info">
                                         <span class="icon">
                                           <i class="fas fa-edit"></i>
                                         </span>
-                                                    <span>Modifier</span>
+                                                    <span></span>
                                                 </a>
                                                 <a href="{{ route('index') }}" class="btn btn-dark">
                                         <span class="icon">
                                           <i class="fas fa-redo-alt"></i>
                                         </span>
-                                                    <span>Routine</span>
+                                                    <span></span>
                                                 </a>
                                                 <a href="{{ route('index') }}" class="btn btn-danger">
                                         <span class="icon">
                                           <i class="fas fa-times"></i>
                                         </span>
-                                                    <span>Supprimer</span>
+                                                    <span></span>
                                                 </a>
                                             </td>
                                         </tr>
