@@ -29,3 +29,4 @@ Route::resource('/exportation', 'ExportationController');
 
 Route::resource('/statistique', 'StatistiqueController');
 
+Route::get('/semantic', 'HomeController@semantic');

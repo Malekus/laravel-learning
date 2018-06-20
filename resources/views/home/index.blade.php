@@ -1,90 +1,85 @@
 @extends('layout.base')
 
 @section('content')
-    <div class="columns">
-        <div class="column is-3">
-            <div class="card">
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-left">
-                            <span class="icon is-large"><i class="fas fa-3x fa-user-circle"></i></span>
-                        </div>
-                        <div class="media-content">
-                            <p class="title is-4">Personne</p>
-                        </div>
+        <div class="row no-gutters">
+            <div class="col-lg-3 col-md-6 p-2">
+                <div class="card">
+                    <div class="card-body">
+                        This is some text within a card body.
                     </div>
-                    <div class="content">
-                        <p class="title is-2 has-text-centered">150</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 p-2">
+                <div class="card">
+                    <div class="card-body">
+                        This is some text within a card body.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 p-2">
+                <div class="card">
+                    <div class="card-body">
+                        This is some text within a card body.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 p-2">
+                <div class="card">
+                    <div class="card-body">
+                        This is some text within a card body.
                     </div>
                 </div>
             </div>
         </div>
-        <div class="column is-3">
+
+    <div class="row no-gutters">
+        <div class="col-12 p-2">
             <div class="card">
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-left">
-                            <span class="icon is-large"><i class="fas fa-3x fa-user-friends"></i></span>
-                        </div>
-                        <div class="media-content">
-                            <p class="title is-4">Partenaire</p>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <p class="title is-2 has-text-centered">150</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column is-3">
-            <div class="card">
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-left">
-                            <span class="icon is-large"><i class="fas fa-3x fa-exclamation-triangle"></i></span>
-                        </div>
-                        <div class="media-content">
-                            <p class="title is-4">Problème</p>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <p class="title is-2 has-text-centered">150</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column is-3">
-            <div class="card">
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-left">
-                            <span class="icon is-large"><i class="fas fa-3x fa-calendar-check"></i></span>
-                        </div>
-                        <div class="media-content">
-                            <p class="title is-4">Rendez-vous</p>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <p class="title is-2 has-text-centered">150</p>
-                    </div>
+                <div class="card-body">
+                    <h5 class="">Activités de la semaine</h5>
+                    {!! $chart->container() !!}
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="columns">
-        <div class="column">
-            <div class="card">
-                <div class="card-content">
-                    <div class="media-content">
-                        <p class="title is-4">Dernières activités</p>
+        <div class="row no-gutters">
+            <div class="col-6 p-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Activités de la semaine</h5>
+                        Tab
                     </div>
-                    <div class="content">
-                        {!! $chart->container() !!}
+                </div>
+            </div>
+            <div class="col-6 p-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Activités de la semaine</h5>
+                        Tab
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    {!! $chart->script() !!}
+
+        <div class="row no-gutters">
+            <div class="col-6 p-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Caf du mois</h5>
+                        Tab
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 p-2">
+                <div class="card">
+                    <div class="card-body">
+                        je sais pas encore
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {!! $chart->script() !!}
 @endsection

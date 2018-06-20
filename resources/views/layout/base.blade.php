@@ -5,29 +5,30 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-              integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset("css/style.css")  }}">
-        <title>Application Web</title>
+        <title>Home</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset("css/new.css")  }}">
     </head>
     <body>
-        @include('layout.menubar')
 
-        <div class="columns mainly">
-            <div class="column is-2 no-padding columnSideBar">
-                <div class="sidebar">
-                    @include('layout.sidebar')
-                </div>
-            </div>
-            <div class="column is-10 columnContent">
+        @include('layout.menu')
+
+        @include('layout.sidebar')
+
+        <div class="main-content">
+            <div class="content">
                 @yield('content')
-
             </div>
-
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
         </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+        <script src="{{ asset("js/script.js")  }}"></script>
+        @yield('javascript')
     </body>
 </html>
+
+{{--<script src="{{ asset("js/semantic.min.js")  }}"></script>--}}
+{{--<link rel="stylesheet" href="{{ asset("css/semantic.min.css")  }}">--}}

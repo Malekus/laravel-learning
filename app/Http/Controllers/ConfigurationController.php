@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Configuration;
 use Illuminate\Http\Request;
 
 class ConfigurationController extends Controller
@@ -13,7 +14,12 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
-        return view('configuration.index');
+        $personnes = Configuration::where('categorie', 'Personne')
+            ->orderBy('type', 'asc')
+            ->get(['type', 'libelle']);
+
+
+        return view('configuration.index', compact('personnes'));
 
     }
 

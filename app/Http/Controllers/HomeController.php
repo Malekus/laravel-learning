@@ -17,4 +17,8 @@ class HomeController extends Controller
         $chart->dataset('Mec', 'line', [54, 465, 6, 98, 21]);
         return view('home.index', compact('chart'));
     }
+
+    public function semantic(){
+       return view('semantic.home');
+    }
 }
