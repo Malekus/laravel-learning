@@ -1,5 +1,9 @@
 @extends('layout.base')
 
+@section('titre')
+    · Personne
+@endsection
+
 @section('content')
 
     <div class="row">
@@ -7,7 +11,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 pb-2">
                             <h1><i class="fas fa-user"></i>  Personne</h1>
                         </div>
                     </div>
@@ -61,26 +65,48 @@
                                         <span class="icon">
                                           <i class="fas fa-search"></i>
                                         </span>
-                                                    <span></span>
                                                 </a>
                                                 <a href="{{ route('personne.edit', $personne) }}" class="btn btn-info">
                                         <span class="icon">
                                           <i class="fas fa-edit"></i>
                                         </span>
-                                                    <span></span>
                                                 </a>
-                                                <a href="{{ route('index') }}" class="btn btn-dark">
+                                                <a href="{{ route('personne.routine',$personne) }}"
+                                                   class="btn btn-dark">
                                         <span class="icon">
                                           <i class="fas fa-redo-alt"></i>
                                         </span>
-                                                    <span></span>
                                                 </a>
-                                                <a href="{{ route('index') }}" class="btn btn-danger">
-                                        <span class="icon">
-                                          <i class="fas fa-times"></i>
-                                        </span>
-                                                    <span></span>
-                                                </a>
+
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#modalPersonneSupprimer".$personne->id}}>
+                                                    <span class="icon"><i class="fas fa-times"></i></span>
+                                                </button>
+
+                                                <div class="modal fade" id={{"modalPersonneSupprimer".$personne->id}} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Personne - Supprimer une personne</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                {!! Form::open(['method' => 'delete', 'url' => route('personne.destroy', $personne)]) !!}
+                                                                <div class="form-row text-center">
+                                                                    <p class="col-12">
+                                                                        Voulez-vous supprimer {{ $personne->nom }} {{ $personne->prenom }} ?
+                                                                    </p>
+                                                                </div>
+                                                                <div class="form-row text-center">
+                                                                    <div class="col-12">
+                                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                                        <button type="submit" class="btn btn-primary">Supprimer</button>
+                                                                    </div>
+                                                                </div>
+                                                                {!! Form::close() !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </td>
                                         </tr>
                                     @endforeach

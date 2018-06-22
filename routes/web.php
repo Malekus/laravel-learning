@@ -19,6 +19,9 @@ Route::resource('/', 'HomeController');
 
 Route::resource('/personne', 'PersonneController');
 
+Route::get('/personne/{personne}/routine', 'PersonneController@routine')
+    ->name('personne.routine');
+
 Route::resource('/probleme', 'ProblemeController');
 
 Route::resource('/partenaire', 'PartenaireController');

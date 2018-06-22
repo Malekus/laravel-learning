@@ -17,21 +17,21 @@ class CreatePersonneTable extends Migration
         Schema::create('personne', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nom');
-            $table->string('prenom');
+            $table->string('prenom')->nullable();
             $table->date('date_naissance')->nullable();
-            $table->string('sexe', 256);
-            $table->integer('enfant');
-            $table->string('csp');
-            $table->string('categorie');
-            $table->string('nationalite');
-            $table->string('logement');
-            $table->string('telephone');
-            $table->string('email');
-            $table->string('adresse');
-            $table->string('code_postale');
-            $table->string('ville');
-            $table->boolean('prioritaire');
-            $table->string('matricule_caf');      
+            $table->string('sexe', 256)->nullable();
+            $table->integer('enfant')->nullable();
+            $table->string('csp')->nullable();
+            $table->string('categorie')->nullable();
+            $table->string('nationalite')->nullable();
+            $table->string('logement')->nullable();
+            $table->string('telephone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('adresse')->nullable();
+            $table->string('code_postale')->nullable();
+            $table->string('ville')->nullable();
+            $table->boolean('prioritaire')->nullable();
+            $table->string('matricule_caf')->nullable();
             $table->timestamps();
         });
     }

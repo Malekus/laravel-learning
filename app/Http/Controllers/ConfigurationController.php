@@ -30,7 +30,7 @@ class ConfigurationController extends Controller
      */
     public function create()
     {
-        return view('personne.create');
+        return view('configuration.create');
     }
 
     /**

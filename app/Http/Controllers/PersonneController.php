@@ -70,6 +70,10 @@ class PersonneController extends Controller
             return response()->json(null, 404);
         }
         $personne->delete();
-        return new PersonneResource($personne);
+        return redirect(route('personne.index'));
+    }
+
+    public function routine($id){
+
     }
 }

@@ -53,17 +53,25 @@
                     </div>
                     <td></td>
 
-                    <div class="row">
-                        <div class="col-12">
-                            <h2>Problèmes</h2>
+                    @if(isset($problemes))
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>Problèmes</h2>
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
-                    <div class="row">
-                        <div class="col-12">
-                            <h2>Rendez-vous</h2>
+
+                    @if(isset($actions))
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>Rendez-vous</h2>
+                            </div>
                         </div>
-                    </div>
+                    @endif
+
+
+
                 </div>
             </div>
         </div>

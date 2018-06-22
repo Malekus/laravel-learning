@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Faker\Provider\DateTime;
 use Illuminate\Database\Eloquent\Model;
 
 class Personne extends Model
@@ -24,7 +26,8 @@ class Personne extends Model
         'code_postale',
         'ville',
         'prioritaire',
-        'matricule_caf'];
+        'matricule_caf'
+    ];
 
 
     protected $table = 'personne';
@@ -42,4 +45,10 @@ class Personne extends Model
         return $query
             ->select('id', 'nom', 'prenom', 'matricule_caf', 'updated_at');
     }
+
+    public function setDateNaissanceAttribute($value){
+        $date = Carbon::createFromFormat('d/m/Y',$value);
+        $this->attributes['date_naissance'] = $date;
+    }
+
 }

@@ -1,424 +1,286 @@
-@if(! empty($personne))
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('nom', 'Nom', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('nom', $personne->nom, ['class' => 'input']) !!}
-                </p>
+@if(!isset($personne))
+    <div class="form-group row justify-content-center">
+        {!! Form::label('nom', 'Nom', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('nom', null, ['class' => 'form-control', 'required']) !!}
+            <div class="invalid-feedback">
+                Saisir un nom
             </div>
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('prenom', 'Prénom', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('prenom', $personne->prenom, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('prenom', 'Prénom', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('prenom', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('date_naissance', 'Date naissance', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('date_naissance', $personne->date_naissance, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('date_naissance', 'Date de naissance', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('date_naissance', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('sexe', 'Sexe', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::select('sexe',array('homme'=>"Homme", 'femme'=>"Femme"), $personne->sexe, ['class' => 'select is-fullwidth']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('sexe', 'Sexe', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::select('sexe', ['homme' => 'Homme', 'femme' => 'Femme'], 'homme', ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('enfant', 'Enfant', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('enfant', $personne->enfant, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('enfant', 'Enfant', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::input('number', 'enfant', 0, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('csp', 'CSP', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('csp', $personne->csp, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('csp', 'CSP', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('csp', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('categorie', 'Catégorie', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('categorie', $personne->categorie, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('categorie', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('nationalite', 'Nationalité', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('nationalite', $personne->nationalite, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('nationalite', 'Nationalité', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('nationalite', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('logement', 'Logement', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('logement', $personne->logement, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('logement', 'Logement', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('logement', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('telephone', 'Téléphone', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('telephone', $personne->telephone, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('telephone', 'Téléphone', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('telephone', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('email', 'Email', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('email', $personne->email, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('email', 'Email', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::email('email', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('adresse', 'Adresse', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('adresse', $personne->adresse, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('adresse', 'Adresse', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('adresse', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('code_postale', 'Code postale', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('code_postale', $personne->code_postale, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('code_postale', 'Code Postale', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('code_postale', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('ville', 'Ville', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('ville', $personne->ville, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('ville', 'Ville', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('ville', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label">
-            {!! Form::label('prioritaire', 'Prioritaire', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field is-narrow">
-                <p class="control">
-                    {!! Form::radio('prioritaire', 1, $personne->prioritaire ? true : false, ['class' => 'radio']) !!}
-                    Oui
-                    {!! Form::radio('prioritaire', 0, $personne->prioritaire ? false : true, ['class' => 'radio']) !!}
-                    Non
-                </p>
+    <fieldset class="form-group">
+        <div class="row justify-content-center">
+            <legend class="col-lg-2 col-form-label pt-0">Quartier prioritaire</legend>
+            <div class="col-lg-6">
+                <div class="form-check">
+                    {!! Form::radio('prioritaire', 1, false, ['class' => 'form-check-input']) !!}
+                    {!! Form::label('prioritaire', "Oui", ['class' => 'col-lg-2 form-check-label']) !!}
+                </div>
+                <div class="form-check">
+                    {!! Form::radio('prioritaire', 0, true, ['class' => 'form-check-input']) !!}
+                    {!! Form::label('prioritaire', "Non", ['class' => 'col-lg-2 form-check-label']) !!}
+                </div>
             </div>
+        </div>
+    </fieldset>
+
+    <div class="form-group row justify-content-center">
+        {!! Form::label('matricule_caf', 'Matricule CAF', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('matricule_caf', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('matricule_caf', 'Matricule caf', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('matricule_caf', $personne->matricule_caf, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-row text-center">
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
         </div>
     </div>
-
 @else
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('nom', 'Nom', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('nom', null, ['class' => 'input']) !!}
-                </p>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('nom', 'Nom', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('nom', $personne->nom, ['class' => 'form-control', 'required']) !!}
+            <div class="invalid-feedback">
+                Saisir un nom
             </div>
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('prenom', 'Prénom', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('prenom', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('prenom', 'Prénom', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('prenom', $personne->prenom, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('date_naissance', 'Date naissance', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('date_naissance', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('date_naissance', 'Date de naissance', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('date_naissance', $personne->date_naissance, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('sexe', 'Sexe', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::select('sexe', array('homme'=>"Homme", 'femme'=>"Femme"), 'homme', ['class' => 'select is-fullwidth']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('sexe', 'Sexe', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::select('sexe', ['homme' => 'Homme', 'femme' => 'Femme'], $personne->sexe, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('enfant', 'Enfant', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('enfant', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('enfant', 'Enfant', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::input('number', 'enfant', $personne->enfant, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('csp', 'CSP', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('csp', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('csp', 'CSP', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('csp', $personne->csp, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('categorie', 'Catégorie', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('categorie', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('categorie', $personne->categorie, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('nationalite', 'Nationalité', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('nationalite', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('nationalite', 'Nationalité', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('nationalite', $personne->nationalite, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('logement', 'Logement', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('logement', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('logement', 'Logement', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('logement', $personne->logement, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('telephone', 'Téléphone', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('telephone', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('telephone', 'Téléphone', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('telephone', $personne->telephone, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('email', 'Email', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('email', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('email', 'Email', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::email('email', $personne->email, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('adresse', 'Adresse', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('adresse', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('adresse', 'Adresse', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('adresse', $personne->adresse, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('code_postale', 'Code postale', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('code_postale', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('code_postale', 'Code Postale', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('code_postale', $personne->code_postale, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('ville', 'Ville', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('ville', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-group row justify-content-center">
+        {!! Form::label('ville', 'Ville', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('ville', $personne->ville, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label">
-            {!! Form::label('prioritaire', 'Prioritaire', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field is-narrow">
-                <p class="control">
-                    {!! Form::radio('prioritaire', 1, ['class' => 'radio']) !!} Oui
-                    {!! Form::radio('prioritaire', 0, true, ['class' => 'radio']) !!} Non
-                </p>
+    <fieldset class="form-group">
+        <div class="row justify-content-center">
+            <legend class="col-lg-2 col-form-label pt-0">Quartier prioritaire</legend>
+            <div class="col-lg-6">
+                <div class="form-check">
+                    {!! Form::radio('prioritaire', 1, $personne->prioritaire ? true : false, ['class' => 'form-check-input']) !!}
+                    {!! Form::label('prioritaire', "Oui", ['class' => 'col-lg-2 form-check-label']) !!}
+                </div>
+                <div class="form-check">
+                    {!! Form::radio('prioritaire', 0, $personne->prioritaire ? false : true, ['class' => 'form-check-input']) !!}
+                    {!! Form::label('prioritaire', "Non", ['class' => 'col-lg-2 form-check-label']) !!}
+                </div>
             </div>
+        </div>
+    </fieldset>
+
+    <div class="form-group row justify-content-center">
+        {!! Form::label('matricule_caf', 'Matricule CAF', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::text('matricule_caf', $personne->matricule_caf, ['class' => 'form-control']) !!}
         </div>
     </div>
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            {!! Form::label('matricule_caf', 'Matricule caf', ['class' => 'label']) !!}
-        </div>
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    {!! Form::text('matricule_caf', null, ['class' => 'input']) !!}
-                </p>
-            </div>
+    <div class="form-row text-center">
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Modifier</button>
         </div>
     </div>
 @endif
+
+
+
+
+
+@section('javascript')
+
+
+    @parent
+    $(document).ready(function () {
+
+        var shortDate = function (myDate) {
+            if (myDate.length == 2) return myDate.concat("/");
+            if (myDate.length == 5) return myDate.concat("/");
+            if (myDate.length == 10) return myDate.slice(0, -1);
+            return myDate;
+        };
+
+        $('#date_naissance').keypress(function () {
+            $('#date_naissance').val(shortDate($('#date_naissance').val()));
+        });
+    });
+
+
+@endsection

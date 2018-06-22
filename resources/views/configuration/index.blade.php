@@ -1,5 +1,9 @@
 @extends('layout.base')
 
+@section('titre')
+    · Configuration
+@endsection
+
 @section('content')
 
     <div class="row">
@@ -7,7 +11,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 pb-2">
                             <h1><i class="fas fa-cogs"></i>  Configuration</h1>
                         </div>
                     </div>
@@ -148,11 +152,48 @@
                                                             <h5 class="modal-title" id="exampleModalLongTitle">Personne - Ajouter une configuration</h5>
                                                         </div>
                                                         <div class="modal-body">
+                                                            {!! Form::open(['method' => 'post', 'url' => route('configuration.store'), 'class' => 'needs-validation', 'novalidate']) !!}
+                                                            <div class="form-group row justify-content-center">
+                                                                {!! Form::label('categorie', 'Catégorie', ['class' => 'col-4 col-form-label']) !!}
+                                                                <div class="col-8">
+                                                                    {!! Form::text('categorie', null, ['class' => 'form-control', 'required']) !!}
+                                                                    <div class="invalid-feedback">
+                                                                        Saisir une catégorie
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row justify-content-center">
+                                                                {!! Form::label('type', 'Type', ['class' => 'col-4 col-form-label']) !!}
+                                                                <div class="col-8">
+                                                                    {!! Form::text('type', null, ['class' => 'form-control', 'required']) !!}
+                                                                    <div class="invalid-feedback">
+                                                                        Saisir un type
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row justify-content-center">
+                                                                {!! Form::label('libelle', 'Libellé', ['class' => 'col-4 col-form-label']) !!}
+                                                                <div class="col-8">
+                                                                    {!! Form::text('libelle', null, ['class' => 'form-control', 'required']) !!}
+                                                                    <div class="invalid-feedback">
+                                                                        Saisir un libellé
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row justify-content-center">
+                                                                {!! Form::label('libelle2', 'Libellé 2', ['class' => 'col-4 col-form-label']) !!}
+                                                                <div class="col-8">
+                                                                    {!! Form::text('libelle2', null, ['class' => 'form-control']) !!}
+                                                                </div>
+                                                            </div>
 
-                                                        </div>
-                                                        <div class="modal-footer text-center">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                                            <button type="button" class="btn btn-primary">Ajouter</button>
+                                                            <div class="form-row text-center">
+                                                                <div class="col-12">
+                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                                                                </div>
+                                                            </div>
+                                                            {!! Form::close() !!}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -180,6 +221,30 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('javascript')
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
 @endsection
 
 {{--
