@@ -62,26 +62,18 @@
                                             <td class="text-center">
                                                 <a href="{{ route('personne.show', $personne) }}"
                                                    class="btn btn-success">
-                                        <span class="icon">
-                                          <i class="fas fa-search"></i>
-                                        </span>
+                                                    <span class="icon"><i class="fas fa-search"></i></span>
                                                 </a>
                                                 <a href="{{ route('personne.edit', $personne) }}" class="btn btn-info">
-                                        <span class="icon">
-                                          <i class="fas fa-edit"></i>
-                                        </span>
+                                                    <span class="icon"><i class="fas fa-edit"></i></span>
                                                 </a>
                                                 <a href="{{ route('personne.routine',$personne) }}"
                                                    class="btn btn-dark">
-                                        <span class="icon">
-                                          <i class="fas fa-redo-alt"></i>
-                                        </span>
+                                                    <span class="icon"><i class="fas fa-redo-alt"></i></span>
                                                 </a>
-
                                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#modalPersonneSupprimer".$personne->id}}>
                                                     <span class="icon"><i class="fas fa-times"></i></span>
                                                 </button>
-
                                                 <div class="modal fade" id={{"modalPersonneSupprimer".$personne->id}} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
@@ -106,7 +98,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </td>
                                         </tr>
                                     @endforeach
@@ -140,85 +131,3 @@
         </div>
     </div>
 @endsection
-
-{{--
-
-
-
-                        <div class="col align-self-center">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-
-
-{!! Form::open(['method' => 'get','url' => route('personne.index')]) !!}
-                                <div class="field is-grouped">
-                                    <p class="control is-expanded">
-                                        {!! Form::text('nom', null, ['class' => 'input', 'placeholder' => "Nom"]) !!}
-                                    </p>
-                                    <p class="control">
-                                        <button class="button is-info">
-                                            Rechercher
-                                        </button>
-                                    </p>
-                                </div>
-                                {!! Form::close() !!}
-
-
-                                                        <table class="table is-bordered is-narrow is-hoverable is-fullwidth">
-                            <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Prénom</th>
-                                <th>Dernière activité</th>
-                                <th>Matricule Caf</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            @foreach($personnes as $personne)
-                                <tr>
-                                    <td>{{ $personne->nom  }}</td>
-                                    <td>{{ $personne->prenom  }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($personne->update_at)->format('d/m/Y') }}</td>
-                                    <td>{{ $personne->matricule_caf  }}</td>
-                                    <td class="has-text-centered">
-                                        <a href="{{ route('personne.show', $personne) }}" class="button is-success">
-                                        <span class="icon">
-                                          <i class="fas fa-search"></i>
-                                        </span>
-                                            <span>Afficher</span>
-                                        </a>
-                                        <a href="{{ route('personne.edit', $personne) }}" class="button is-info">
-                                        <span class="icon">
-                                          <i class="fas fa-edit"></i>
-                                        </span>
-                                            <span>Modifier</span>
-                                        </a>
-                                        <a href="{{ route('index') }}" class="button is-active">
-                                        <span class="icon">
-                                          <i class="fas fa-redo-alt"></i>
-                                        </span>
-                                            <span>Routine</span>
-                                        </a>
-                                        <a href="{{ route('index') }}" class="button is-danger">
-                                        <span class="icon">
-                                          <i class="fas fa-times"></i>
-                                        </span>
-                                            <span>Supprimer</span>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-
---}}

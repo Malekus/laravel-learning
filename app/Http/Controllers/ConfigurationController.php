@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Configuration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class ConfigurationController extends Controller
 {
@@ -14,12 +15,14 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
-        $personnes = Configuration::where('categorie', 'Personne')
+        $configurations = Configuration::where('categorie', 'Personne')
             ->orderBy('type', 'asc')
-            ->get(['type', 'libelle']);
-
-
-        return view('configuration.index', compact('personnes'));
+            ->get(['id', 'categorie', 'type', 'libelle', 'libelle2', 'created_at']);
+        //return view('configuration.index', compact('configurations'));
+        $types = Configuration::where('categorie', 'Personne')
+            ->groupBy('type')
+            ->get(['type']);
+        return view('configuration.test', compact('types'));
 
     }
 
@@ -43,7 +46,8 @@ class ConfigurationController extends Controller
     {
         $config = Configuration::create($request->all());
         //return response()->json(new PersonneResource($personne), 201, [], JSON_NUMERIC_CHECK);
-        return redirect(route('configuration.index'));
+        return response()->json(['success' => true, 'message' => 'Coool', 'config' => $config], 201, [], JSON_PRETTY_PRINT);
+        /*return redirect(route('configuration.index'));*/
     }
 
     /**
@@ -88,6 +92,11 @@ class ConfigurationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $config = Configuration::find($id);
+        if(!$config){
+            return response()->json(null, 404);
+        }
+        $config->delete();
+        return redirect(route('configuration.index'));
     }
 }

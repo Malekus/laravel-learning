@@ -32,4 +32,5 @@ Route::resource('/exportation', 'ExportationController');
 
 Route::resource('/statistique', 'StatistiqueController');
 
-Route::get('/semantic', 'HomeController@semantic');
+Route::get('/ajax/{categorie}/{type}', 'AjaxController@configTab')
+    ->name('ajax.configTab');

@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Configuration;
 
 class AjaxController extends Controller
 {
-    //
+    public static function configTab($categorie, $type)
+    {
+        $configurations = Configuration::where('categorie', $categorie)
+            ->where('type', $type)
+            ->get();
+        return view('ajax.configTab', compact('configurations'));
+
+    }
 }

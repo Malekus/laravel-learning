@@ -16,8 +16,20 @@ class Configuration extends Model
         'libelle2'
     ];
 
-    public function scopeIndexConfig($query, $categorie){
-        return $query
-            ->select('id', 'nom', 'prenom', 'matricule_caf', 'updated_at');
+    public function scopeField($query, $categorie, $type)
+    {
+        $row = $query
+            ->select($type)
+            ->where('categorie', $categorie)
+            ->groupBy($type)
+            ->get()
+            ->toArray();
+        $tab = [];
+        foreach ($row as $key => $line) {
+            $tab[$line[$type]] = $line[$type];
+        }
+        return $tab;
+
     }
+
 }

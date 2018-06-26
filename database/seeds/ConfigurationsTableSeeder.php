@@ -27,6 +27,7 @@ class ConfigurationsTableSeeder extends Seeder
         App\Configuration::create(['categorie' => 'Partenaire', 'type' => 'Structure', 'libelle' => 'Mairie', 'libelle2' => NULL]);
         App\Configuration::create(['categorie' => 'Personne', 'type' => 'CSP', 'libelle' => 'Etudiant', 'libelle2' => NULL]);
         App\Configuration::create(['categorie' => 'Personne', 'type' => 'CSP', 'libelle' => 'RSA', 'libelle2' => NULL]);
+        App\Configuration::create(['categorie' => 'Personne', 'type' => 'Niveau Scolaire', 'libelle' => 'Lycée', 'libelle2' => NULL]);
         App\Configuration::create(['categorie' => 'Personne', 'type' => 'Catégorie', 'libelle' => 'RSA', 'libelle2' => NULL]);
         App\Configuration::create(['categorie' => 'Personne', 'type' => 'Situation', 'libelle' => 'Couple', 'libelle2' => NULL]);
         App\Configuration::create(['categorie' => 'Personne', 'type' => 'Logement', 'libelle' => 'HLM', 'libelle2' => NULL]);

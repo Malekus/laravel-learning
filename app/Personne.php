@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use Faker\Provider\DateTime;
 use Illuminate\Database\Eloquent\Model;
+use function PHPSTORM_META\type;
 
 class Personne extends Model
 {
@@ -47,8 +48,11 @@ class Personne extends Model
     }
 
     public function setDateNaissanceAttribute($value){
-        $date = Carbon::createFromFormat('d/m/Y',$value);
-        $this->attributes['date_naissance'] = $date;
+        if($value instanceof string){
+            $date = Carbon::createFromFormat('d/m/Y',$value);
+            $this->attributes['date_naissance'] = $date;
+        }
+        $this->attributes['date_naissance'] = $value;
     }
 
 }

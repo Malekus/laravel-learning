@@ -39,7 +39,7 @@
 
                                         <div class="col-lg-8 pt-2">
                                             <div class="row">
-                                                @foreach($personnes as $key => $personne)
+                                                @foreach($configurations as $key => $configuration)
                                                     @if($key == 0)
                                                         <div class="col-12 pt-2">
                                                             <div class="">
@@ -53,45 +53,60 @@
                                                                     </thead>
                                                                     <tbody>
                                                                     <tr>
-                                                                        <td>{{ $personne->type }}</td>
-                                                                        <td>{{ $personne->libelle }}</td>
-                                                                        <td  class="text-center"><a href="#" class="btn btn-primary"><span
-                                                                                        class="icon"><i
+                                                                        <td>{{ $configuration->type }}</td>
+                                                                        <td>{{ $configuration->libelle }}</td>
+                                                                        <td class="text-center">
+                                                                            <button type="button"
+                                                                                    class="btn btn-primary"
+                                                                                    data-toggle="modal"
+                                                                                    data-target={{ "#showModal".$configuration->id  }}>
+                                                                                <span class="icon"><i
                                                                                             class="fas fa-search"></i></span>
-                                                                                <span></span>
-                                                                            </a>
-                                                                            <a href="#"
-                                                                               class="btn btn-danger">
-                                                                <span class="icon">
-                                                                  <i class="fas fa-trash-alt"></i>
-                                                                </span>
-                                                                                <span></span>
-                                                                            </a>
+                                                                            </button>
+
+                                                                            <button type="button" class="btn btn-danger"
+                                                                                    data-toggle="modal"
+                                                                                    data-target={{ "#deleteModal".$configuration->id  }}>
+                                                                                <span class="icon"><i
+                                                                                            class="fas fa-trash-alt"></i></span>
+                                                                            </button>
                                                                         </td>
                                                                         </td>
                                                                     </tr>
+                                                                    <div class="d-none">
+                                                                        @include('modal.show', ['titleModal' => 'Personne'])
+                                                                        @include('modal.delete', ['titleModal' => 'Personne'])
+
+                                                                    </div>
                                                                     @else
-                                                                        @if($personnes[$key-1]->type == $personne->type)
+                                                                        @if($configurations[$key-1]->type == $configuration->type)
                                                                             <tr>
-                                                                                <td>{{ $personne->type }}</td>
-                                                                                <td>{{ $personne->libelle }}</td>
-                                                                                <td  class="text-center"><a href="#"
-                                                                                       class="btn btn-primary">
-                                        <span class="icon">
-                                          <i class="fas fa-search"></i>
-                                        </span>
-                                                                                        <span></span>
-                                                                                    </a>
-                                                                                    <a href="#"
-                                                                                       class="btn btn-danger">
-                                        <span class="icon">
-                                          <i class="fas fa-trash-alt"></i>
-                                        </span>
-                                                                                        <span></span>
-                                                                                    </a>
+                                                                                <td>{{ $configuration->type }}</td>
+                                                                                <td>{{ $configuration->libelle }}</td>
+                                                                                <td class="text-center">
+                                                                                    <button type="button"
+                                                                                            class="btn btn-primary"
+                                                                                            data-toggle="modal"
+                                                                                            data-target={{ "#showModal".$configuration->id  }}>
+                                                                                        <span class="icon"><i
+                                                                                                    class="fas fa-search"></i></span>
+                                                                                    </button>
+
+                                                                                    <button type="button"
+                                                                                            class="btn btn-danger"
+                                                                                            data-toggle="modal"
+                                                                                            data-target={{ "#deleteModal".$configuration->id  }}>
+                                                                                        <span class="icon"><i
+                                                                                                    class="fas fa-trash-alt"></i></span>
+                                                                                    </button>
                                                                                 </td>
                                                                                 </td>
                                                                             </tr>
+                                                                            <div class="d-none">
+                                                                                @include('modal.show', ['titleModal' => 'Personne'])
+                                                                                @include('modal.delete', ['titleModal' => 'Personne'])
+
+                                                                            </div>
                                                                         @else
                                                                     </tbody>
                                                                 </table>
@@ -109,25 +124,33 @@
                                                                     </thead>
                                                                     <tbody>
                                                                     <tr>
-                                                                        <td>{{ $personne->type }}</td>
-                                                                        <td>{{ $personne->libelle }}</td>
+                                                                        <td>{{ $configuration->type }}</td>
+                                                                        <td>{{ $configuration->libelle }}</td>
                                                                         <td  class="text-center">
-                                                                            <a href="#"
-                                                                               class="btn btn-primary">
-                                        <span class="icon">
-                                          <i class="fas fa-search"></i>
-                                        </span>
-                                                                                <span></span>
-                                                                            </a>
-                                                                            <a href="#"
-                                                                               class="btn btn-danger">
-                                        <span class="icon">
-                                          <i class="fas fa-trash-alt"></i>
-                                        </span>
-                                                                                <span></span>
-                                                                            </a>
+
+                                                                            <button type="button"
+                                                                                    class="btn btn-primary"
+                                                                                    data-toggle="modal"
+                                                                                    data-target={{ "#showModal".$configuration->id  }}>
+                                                                                <span class="icon"><i
+                                                                                            class="fas fa-search"></i></span>
+                                                                            </button>
+
+                                                                            <button type="button" class="btn btn-danger"
+                                                                                    data-toggle="modal"
+                                                                                    data-target={{ "#deleteModal".$configuration->id  }}>
+                                                                                <span class="icon"><i
+                                                                                            class="fas fa-trash-alt"></i></span>
+                                                                            </button>
+
                                                                         </td>
                                                                     </tr>
+                                                                    <div class="d-none">
+                                                                        @include('modal.show', ['titleModal' => 'Personne'])
+                                                                        @include('modal.delete', ['titleModal' => 'Personne'])
+
+                                                                    </div>
+
                                                                     @endif
                                                                     @endif
                                                                     @endforeach
@@ -154,18 +177,19 @@
                                                         <div class="modal-body">
                                                             {!! Form::open(['method' => 'post', 'url' => route('configuration.store'), 'class' => 'needs-validation', 'novalidate']) !!}
                                                             <div class="form-group row justify-content-center">
-                                                                {!! Form::label('categorie', 'Catégorie', ['class' => 'col-4 col-form-label']) !!}
-                                                                <div class="col-8">
-                                                                    {!! Form::text('categorie', null, ['class' => 'form-control', 'required']) !!}
+                                                                {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-4 col-form-label']) !!}
+                                                                <div class="col-lg-8">
+                                                                    {!! Form::select('categorie', \App\Configuration::field('Personne', 'categorie'), 'Personne',['class' => 'form-control', 'required']) !!}
                                                                     <div class="invalid-feedback">
                                                                         Saisir une catégorie
                                                                     </div>
                                                                 </div>
                                                             </div>
+
                                                             <div class="form-group row justify-content-center">
                                                                 {!! Form::label('type', 'Type', ['class' => 'col-4 col-form-label']) !!}
                                                                 <div class="col-8">
-                                                                    {!! Form::text('type', null, ['class' => 'form-control', 'required']) !!}
+                                                                    {!! Form::select('type', \App\Configuration::field('Personne', 'type'), 'Personne',['class' => 'form-control', 'required']) !!}
                                                                     <div class="invalid-feedback">
                                                                         Saisir un type
                                                                     </div>
@@ -178,12 +202,6 @@
                                                                     <div class="invalid-feedback">
                                                                         Saisir un libellé
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row justify-content-center">
-                                                                {!! Form::label('libelle2', 'Libellé 2', ['class' => 'col-4 col-form-label']) !!}
-                                                                <div class="col-8">
-                                                                    {!! Form::text('libelle2', null, ['class' => 'form-control']) !!}
                                                                 </div>
                                                             </div>
 
@@ -225,7 +243,6 @@
 
 
 @section('javascript')
-    <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
             'use strict';
@@ -244,68 +261,4 @@
                 });
             }, false);
         })();
-    </script>
 @endsection
-
-{{--
-
-<div class="col-6">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-hover">
-                                                    <thead>
-                                                    <tr>
-                                                        <th scope="col">Type</th>
-                                                        <th scope="col">Libelle</th>
-                                                        <th scope="col">Action</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($personnes as $key => $personne)
-                                                        @if($key != 0)
-                                                            @if($personnes[$key-1]->type == $personne->type)
-                                                                <tr>
-                                                                    <td>{{ $personne->type }}</td>
-                                                                    <td>{{ $personne->libelle }}</td>
-                                                                    <td>Action</td>
-                                                                </tr>
-                                                            @else
-                                                                </tbody>
-                                                                </table>
-                                                                </div>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                <div class="table-responsive">
-                                                                <table class="table table-bordered table-hover">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th scope="col">Type</th>
-                                                                    <th scope="col">Libelle</th>
-                                                                    <th scope="col">Action</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td>{{ $personne->type }}</td>
-                                                                    <td>{{ $personne->libelle }}</td>
-                                                                    <td>Action</td>
-                                                                </tr>
-                                                            @endif
-                                                                <tr>
-                                                                    <td>{{ $personne->type }}</td>
-                                                                    <td>{{ $personne->libelle }}</td>
-                                                                    <td>{{ $personnes[$key-1]->type == $personne->type  }} </td>
-                                                                </tr>
-                                                            @else
-                                                                <tr>
-                                                                    <td>{{ $personne->type }}</td>
-                                                                    <td>{{ $personne->libelle }}</td>
-                                                                    <td>Action</td>
-                                                                </tr>
-                                                            @endif
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
---}}

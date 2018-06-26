@@ -181,3 +181,7 @@ canvas {
         text-align: left;
     }
 }
+
+.no-height{
+    height: 0;
+}
