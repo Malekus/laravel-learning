@@ -1,4 +1,4 @@
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover" id={{$nameTab }}>
     <thead class="alert alert-primary">
     <tr>
         <th scope="col">Type</th>

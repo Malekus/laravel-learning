@@ -10,8 +10,12 @@ class AjaxController extends Controller
     {
         $configurations = Configuration::where('categorie', $categorie)
             ->where('type', $type)
+            ->orderBy('updated_at', 'desc')
             ->get();
-        return view('ajax.configTab', compact('configurations'));
+        $nameTab = $categorie.$type;
+        return view('ajax.configTab', compact(['configurations', 'nameTab']));
 
     }
 }
+
+

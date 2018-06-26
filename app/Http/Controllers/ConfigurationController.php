@@ -46,8 +46,8 @@ class ConfigurationController extends Controller
     {
         $config = Configuration::create($request->all());
         //return response()->json(new PersonneResource($personne), 201, [], JSON_NUMERIC_CHECK);
-        return response()->json(['success' => true, 'message' => 'Coool', 'config' => $config], 201, [], JSON_PRETTY_PRINT);
-        /*return redirect(route('configuration.index'));*/
+        return response()->json(['success' => true, 'message' => 'Coool'], 201, [], JSON_PRETTY_PRINT);
+        //return redirect(route('ajax.configTab', ['categorie']));
     }
 
     /**

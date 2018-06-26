@@ -73,23 +73,7 @@
     @section('jafter')
         <script>
 /*
-             (function() {
-                'use strict';
-                window.addEventListener('load', function() {
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    var forms = document.getElementsByClassName('needs-validation');
-                    // Loop over them and prevent submission
-                    var validation = Array.prototype.filter.call(forms, function(form) {
-                        form.addEventListener('submit', function(event) {
-                            if (form.checkValidity() === false) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                        }, false);
-                    });
-                }, false);
-            })();
+
 
              */
 
@@ -97,32 +81,31 @@
 
             $(document).ready(function () {
                 $('#formAddConfiguration').on('submit', function (e) {
+                    e.preventDefault();
+                    var loader = '<i class="fas fa-sync fa-spin mx-2"></i>';
 
+                    $('a.nav-item.nav-link.active.show').add(loader);
 
-
-                    var forms = $('#formAddConfiguration');
-                    forms.validate();
-                    console.log(forms.valid());
-
-                    return false;
 
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                         }
                     });
-                    //$('#modalAddConfiguration').modal('toggle');
-
                     $.ajax({
                         url: '{{ url('/configuration') }}',
                         method: 'POST',
-                        data: {
-                            categorie : $('#setting_categorie').val(),
-                            type : $('#setting_type').val(),
-                            libelle : $('#setting_libelle').val()
-                        },
+                        data: $(this).serialize(),
+                        dataType: "json",
                         success: function (data) {
-                            console.log(data)
+                            $('#modalAddConfiguration').modal('toggle');
+                            $.ajax({
+                                url: '{{ url('/ajax/Personne/Catégorie') }}',
+                                method: 'GET',
+                                success: function (data) {
+                                    $('#PersonneCatégorie').replaceWith(data);
+                                }
+                            });
                         },
                         error: function(data){
                             console.log("fail");
@@ -130,10 +113,7 @@
                     });
 
 
-
-
                 })
             });
-
         </script>
     @endsection
