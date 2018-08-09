@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="col-12">
-            <div class="card">
+            <div class="card sizeCard">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 pb-2">
@@ -32,15 +32,19 @@
                                        href="#nav-action" role="tab" aria-controls="nav-action" aria-selected="false">Rendez-vous</a>
                                 </div>
                             </nav>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-personne" role="tabpanel"
                                      aria-labelledby="nav-personne-tab">
                                     <div class="row">
-
                                         <div class="col-lg-8 pt-2">
                                             @foreach($types as $type)
                                                 {!! \App\Http\Controllers\AjaxController::configTab('Personne', $type->type ) !!}
                                             @endforeach
+                                            <div class="no-height"></div>
                                         </div>
 
                                         <div class="col-lg-4 pt-2 text-center">
@@ -51,9 +55,7 @@
                                             </div>
                                             @include('configuration.create')
                                         </div>
-
                                     </div>
-
                                 </div>
                                 <div class="tab-pane fade" id="nav-partenaire" role="tabpanel"
                                      aria-labelledby="nav-partenaire-tab">partenaire
@@ -61,9 +63,12 @@
                                 <div class="tab-pane fade" id="nav-probleme" role="tabpanel"
                                      aria-labelledby="nav-probleme-tab">probleme
                                 </div>
-                                <div class="tab-pane fade" id="nav-action" role="tabpanel"
-                                     aria-labelledby="nav-action-tab">action
+                                <div class="tab-pane fade" id="nav-action" role="tabpanel" aria-labelledby="nav-action-tab">
+                                    action
                                 </div>
+                            </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -94,4 +99,59 @@
     });
     }, false);
     })();
+@endsection
+
+
+@section('jafter')
+
+
+    <script>
+        $(document).ready(function () {
+            /*Add configuration*/
+            $(document).on('click', 'button.btn.btn-success.showModal', function (e) {
+                e.preventDefault();
+
+                $('#' + $('.nav-item.nav-link.active').attr('id')).append('<i class="fas fa-sync fa-spin mx-2"></i>');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                var configuration = $(this).parents('tr').attr('id');
+                $.ajax({
+                    url: '{{ url('/configuration/')}}' + '/' + configuration,
+                    method: 'GET',
+                    success: function (data) {
+                        $('.nav-item.nav-link.active i').remove();
+                        $('.no-height').empty();
+                        $('.no-height').append(data);
+                        $('#modalShowConfiguration').modal();
+                        $('#setting_libelle').val("");
+                    },
+                    error: function (data) {
+                        $('.nav-item.nav-link.active i').remove();
+                        console.log("fail");
+
+                    }
+                });
+            });
+
+            /*Edit configuration*/
+
+            $(document).on('click', 'button.btn.btn-primary.editModal', function (e) {
+                e.preventDefault();
+                $('.no-height').empty();
+
+                console.log("click edit");
+            });
+
+            /*Delete configuration*/
+            $(document).on('click', 'button.btn.btn-danger.deleteModal', function (e) {
+                e.preventDefault();
+
+                console.log("click delete");
+            });
+        });
+    </script>
 @endsection

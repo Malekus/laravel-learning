@@ -17,7 +17,6 @@ class PersonneController extends Controller
             return view('personne.index', compact('personnes'));
         }
 
-
         $personnes = Personne::index()->where('nom', 'like', '%'.$request->get('nom').'%')->get(); //->paginate(15);
         return view('personne.index', compact('personnes'));
 

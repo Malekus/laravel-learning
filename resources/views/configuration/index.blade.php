@@ -35,204 +35,22 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-personne" role="tabpanel"
                                      aria-labelledby="nav-personne-tab">
-                                    <div class="row">
-
-                                        <div class="col-lg-8 pt-2">
-                                            <div class="row">
-                                                @foreach($configurations as $key => $configuration)
-                                                    @if($key == 0)
-                                                        <div class="col-12 pt-2">
-                                                            <div class="">
-                                                                <table class="table table-bordered table-hover">
-                                                                    <thead class="alert alert-primary">
-                                                                    <tr>
-                                                                        <th scope="col">Type</th>
-                                                                        <th scope="col">Libelle</th>
-                                                                        <th scope="col">Action</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td>{{ $configuration->type }}</td>
-                                                                        <td>{{ $configuration->libelle }}</td>
-                                                                        <td class="text-center">
-                                                                            <button type="button"
-                                                                                    class="btn btn-primary"
-                                                                                    data-toggle="modal"
-                                                                                    data-target={{ "#showModal".$configuration->id  }}>
-                                                                                <span class="icon"><i
-                                                                                            class="fas fa-search"></i></span>
-                                                                            </button>
-
-                                                                            <button type="button" class="btn btn-danger"
-                                                                                    data-toggle="modal"
-                                                                                    data-target={{ "#deleteModal".$configuration->id  }}>
-                                                                                <span class="icon"><i
-                                                                                            class="fas fa-trash-alt"></i></span>
-                                                                            </button>
-                                                                        </td>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <div class="d-none">
-                                                                        @include('modal.show', ['titleModal' => 'Personne'])
-                                                                        @include('modal.delete', ['titleModal' => 'Personne'])
-
-                                                                    </div>
-                                                                    @else
-                                                                        @if($configurations[$key-1]->type == $configuration->type)
-                                                                            <tr>
-                                                                                <td>{{ $configuration->type }}</td>
-                                                                                <td>{{ $configuration->libelle }}</td>
-                                                                                <td class="text-center">
-                                                                                    <button type="button"
-                                                                                            class="btn btn-primary"
-                                                                                            data-toggle="modal"
-                                                                                            data-target={{ "#showModal".$configuration->id  }}>
-                                                                                        <span class="icon"><i
-                                                                                                    class="fas fa-search"></i></span>
-                                                                                    </button>
-
-                                                                                    <button type="button"
-                                                                                            class="btn btn-danger"
-                                                                                            data-toggle="modal"
-                                                                                            data-target={{ "#deleteModal".$configuration->id  }}>
-                                                                                        <span class="icon"><i
-                                                                                                    class="fas fa-trash-alt"></i></span>
-                                                                                    </button>
-                                                                                </td>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <div class="d-none">
-                                                                                @include('modal.show', ['titleModal' => 'Personne'])
-                                                                                @include('modal.delete', ['titleModal' => 'Personne'])
-
-                                                                            </div>
-                                                                        @else
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 pt-2">
-                                                            <div class="">
-                                                                <table class="table table-bordered table-hover">
-                                                                    <thead class="alert alert-primary">
-                                                                    <tr>
-                                                                        <th scope="col">Type</th>
-                                                                        <th scope="col">Libelle</th>
-                                                                        <th scope="col">Action</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td>{{ $configuration->type }}</td>
-                                                                        <td>{{ $configuration->libelle }}</td>
-                                                                        <td  class="text-center">
-
-                                                                            <button type="button"
-                                                                                    class="btn btn-primary"
-                                                                                    data-toggle="modal"
-                                                                                    data-target={{ "#showModal".$configuration->id  }}>
-                                                                                <span class="icon"><i
-                                                                                            class="fas fa-search"></i></span>
-                                                                            </button>
-
-                                                                            <button type="button" class="btn btn-danger"
-                                                                                    data-toggle="modal"
-                                                                                    data-target={{ "#deleteModal".$configuration->id  }}>
-                                                                                <span class="icon"><i
-                                                                                            class="fas fa-trash-alt"></i></span>
-                                                                            </button>
-
-                                                                        </td>
-                                                                    </tr>
-                                                                    <div class="d-none">
-                                                                        @include('modal.show', ['titleModal' => 'Personne'])
-                                                                        @include('modal.delete', ['titleModal' => 'Personne'])
-
-                                                                    </div>
-
-                                                                    @endif
-                                                                    @endif
-                                                                    @endforeach
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4 pt-2 text-center">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
-                                                Ajouter une configuration
-                                            </button>
-
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLongTitle">Personne - Ajouter une configuration</h5>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            {!! Form::open(['method' => 'post', 'url' => route('configuration.store'), 'class' => 'needs-validation', 'novalidate']) !!}
-                                                            <div class="form-group row justify-content-center">
-                                                                {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-4 col-form-label']) !!}
-                                                                <div class="col-lg-8">
-                                                                    {!! Form::select('categorie', \App\Configuration::field('Personne', 'categorie'), 'Personne',['class' => 'form-control', 'required']) !!}
-                                                                    <div class="invalid-feedback">
-                                                                        Saisir une catégorie
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-group row justify-content-center">
-                                                                {!! Form::label('type', 'Type', ['class' => 'col-4 col-form-label']) !!}
-                                                                <div class="col-8">
-                                                                    {!! Form::select('type', \App\Configuration::field('Personne', 'type'), 'Personne',['class' => 'form-control', 'required']) !!}
-                                                                    <div class="invalid-feedback">
-                                                                        Saisir un type
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row justify-content-center">
-                                                                {!! Form::label('libelle', 'Libellé', ['class' => 'col-4 col-form-label']) !!}
-                                                                <div class="col-8">
-                                                                    {!! Form::text('libelle', null, ['class' => 'form-control', 'required']) !!}
-                                                                    <div class="invalid-feedback">
-                                                                        Saisir un libellé
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-row text-center">
-                                                                <div class="col-12">
-                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                                                                    <button type="submit" class="btn btn-primary">Ajouter</button>
-                                                                </div>
-                                                            </div>
-                                                            {!! Form::close() !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-
+                                    {!! \App\Http\Controllers\ConfigurationController::content('Personne') !!}
                                 </div>
                                 <div class="tab-pane fade" id="nav-partenaire" role="tabpanel"
-                                     aria-labelledby="nav-partenaire-tab">partenaire
+                                     aria-labelledby="nav-partenaire-tab">
+                                    {!! \App\Http\Controllers\ConfigurationController::content('Partenaire') !!}
                                 </div>
                                 <div class="tab-pane fade" id="nav-probleme" role="tabpanel"
-                                     aria-labelledby="nav-probleme-tab">probleme
+                                     aria-labelledby="nav-probleme-tab">
+                                    {!! \App\Http\Controllers\ConfigurationController::content('Problème') !!}
                                 </div>
                                 <div class="tab-pane fade" id="nav-action" role="tabpanel"
-                                     aria-labelledby="nav-action-tab">action
+                                     aria-labelledby="nav-action-tab">
+                                    {!! \App\Http\Controllers\ConfigurationController::content('Action') !!}
                                 </div>
                             </div>
+                            <div id="displayModal" class="no-height"></div>
                         </div>
                     </div>
                 </div>
@@ -243,7 +61,8 @@
 
 
 @section('javascript')
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
+    <script>
+
         (function() {
             'use strict';
             window.addEventListener('load', function() {
@@ -261,4 +80,144 @@
                 });
             }, false);
         })();
+
+        $(document).ready(function () {
+            $(document).on('click', '.addModal', function (e) {
+                e.preventDefault();
+                console.log('addModal');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                var configuration = $('.nav-item.nav-link.active').text();
+                var url = '{{ url('/configuration/:type/null/addModal')}}';
+                url = url.replace(':type', configuration);
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (data) {
+                        $('.nav-item.nav-link.active i').remove();
+                        $('#displayModal').empty();
+                        $('#displayModal').append(data);
+                        $('#modalAddConfiguration').modal();
+                        $('#setting_libelle').val("");
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        $('.nav-item.nav-link.active i').remove();
+                        console.log("fail");
+
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.showModal', function (e) {
+                e.preventDefault();
+                console.log('showModal');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                var configuration = $(this).parents('tr').attr('id');
+                var type = $($(this).parents('tr').children('td')[0]).text();
+                var libelle = $($(this).parents('tr').children('td')[1]).text();
+                var url = '{{ url('/configuration/:type/:libelle/showModal')}}';
+                url = url.replace(':type', type).replace(':libelle', libelle);
+
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (data) {
+                        $('.nav-item.nav-link.active i').remove();
+                        $('#displayModal').empty();
+                        $('#displayModal').append(data);
+                        $('#modalShowConfiguration').modal();
+                        $('#setting_libelle').val("");
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        $('.nav-item.nav-link.active i').remove();
+                        console.log("fail");
+
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.editModal', function (e) {
+                e.preventDefault();
+                console.log('edit modal');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                var configuration = $(this).parents('tr').attr('id');
+                var type = $($(this).parents('tr').children('td')[0]).text();
+                var libelle = $($(this).parents('tr').children('td')[1]).text();
+                var url = '{{ url('/configuration/:type/:libelle/editModal')}}';
+                url = url.replace(':type', type).replace(':libelle', libelle);
+
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (data) {
+                        $('.nav-item.nav-link.active i').remove();
+                        $('#displayModal').empty();
+                        $('#displayModal').append(data);
+                        $('#modalEditConfiguration').modal();
+                        $('#setting_libelle').val("");
+                        console.log(data)
+                    },
+                    error: function (data) {
+                        $('.nav-item.nav-link.active i').remove();
+                        console.log("fail");
+
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.deleteModal', function (e) {
+                e.preventDefault();
+                console.log('delete modal');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                var configuration = $(this).parents('tr').attr('id');
+                var type = $($(this).parents('tr').children('td')[0]).text();
+                var libelle = $($(this).parents('tr').children('td')[1]).text();
+                var url = '{{ url('/configuration/:type/:libelle/deleteModal')}}';
+                url = url.replace(':type', type).replace(':libelle', libelle);
+                ;
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (data) {
+                        console.log(data);
+                        $('.nav-item.nav-link.active i').remove();
+                        $('#displayModal').empty();
+                        $('#displayModal').append(data);
+                        $('#modalDeleteConfiguration').modal();
+                    },
+                    error: function (data) {
+                        $('.nav-item.nav-link.active i').remove();
+                        console.log("fail");
+
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

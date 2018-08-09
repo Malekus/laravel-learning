@@ -1,5 +1,4 @@
 
-
     <!-- Modal -->
 <div class="modal fade" id="modalAddConfiguration" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -71,21 +70,17 @@
 
 
     @section('jafter')
+
+        @parent
+
+
         <script>
-/*
-
-
-             */
-
-
-
             $(document).ready(function () {
                 $('#formAddConfiguration').on('submit', function (e) {
                     e.preventDefault();
                     var loader = '<i class="fas fa-sync fa-spin mx-2"></i>';
-
-                    $('a.nav-item.nav-link.active.show').add(loader);
-
+                    var idTab = $('.nav-item.nav-link.active').attr('id');
+                    $('#' + idTab).append(loader);
 
                     $.ajaxSetup({
                         headers: {
@@ -98,22 +93,21 @@
                         data: $(this).serialize(),
                         dataType: "json",
                         success: function (data) {
+                            $('#' + idTab + ' i').remove();
                             $('#modalAddConfiguration').modal('toggle');
-                            $.ajax({
-                                url: '{{ url('/ajax/Personne/Catégorie') }}',
-                                method: 'GET',
-                                success: function (data) {
-                                    $('#PersonneCatégorie').replaceWith(data);
-                                }
-                            });
+                            $('#PersonneCatégorie tbody tr').first().before(data);
+                            $('#PersonneCatégorie tbody tr').first().removeClass("alert alert-success", 1800);
                         },
                         error: function(data){
-                            console.log("fail");
+                            $('#' + idTab + ' i').remove();
+                            return false;
                         }
                     });
 
 
-                })
+                });
             });
         </script>
+
     @endsection
+
