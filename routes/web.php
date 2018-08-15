@@ -17,29 +17,10 @@
 
 Route::resource('/', 'HomeController');
 
-Route::resource('/personne', 'PersonneController');
-
-Route::get('/personne/{personne}/routine', 'PersonneController@routine')
-    ->name('personne.routine');
-
 Route::resource('/probleme', 'ProblemeController');
 
 Route::resource('/partenaire', 'PartenaireController');
 
-Route::resource('/configuration', 'ConfigurationController');
-
 Route::resource('/exportation', 'ExportationController');
 
 Route::resource('/statistique', 'StatistiqueController');
-
-Route::get('/ajax/{categorie}/{type}', 'AjaxController@configTab')
-    ->name('ajax.configTab');
-
-Route::get('/configuration/{type}/{libelle}/{action}', 'ConfigurationController@modal')
-    ->name('configuration.modal');
-
-
-Route::get('/configuration/content/{title}', 'ConfigurationController@content')
-    ->name('configuration.content');
-
-

@@ -11,13 +11,16 @@ class PersonneController extends Controller
     public function index(Request $request)
     {
 
-        if($request->get('nom') == null){
-
-            $personnes = Personne::index()->get(); //->paginate(15);
+        if($request->get('search') == null){
+            $personnes = Personne::index()->paginate(10);
             return view('personne.index', compact('personnes'));
         }
 
-        $personnes = Personne::index()->where('nom', 'like', '%'.$request->get('nom').'%')->get(); //->paginate(15);
+        $personnes = Personne::index()
+            ->where('nom', 'like', '%'.$request->get('search').'%')
+            ->orWhere('matricule_caf', 'like', '%'.$request->get('search').'%')
+            //->get()
+            ->paginate(10);
         return view('personne.index', compact('personnes'));
 
     }
@@ -70,6 +73,20 @@ class PersonneController extends Controller
         }
         $personne->delete();
         return redirect(route('personne.index'));
+    }
+
+    public function list_(Request $request){
+        $search = $request->get('search') ? $request->get('search') : null;
+        if($search === null){
+            $personnes = Personne::index()->paginate(10)->withPath('personne');
+            return view('personne.ajax.list', compact('personnes'));
+        }
+
+        $personnes = Personne::index()
+            ->where('nom', 'like', '%'.$search.'%')
+            ->orWhere('matricule_caf', 'like', '%'.$search.'%')->paginate(10)->withPath('personne');
+
+        return view('personne.ajax.list', compact('personnes'));
     }
 
     public function routine($id){

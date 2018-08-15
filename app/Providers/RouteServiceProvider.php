@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use SebastianBergmann\FileIterator\Iterator;
+use Symfony\Component\Finder\Finder;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -39,6 +41,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapPageRoutes();
+
         //
     }
 
@@ -69,5 +73,20 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapPageRoutes()
+    {
+
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(
+                function () {
+                    $files = Finder::create()->in(app_path('../routes/page'))->name('*.php');
+                    foreach ($files as $file){
+                        require_once $file;
+                    }
+                }
+            );
     }
 }
