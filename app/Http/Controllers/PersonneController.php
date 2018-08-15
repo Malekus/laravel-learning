@@ -89,6 +89,11 @@ class PersonneController extends Controller
         return view('personne.ajax.list', compact('personnes'));
     }
 
+    public function modal($id){
+        $personne = Personne::findOrFail($id);
+        return \response()->json(\view('personne.ajax.delete')->with(['personne' => $personne])->render());
+    }
+
     public function routine($id){
 
     }

@@ -27,3 +27,6 @@ Route::get('/personne/{personne}/routine', 'PersonneController@routine')
 
 Route::post('/personne/list', 'PersonneController@list_')
     ->name('personne.list');
+
+Route::get('/personne/{id}/{action}', 'PersonneController@modal')
+    ->name('personne.modal');

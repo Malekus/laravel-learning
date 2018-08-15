@@ -25,53 +25,25 @@
                                class="btn btn-success">
                                 <span class="icon"><i class="fas fa-search"></i></span>
                             </a>
-                            <a href="{{ route('personne.edit', $personne) }}" class="btn btn-info">
+                            <a href="{{ route('personne.edit', $personne) }}"
+                               class="btn btn-info">
                                 <span class="icon"><i class="fas fa-edit"></i></span>
                             </a>
                             <a href="{{ route('personne.routine',$personne) }}"
                                class="btn btn-dark">
                                 <span class="icon"><i class="fas fa-redo-alt"></i></span>
                             </a>
-                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target={{"#modalPersonneSupprimer".$personne->id}}>
-                                <span class="icon"><i class="fas fa-times"></i></span>
+                            <button type="button" class="btn btn-danger deleteModal" data-toggle="modal">
+                                <span class="icon"><i class="fas fa-trash-alt"></i></span>
                             </button>
-                            <div class="modal fade" id={{"modalPersonneSupprimer".$personne->id}} tabindex="-1"
-                                 role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Personne - Supprimer une
-                                                personne</h5>
-                                        </div>
-                                        <div class="modal-body">
-                                            {!! Form::open(['method' => 'delete', 'url' => route('personne.destroy', $personne)]) !!}
-                                            <div class="form-row text-center">
-                                                <p class="col-12">
-                                                    Voulez-vous supprimer {{ $personne->nom }} {{ $personne->prenom }} ?
-                                                </p>
-                                            </div>
-                                            <div class="form-row text-center">
-                                                <div class="col-12">
-                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                                        Annuler
-                                                    </button>
-                                                    <button type="submit" class="btn btn-primary">Supprimer</button>
-                                                </div>
-                                            </div>
-                                            {!! Form::close() !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>
 
 @include('personne.ajax.pagination')
-
