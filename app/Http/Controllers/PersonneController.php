@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Configuration;
 use App\Personne;
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
-use \App\Http\Resources\Personne as PersonneResource;
 
 class PersonneController extends Controller
 {
@@ -32,21 +33,18 @@ class PersonneController extends Controller
 
     public function store(Request $request)
     {
-        $personne = Personne::create($request->all());
-        //return response()->json(new PersonneResource($personne), 201, [], JSON_NUMERIC_CHECK);
-        return redirect(route('personne.index'));
+        $personne = Personne::create($request->except('logement', 'csp', 'categorie'));
+        $personne->logement()->associate(Configuration::find($request->get('logement')));
+        $personne->csp()->associate(Configuration::find($request->get('csp')));
+        $personne->categorie()->associate(Configuration::find($request->get('categorie')));
+        $personne->save();
+        return redirect(route('personne.show', ['personne' => $personne]));
     }
 
     public function show($id)
     {
-        /*
         $personne = Personne::find($id);
-        if(!$personne){
-            return response()->json(null, 404);
-        }
-        return response()->json(new PersonneResource($personne), 200, [], JSON_NUMERIC_CHECK);
-        */
-        $personne = Personne::findOrFail($id);
+        //$personne->load(['logement:id,libelle', 'csp:id,libelle', 'problemes', 'categorie']);
         return view('personne.show', compact('personne'));
     }
 
@@ -61,8 +59,15 @@ class PersonneController extends Controller
         if(!$personne){
             return response()->json(null, 404);
         }
-        $personne->update($request->all());
-        return redirect(route('personne.index'));
+        $personne = Personne::create($request->except('logement', 'csp', 'categorie'));
+        $personne->logement()->dissociate();
+        $personne->csp()->dissociate();
+        $personne->categorie()->dissociate();
+        $personne->logement()->associate(Configuration::find($request->get('logement')));
+        $personne->csp()->associate(Configuration::find($request->get('csp')));
+        $personne->categorie()->associate(Configuration::find($request->get('categorie')));
+        $personne->save();
+        return redirect(route('personne.show', ['personne' => $personne]));
     }
 
     public function destroy($id)
@@ -96,5 +101,14 @@ class PersonneController extends Controller
 
     public function routine($id){
 
+    }
+
+    public function cafMois($id)
+    {
+        $personne = Personne::find($id);
+        dd($personne);
+        $datenow = new DateTime('now');
+
+        return redirect(route('personne.show', $personne));
     }
 }

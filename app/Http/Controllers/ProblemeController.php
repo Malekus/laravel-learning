@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Configuration;
+use App\Personne;
+use App\Probleme;
 use Illuminate\Http\Request;
 
 class ProblemeController extends Controller
@@ -21,9 +24,10 @@ class ProblemeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $personne = Personne::findOrFail($id);
+        return view('probleme.create', compact('personne'));
     }
 
     /**
@@ -32,9 +36,16 @@ class ProblemeController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+
+        $probleme = new Probleme();
+        $probleme->personne()->associate(Personne::find($request->route('personne')));
+        $probleme->categorie()->associate(Configuration::find($request->get('categorie')));
+        $probleme->type()->associate(Configuration::find($request->get('type')));
+        $probleme->accompagnement()->associate(Configuration::find($request->get('accompagnement')));
+        $probleme->save();
+        return redirect(route('personne.show', ['personne' => $request->route('personne')]));
     }
 
     /**
@@ -68,7 +79,18 @@ class ProblemeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $probleme = Probleme::findOrFail($id);
+        if (!$probleme) {
+            return response()->json(null, 404);
+        }
+        $probleme->categorie()->dissociate();
+        $probleme->type()->dissociate();
+        $probleme->accompagnement()->dissociate();
+        $probleme->categorie()->associate(Configuration::find($request->get('categorie')));
+        $probleme->type()->associate(Configuration::find($request->get('type')));
+        $probleme->accompagnement()->associate(Configuration::find($request->get('accompagnement')));
+        $probleme->save();
+        return redirect(route('personne.show', ['id' => $probleme->personne]));
     }
 
     /**
@@ -79,6 +101,46 @@ class ProblemeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $probleme = Probleme::find($id);
+        if (!$probleme) {
+            return response()->json(null, 404);
+        }
+        $probleme->delete();
+        return redirect(route('personne.show', ['personne' => $probleme->personne]));
+    }
+
+    public function resoudre($id)
+    {
+
+       /*
+       $probleme = Probleme::find($id);
+        dd($probleme);
+       if (!$probleme) {
+            return response()->json(null, 404);
+        }
+        $probleme->resolu = !$probleme->resolu;
+        $probleme->save();
+        return redirect(route('personne.show', ['personne' => $probleme]));
+        */
+
+       return true;
+
+    }
+
+
+    public function modal($id, $action)
+    {
+        $probleme = Probleme::find($id);
+
+        if ($action == "showModal") {
+            return \response()->json(\view('probleme.ajax.show')->with(['probleme' => $probleme])->render());
+        }
+        if ($action == "editModal") {
+            return \response()->json(\view('probleme.ajax.edit')->with(['probleme' => $probleme])->render());
+        }
+        if ($action == "deleteModal") {
+            return \response()->json(\view('probleme.ajax.delete')->with(['probleme' => $probleme])->render());
+        }
+        return null;
     }
 }

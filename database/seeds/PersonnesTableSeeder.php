@@ -11,6 +11,6 @@ class PersonnesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Personne::class, 30)->create();
+        factory(\App\Personne::class, 100)->create();
     }
 }

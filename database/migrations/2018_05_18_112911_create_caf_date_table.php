@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConfigTable extends Migration
+class CreateCafDateTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateConfigTable extends Migration
      */
     public function up()
     {
-        Schema::create('configuration', function (Blueprint $table) {
+        Schema::create('caf_date', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('categorie');
-            $table->string('type');
-            $table->string('libelle');
-            $table->string('libelle2')->nullable();
+            $table->date('ajout');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateConfigTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('config');
+        Schema::dropIfExists('caf_date');
     }
 }

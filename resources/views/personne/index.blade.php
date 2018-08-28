@@ -72,6 +72,10 @@
                                                        class="btn btn-dark">
                                                         <span class="icon"><i class="fas fa-redo-alt"></i></span>
                                                     </a>
+                                                    <a href="#"
+                                                       class="btn btn-warning">
+                                                        <span class="icon"><i class="fas fa-calendar-alt"></i></span>
+                                                    </a>
                                                     <button type="button" class="btn btn-danger deleteModal" data-toggle="modal">
                                                         <span class="icon"><i class="fas fa-trash-alt"></i></span>
                                                     </button>
@@ -96,6 +100,7 @@
 
 
 @section('javascript')
+
     <script>
         $(document).ready(function () {
             $(document).on('click', '.page-item', function (e) {

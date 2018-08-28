@@ -21,10 +21,7 @@ class CreatePersonneTable extends Migration
             $table->date('date_naissance')->nullable();
             $table->string('sexe', 256)->nullable();
             $table->integer('enfant')->nullable();
-            $table->string('csp')->nullable();
-            $table->string('categorie')->nullable();
             $table->string('nationalite')->nullable();
-            $table->string('logement')->nullable();
             $table->string('telephone')->nullable();
             $table->string('email')->nullable();
             $table->string('adresse')->nullable();
@@ -33,6 +30,14 @@ class CreatePersonneTable extends Migration
             $table->boolean('prioritaire')->nullable();
             $table->string('matricule_caf')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('probleme', function (Blueprint $table){
+            $table->integer('personne_id')->unsigned()->index();
+        });
+
+        Schema::table('caf_date', function (Blueprint $table){
+            $table->integer('personne_id')->unsigned()->index();
         });
     }
 

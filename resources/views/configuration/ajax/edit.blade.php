@@ -4,31 +4,33 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ $titleModal }} - Modifier une configuration</h5>
+                    <h5 class="modal-title">{{ $title }} - Modifier une configuration</h5>
                 </div>
                 {!! Form::open(['method' => 'put', 'url' => route('configuration.update', $configuration)]) !!}
                 <div class="modal-body">
+
                     <div class="form-group row justify-content-center">
                         {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-4 col-form-label']) !!}
                         <div class="col-lg-8">
-                            {!! Form::select('categorie', \App\Configuration::field($titleModal, 'categorie'), $configuration->categorie,['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('categorie', \App\Configuration::groupBy('categorie')->pluck('categorie', 'categorie'), $configuration->categorie,['class' => 'form-control', 'required']) !!}
                             <div class="invalid-feedback">
                                 Saisir une catégorie
                             </div>
                         </div>
                     </div>
 
-                    @if($titleModal != 'Problème')
-                        <div class="form-group row justify-content-center">
-                            {!! Form::label('type', 'Type', ['class' => 'col-4 col-form-label']) !!}
-                            <div class="col-8">
-                                {!! Form::select('type', \App\Configuration::field($titleModal, 'type'), $configuration->type,['class' => 'form-control', 'required']) !!}
-                                <div class="invalid-feedback">
-                                    Saisir un type
-                                </div>
+
+                    <div class="form-group row justify-content-center">
+                        {!! Form::label('champ', 'Champ', ['class' => 'col-4 col-form-label']) !!}
+                        <div class="col-8">
+                            {!! Form::select('champ', \App\Configuration::where('categorie', $title)->orderBy('champ')->pluck('champ', 'champ'), $configuration->champ,['class' => 'form-control', 'required']) !!}
+                            <div class="invalid-feedback">
+                                Saisir un type
                             </div>
                         </div>
-                    @endif
+                    </div>
+
+
                     <div class="form-group row justify-content-center">
                         {!! Form::label('libelle', 'Libellé', ['class' => 'col-4 col-form-label']) !!}
                         <div class="col-8">
@@ -39,17 +41,6 @@
                         </div>
                     </div>
 
-                    @if($titleModal == 'Problème')
-                        <div class="form-group row justify-content-center">
-                            {!! Form::label('libelle2', 'Libellé 2', ['class' => 'col-4 col-form-label']) !!}
-                            <div class="col-8">
-                                {!! Form::text('libelle2', $configuration->libelle2, ['class' => 'form-control', 'required']) !!}
-                                <div class="invalid-feedback">
-                                    Saisir un libellé
-                                </div>
-                            </div>
-                        </div>
-                    @endif
                 </div>
                 <div class="modal-footer">
                     <div class="form-row">

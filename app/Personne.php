@@ -3,9 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
-use Faker\Provider\DateTime;
 use Illuminate\Database\Eloquent\Model;
-use function PHPSTORM_META\type;
 
 class Personne extends Model
 {
@@ -35,11 +33,31 @@ class Personne extends Model
 
     public function problemes()
     {
-        return $this->hasMany(Probleme::class);
+        return $this->hasMany('App\Probleme');
     }
 
-    public function scopePersonneEdit($query){
-        return $query->where('enfant', 0)->get('nom', 'prenom');
+    public function logement()
+    {
+        return $this->belongsTo('App\Configuration');
+    }
+
+    public function csp()
+    {
+        return $this->belongsTo('App\Configuration');
+    }
+
+    public function categorie()
+    {
+        return $this->belongsTo('App\Configuration');
+    }
+
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($personne) {
+            $personne->problemes()->delete();
+        });
     }
 
     public function scopeIndex($query){

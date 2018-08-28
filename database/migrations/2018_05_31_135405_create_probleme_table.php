@@ -15,11 +15,9 @@ class CreateProblemeTable extends Migration
     {
         Schema::create('probleme', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('categorie');
-            $table->string('type');
+            $table->boolean('resolu')->default(false);
             $table->timestamps();
         });
-
     }
 
     /**

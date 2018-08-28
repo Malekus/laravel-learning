@@ -35,7 +35,9 @@ class ConfigurationController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $configuration = Configuration::create($request->all());
+        return redirect(route('configuration.index'));
         return \response()->json(\view('ajax.configuration.line')->with(['configuration' => $configuration])->render());
     }
 
@@ -60,7 +62,7 @@ class ConfigurationController extends Controller
     public function edit($id)
     {
         $configuration = Configuration::findOrFail($id);
-        return \response()->json(\view('configuration.ajax.edit')->with(['configuration' => $configuration, 'titleModal' => 'Personne'])->render());
+        return \response()->json(\view('configuration.ajax.edit')->with(['configuration' => $configuration, 'title' => $configuration->categorie])->render());
     }
 
     /**
@@ -96,14 +98,14 @@ class ConfigurationController extends Controller
         return redirect(route('configuration.index'));
     }
 
-    public function modal($type, $libelle = null, $action)
+    public function modal($id, $action)
     {
         if ($action == 'addModal') {
-            if ($type === 'Rendez-vous') return \response()->json(\view('configuration.ajax.add')->with(['title' => 'Action'])->render());
-            return \response()->json(\view('configuration.ajax.add')->with(['title' => $type])->render());
+            if (strlen($id) === strlen('Rendez-vous')) return \response()->json(\view('configuration.ajax.add')->with(['title' => 'Action'])->render());
+            return \response()->json(\view('configuration.ajax.add')->with(['title' => $id])->render());
         }
 
-        $configuration = Configuration::where([['type', $type], ['libelle', $libelle]])->first() ? Configuration::where([['type', $type], ['libelle', $libelle]])->first() : Configuration::where([['type', 'Problème'], ['libelle', $type], ['libelle2', $libelle]])->first();
+        $configuration = Configuration::find($id);
 
         if ($action == "showModal") {
             return \response()->json(\view('configuration.ajax.show')->with(['configuration' => $configuration, 'titleModal' => $configuration->categorie])->render());
@@ -120,8 +122,8 @@ class ConfigurationController extends Controller
     public static function content($title = 'Personne')
     {
         $configurations = Configuration::where('categorie', $title)
-            ->orderBy('type', 'asc')
-            ->get(['id', 'categorie', 'type', 'libelle', 'libelle2', 'created_at']);
+            ->orderBy('champ', 'asc')
+            ->get(['id', 'categorie', 'champ', 'libelle', 'created_at']);
         return view('configuration.ajax.content', compact(['configurations', 'title']));
     }
 }

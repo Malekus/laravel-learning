@@ -28,5 +28,8 @@ Route::get('/personne/{personne}/routine', 'PersonneController@routine')
 Route::post('/personne/list', 'PersonneController@list_')
     ->name('personne.list');
 
-Route::get('/personne/{id}/{action}', 'PersonneController@modal')
+Route::get('/personne/{personne}/{action}', 'PersonneController@modal')
     ->name('personne.modal');
+
+Route::get('/personne/{personne}/cafMois', 'PersonneController@cafMois')
+    ->name('personne.cafMois');

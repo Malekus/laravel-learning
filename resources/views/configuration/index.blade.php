@@ -93,8 +93,10 @@
                 });
 
                 var configuration = $('.nav-item.nav-link.active').text();
-                var url = '{{ url('/configuration/:type/null/addModal')}}';
-                url = url.replace(':type', configuration);
+                console.log(configuration);
+                var url = '{{ url('/configuration/:configuration/addModal')}}';
+                url = url.replace(':configuration', configuration);
+
                 $.ajax({
                     url: url,
                     method: 'GET',
@@ -124,12 +126,10 @@
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                     }
                 });
+                var url = '{{ url('/configuration/:configuration/showModal')}}';
+                url = url.replace(':configuration', $(this).parents('tr').attr('id'));
 
-                var configuration = $(this).parents('tr').attr('id');
-                var type = $($(this).parents('tr').children('td')[0]).text();
-                var libelle = $($(this).parents('tr').children('td')[1]).text();
-                var url = '{{ url('/configuration/:type/:libelle/showModal')}}';
-                url = url.replace(':type', type).replace(':libelle', libelle);
+
 
                 $.ajax({
                     url: url,
@@ -161,10 +161,8 @@
                 });
 
                 var configuration = $(this).parents('tr').attr('id');
-                var type = $($(this).parents('tr').children('td')[0]).text();
-                var libelle = $($(this).parents('tr').children('td')[1]).text();
-                var url = '{{ url('/configuration/:type/:libelle/editModal')}}';
-                url = url.replace(':type', type).replace(':libelle', libelle);
+                var url = '{{ url('/configuration/:configuration/editModal')}}';
+                url = url.replace(':configuration', configuration);
 
                 $.ajax({
                     url: url,
@@ -196,11 +194,8 @@
                 });
 
                 var configuration = $(this).parents('tr').attr('id');
-                var type = $($(this).parents('tr').children('td')[0]).text();
-                var libelle = $($(this).parents('tr').children('td')[1]).text();
-                var url = '{{ url('/configuration/:type/:libelle/deleteModal')}}';
-                url = url.replace(':type', type).replace(':libelle', libelle);
-                ;
+                var url = '{{ url('/configuration/:configuration/deleteModal')}}';
+                url = url.replace(':configuration', configuration);
                 $.ajax({
                     url: url,
                     method: 'GET',

@@ -11,15 +11,14 @@ class Configuration extends Model
 
     protected $fillable = [
         'categorie',
-        'type',
-        'libelle',
-        'libelle2'
+        'champ',
+        'libelle'
     ];
 
     public function scopeField($query, $categorie, $type)
     {
         $row = $query
-            ->select($type)
+            ->select('libelle, '.$type)
             ->where('categorie', $categorie)
             ->groupBy($type)
             ->get()
@@ -28,8 +27,25 @@ class Configuration extends Model
         foreach ($row as $key => $line) {
             $tab[$line[$type]] = $line[$type];
         }
-        return $tab;
 
+        dd($tab);
+        return $tab;
+    }
+
+    public function scopeChamps($query, $categorie, $champs, $col = null)
+    {
+        $row = $query
+            ->select($col)
+            ->where('categorie', $categorie)
+            ->where('champ', $champs)
+            ->groupBy($col)
+            ->get()
+            ->toArray();
+        $tab = [];
+        foreach ($row as $key => $line) {
+            $tab[$line[$col]] = $line[$col];
+        }
+        return $tab;
     }
 
 }

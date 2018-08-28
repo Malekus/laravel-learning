@@ -40,14 +40,14 @@
     <div class="form-group row justify-content-center">
         {!! Form::label('csp', 'CSP', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
-            {!! Form::text('csp', null, ['class' => 'form-control']) !!}
+            {!! Form::select('csp', \App\Configuration::where(['champ' => 'CSP', 'categorie' => 'Personne'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
         </div>
     </div>
 
     <div class="form-group row justify-content-center">
         {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
-            {!! Form::text('categorie', null, ['class' => 'form-control']) !!}
+            {!! Form::select('categorie', \App\Configuration::where(['champ' => 'Catégorie', 'categorie' => 'Personne'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
         </div>
     </div>
 
@@ -61,7 +61,7 @@
     <div class="form-group row justify-content-center">
         {!! Form::label('logement', 'Logement', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
-            {!! Form::text('logement', null, ['class' => 'form-control']) !!}
+            {!! Form::select('logement', \App\Configuration::where('champ', 'Logement')->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
         </div>
     </div>
 
@@ -170,14 +170,14 @@
     <div class="form-group row justify-content-center">
         {!! Form::label('csp', 'CSP', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
-            {!! Form::text('csp', $personne->csp, ['class' => 'form-control']) !!}
+            {!! Form::select('csp', \App\Configuration::where(['champ' => 'CSP', 'categorie' => 'Personne'])->pluck('libelle', 'id'), $personne->csp->libelle,['class' => 'form-control']) !!}
         </div>
     </div>
 
     <div class="form-group row justify-content-center">
         {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
-            {!! Form::text('categorie', $personne->categorie, ['class' => 'form-control']) !!}
+            {!! Form::select('categorie', \App\Configuration::where(['champ' => 'Catégorie', 'categorie' => 'Personne'])->pluck('libelle', 'id'), $personne->categorie->libelle,['class' => 'form-control']) !!}
         </div>
     </div>
 
@@ -191,7 +191,7 @@
     <div class="form-group row justify-content-center">
         {!! Form::label('logement', 'Logement', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
-            {!! Form::text('logement', $personne->logement, ['class' => 'form-control']) !!}
+            {!! Form::select('logement', \App\Configuration::where('champ', 'Logement')->pluck('libelle', 'id'), $personne->logement->id,['class' => 'form-control']) !!}
         </div>
     </div>
 
@@ -260,27 +260,22 @@
     </div>
 @endif
 
-
-
-
-
 @section('javascript')
 
-
     @parent
-    $(document).ready(function () {
 
-        var shortDate = function (myDate) {
-            if (myDate.length == 2) return myDate.concat("/");
-            if (myDate.length == 5) return myDate.concat("/");
-            if (myDate.length == 10) return myDate.slice(0, -1);
-            return myDate;
-        };
+    <script>
+        $(document).ready(function () {
+            var shortDate = function (myDate) {
+                if (myDate.length == 2) return myDate.concat("/");
+                if (myDate.length == 5) return myDate.concat("/");
+                if (myDate.length == 10) return myDate.slice(0, -1);
+                return myDate;
+            };
 
-        $('#date_naissance').keypress(function () {
-            $('#date_naissance').val(shortDate($('#date_naissance').val()));
+            $('#date_naissance').keypress(function () {
+                $('#date_naissance').val(shortDate($('#date_naissance').val()));
+            });
         });
-    });
-
-
+    </script>
 @endsection

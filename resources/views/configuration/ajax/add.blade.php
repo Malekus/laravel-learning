@@ -10,24 +10,22 @@
                 <div class="form-group row justify-content-center">
                     {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-4 col-form-label']) !!}
                     <div class="col-lg-8">
-                        {!! Form::select('categorie', \App\Configuration::field($title, 'categorie'), $title,['class' => 'form-control', 'required']) !!}
+                        {!! Form::select('categorie', \App\Configuration::groupBy('categorie')->pluck('categorie', 'categorie'), $title,['class' => 'form-control', 'required']) !!}
                         <div class="invalid-feedback">
                             Saisir une catégorie
                         </div>
                     </div>
                 </div>
 
-                @if($title != 'Problème')
-                    <div class="form-group row justify-content-center">
-                        {!! Form::label('type', 'Type', ['class' => 'col-4 col-form-label']) !!}
-                        <div class="col-8">
-                            {!! Form::select('type', \App\Configuration::field($title, 'type'), $title,['class' => 'form-control', 'required']) !!}
-                            <div class="invalid-feedback">
-                                Saisir un type
-                            </div>
+                <div class="form-group row justify-content-center">
+                    {!! Form::label('champ', 'Champ', ['class' => 'col-4 col-form-label']) !!}
+                    <div class="col-8">
+                        {!! Form::select('champ', \App\Configuration::where('categorie', $title)->orderBy('champ')->pluck('champ', 'champ'), null,['class' => 'form-control', 'required']) !!}
+                        <div class="invalid-feedback">
+                            Saisir un type
                         </div>
                     </div>
-                @endif
+                </div>
 
                 <div class="form-group row justify-content-center">
                     {!! Form::label('libelle', 'Libellé', ['class' => 'col-4 col-form-label']) !!}
@@ -38,18 +36,6 @@
                         </div>
                     </div>
                 </div>
-
-                @if($title == 'Problème')
-                    <div class="form-group row justify-content-center">
-                        {!! Form::label('libelle2', 'Libellé 2', ['class' => 'col-4 col-form-label']) !!}
-                        <div class="col-8">
-                            {!! Form::text('libelle2', null, ['class' => 'form-control', 'required']) !!}
-                            <div class="invalid-feedback">
-                                Saisir un libellé 2
-                            </div>
-                        </div>
-                    </div>
-                @endif
 
                 <div class="form-row text-center">
                     <div class="col-12">
