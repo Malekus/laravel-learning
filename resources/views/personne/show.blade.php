@@ -115,7 +115,7 @@
                                                 <td>{{ \Carbon\Carbon::parse($probleme->update_at)->format('d/m/Y') }}</td>
                                                 <td class="text-center">
 
-                                                    <a href="#" class="btn btn-dark">
+                                                    <a href="{{ route('probleme.resoudre', $probleme) }}" class="btn btn-dark">
                                                         <span class="icon"><i class="fas fa-check"></i></span>
                                                     </a>
 

@@ -111,19 +111,13 @@ class ProblemeController extends Controller
 
     public function resoudre($id)
     {
-
-       /*
-       $probleme = Probleme::find($id);
-        dd($probleme);
+       $probleme = Probleme::findOrFail($id);
        if (!$probleme) {
             return response()->json(null, 404);
         }
         $probleme->resolu = !$probleme->resolu;
         $probleme->save();
-        return redirect(route('personne.show', ['personne' => $probleme]));
-        */
-
-       return true;
+        return redirect(route('personne.show', ['personne' => $probleme->personne]));
 
     }
 
