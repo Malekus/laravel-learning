@@ -98,11 +98,13 @@ class ConfigurationController extends Controller
         return redirect(route('configuration.index'));
     }
 
-    public function modal($id, $action)
+    public function modal($action, $id)
     {
+
+
         if ($action == 'addModal') {
-            if (strlen($id) === strlen('Rendez-vous')) return \response()->json(\view('configuration.ajax.add')->with(['title' => 'Action'])->render());
-            return \response()->json(\view('configuration.ajax.add')->with(['title' => $id])->render());
+            if (strlen($id) === strlen('Rendez-vous')) return \response()->json(\view('configuration.ajax.add')->with(['titleModal' => 'Action'])->render());
+            return \response()->json(\view('configuration.ajax.add')->with(['titleModal' => $id])->render());
         }
 
         $configuration = Configuration::find($id);

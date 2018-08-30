@@ -50,7 +50,7 @@
                                     {!! \App\Http\Controllers\ConfigurationController::content('Action') !!}
                                 </div>
                             </div>
-                            <div id="displayModal" class="no-height"></div>
+
                         </div>
                     </div>
                 </div>
@@ -84,8 +84,6 @@
         $(document).ready(function () {
             $(document).on('click', '.addModal', function (e) {
                 e.preventDefault();
-                console.log('addModal');
-
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -93,20 +91,16 @@
                 });
 
                 var configuration = $('.nav-item.nav-link.active').text();
-                console.log(configuration);
-                var url = '{{ url('/configuration/:configuration/addModal')}}';
+                var url = '{{ url('/configuration/addModal/:configuration')}}';
                 url = url.replace(':configuration', configuration);
 
                 $.ajax({
                     url: url,
                     method: 'GET',
                     success: function (data) {
-                        $('.nav-item.nav-link.active i').remove();
-                        $('#displayModal').empty();
-                        $('#displayModal').append(data);
+                        $('.no-height').empty().append(data);
                         $('#modalAddConfiguration').modal();
                         $('#setting_libelle').val("");
-                        console.log(data);
                     },
                     error: function (data) {
                         $('.nav-item.nav-link.active i').remove();
@@ -119,31 +113,23 @@
 
             $(document).on('click', '.showModal', function (e) {
                 e.preventDefault();
-                console.log('showModal');
-
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                     }
                 });
-                var url = '{{ url('/configuration/:configuration/showModal')}}';
+                var url = '{{ url('/configuration/showModal/:configuration')}}';
                 url = url.replace(':configuration', $(this).parents('tr').attr('id'));
-
-
 
                 $.ajax({
                     url: url,
                     method: 'GET',
                     success: function (data) {
-                        $('.nav-item.nav-link.active i').remove();
-                        $('#displayModal').empty();
-                        $('#displayModal').append(data);
+                        $('.no-height').empty().append(data);
                         $('#modalShowConfiguration').modal();
                         $('#setting_libelle').val("");
-                        console.log(data);
                     },
                     error: function (data) {
-                        $('.nav-item.nav-link.active i').remove();
                         console.log("fail");
 
                     }
@@ -153,7 +139,6 @@
 
             $(document).on('click', '.editModal', function (e) {
                 e.preventDefault();
-                console.log('edit modal');
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -161,22 +146,18 @@
                 });
 
                 var configuration = $(this).parents('tr').attr('id');
-                var url = '{{ url('/configuration/:configuration/editModal')}}';
+                var url = '{{ url('/configuration/editModal/:configuration')}}';
                 url = url.replace(':configuration', configuration);
 
                 $.ajax({
                     url: url,
                     method: 'GET',
                     success: function (data) {
-                        $('.nav-item.nav-link.active i').remove();
-                        $('#displayModal').empty();
-                        $('#displayModal').append(data);
+                        $('.no-height').empty().append(data);
                         $('#modalEditConfiguration').modal();
                         $('#setting_libelle').val("");
-                        console.log(data)
                     },
                     error: function (data) {
-                        $('.nav-item.nav-link.active i').remove();
                         console.log("fail");
 
                     }
@@ -186,7 +167,6 @@
 
             $(document).on('click', '.deleteModal', function (e) {
                 e.preventDefault();
-                console.log('delete modal');
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -194,20 +174,17 @@
                 });
 
                 var configuration = $(this).parents('tr').attr('id');
-                var url = '{{ url('/configuration/:configuration/deleteModal')}}';
+                var url = '{{ url('/configuration/deleteModal/:configuration')}}';
                 url = url.replace(':configuration', configuration);
                 $.ajax({
                     url: url,
                     method: 'GET',
                     success: function (data) {
                         console.log(data);
-                        $('.nav-item.nav-link.active i').remove();
-                        $('#displayModal').empty();
-                        $('#displayModal').append(data);
+                        $('.no-height').empty().append(data);
                         $('#modalDeleteConfiguration').modal();
                     },
                     error: function (data) {
-                        $('.nav-item.nav-link.active i').remove();
                         console.log("fail");
 
                     }

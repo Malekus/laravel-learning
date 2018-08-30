@@ -2,15 +2,16 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ $title  }} - Ajouter une
+                <h5 class="modal-title">{{ $titleModal }} - Ajouter une
                     configuration</h5>
             </div>
             <div class="modal-body">
                 {!! Form::open(['method' => 'post', 'url' => route('configuration.store'), 'class' => 'needs-validation', 'novalidate']) !!}
+
                 <div class="form-group row justify-content-center">
                     {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-4 col-form-label']) !!}
                     <div class="col-lg-8">
-                        {!! Form::select('categorie', \App\Configuration::groupBy('categorie')->pluck('categorie', 'categorie'), $title,['class' => 'form-control', 'required']) !!}
+                        {!! Form::select('categorie', \App\Configuration::groupBy('categorie')->pluck('categorie', 'categorie'), $titleModal,['class' => 'form-control', 'required']) !!}
                         <div class="invalid-feedback">
                             Saisir une catégorie
                         </div>
@@ -20,7 +21,7 @@
                 <div class="form-group row justify-content-center">
                     {!! Form::label('champ', 'Champ', ['class' => 'col-4 col-form-label']) !!}
                     <div class="col-8">
-                        {!! Form::select('champ', \App\Configuration::where('categorie', $title)->orderBy('champ')->pluck('champ', 'champ'), null,['class' => 'form-control', 'required']) !!}
+                        {!! Form::select('champ', \App\Configuration::where('categorie', $titleModal)->orderBy('champ')->pluck('champ', 'champ'), null,['class' => 'form-control', 'required']) !!}
                         <div class="invalid-feedback">
                             Saisir un type
                         </div>

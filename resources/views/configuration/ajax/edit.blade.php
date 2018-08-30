@@ -4,7 +4,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ $title }} - Modifier une configuration</h5>
+                    <h5 class="modal-title">{{ $titleModal }} - Modifier une configuration</h5>
                 </div>
                 {!! Form::open(['method' => 'put', 'url' => route('configuration.update', $configuration)]) !!}
                 <div class="modal-body">
@@ -23,7 +23,7 @@
                     <div class="form-group row justify-content-center">
                         {!! Form::label('champ', 'Champ', ['class' => 'col-4 col-form-label']) !!}
                         <div class="col-8">
-                            {!! Form::select('champ', \App\Configuration::where('categorie', $title)->orderBy('champ')->pluck('champ', 'champ'), $configuration->champ,['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('champ', \App\Configuration::where('categorie', $titleModal)->orderBy('champ')->pluck('champ', 'champ'), $configuration->champ,['class' => 'form-control', 'required']) !!}
                             <div class="invalid-feedback">
                                 Saisir un type
                             </div>
