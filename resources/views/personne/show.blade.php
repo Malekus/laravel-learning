@@ -78,7 +78,7 @@
                                         <li class="list-group-item"><span class="font-weight-bold">Nb problème</span>
                                             : {{ count($personne->problemes) }}</li>
                                         <li class="list-group-item"><span class="font-weight-bold">Nb rendez-vous</span>
-                                            : à faire
+                                            : {{ count($actions) }}
                                         </li>
                                         <li class="list-group-item"><span class="font-weight-bold">Dernière activité</span> : {{ \Carbon\Carbon::parse($personne->update_at)->format('d/m/Y') }}</li>
                                     </ul>
@@ -119,6 +119,10 @@
                                                         <span class="icon"><i class="fas fa-check"></i></span>
                                                     </a>
 
+                                                    <a href="{{ route('action.create', $probleme) }}" class="btn btn-info">
+                                                        <span class="icon"><i class="fas fa-plus"></i></span>
+                                                    </a>
+
                                                     <button type="button" class="btn btn-success showModal"
                                                             data-toggle="modal">
                                                         <span class="icon"><i class="fas fa-search"></i></span>
@@ -140,11 +144,36 @@
                         </div>
                     @endif
 
-
-                    @if(isset($actions))
+                    @if(count($actions) != 0)
                         <div class="row">
                             <div class="col-12">
                                 <h2>Rendez-vous</h2>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Problème</th>
+                                        <th>Type</th>
+                                        <th>Dirigé vers</th>
+                                        <th>Avancement</th>
+                                        <th>Dernière modification</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($actions as $key => $action)
+                                            <tr id="{{ $action->id  }}">
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $action->probleme->categorie->libelle }} - {{ $action->probleme->type->libelle }}</td>
+                                                <td>{{ $action->action->libelle }}</td>
+                                                <td>{{ isset($action->complement->libelle) ? $action->complement->libelle : "non renseigné" }}</td>
+                                                <td>{{ $action->avancement ? "terminé" : "en cours"}}</td>
+                                                <td>{{ \Carbon\Carbon::parse($action->update_at)->format('d/m/Y') }}</td>
+                                                <td>Actions</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     @endif

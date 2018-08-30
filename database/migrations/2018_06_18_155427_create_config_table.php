@@ -27,24 +27,34 @@ class CreateConfigTable extends Migration
         });
 
         Schema::table('probleme', function (Blueprint $table){
-            $table->integer('type_id')->unsigned()->nullable()->index();
+            $table->integer('type_id')->unsigned()->index();
         });
 
         Schema::table('probleme', function (Blueprint $table){
-            $table->integer('accompagnement_id')->unsigned()->nullable()->index();
+            $table->integer('accompagnement_id')->unsigned()->index();
         });
 
         Schema::table('personne', function (Blueprint $table){
-            $table->integer('logement_id')->unsigned()->nullable()->index();
+            $table->integer('logement_id')->unsigned()->index();
         });
 
         Schema::table('personne', function (Blueprint $table){
-            $table->integer('csp_id')->unsigned()->nullable()->index();
+            $table->integer('csp_id')->unsigned()->index();
         });
 
         Schema::table('personne', function (Blueprint $table){
-            $table->integer('categorie_id')->unsigned()->nullable()->index();
+            $table->integer('categorie_id')->unsigned()->index();
         });
+
+        Schema::table('action', function (Blueprint $table){
+            $table->integer('action_id')->unsigned()->index();
+        });
+
+        Schema::table('action', function (Blueprint $table){
+            $table->integer('complement_id')->unsigned()->nullable()->index();
+        });
+
+
     }
 
     /**

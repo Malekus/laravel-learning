@@ -33,4 +33,9 @@ class Probleme extends Model
     {
         return $this->belongsTo('App\Configuration');
     }
+
+    public function actions()
+    {
+        return $this->hasMany('App\Action');
+    }
 }

@@ -18,6 +18,10 @@ class CreateProblemeTable extends Migration
             $table->boolean('resolu')->default(false);
             $table->timestamps();
         });
+
+        Schema::table('action', function (Blueprint $table){
+            $table->integer('probleme_id')->unsigned()->index();
+        });
     }
 
     /**

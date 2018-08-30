@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Action;
 use App\Configuration;
 use App\Personne;
+use App\Probleme;
 use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PersonneController extends Controller
 {
@@ -44,8 +47,8 @@ class PersonneController extends Controller
     public function show($id)
     {
         $personne = Personne::find($id);
-        //$personne->load(['logement:id,libelle', 'csp:id,libelle', 'problemes', 'categorie']);
-        return view('personne.show', compact('personne'));
+        $actions = Action::whereIn('probleme_id', $personne->problemes->pluck('id')->toArray())->get();
+        return view('personne.show', compact(['personne', 'actions']));
     }
 
     public function edit($id){
