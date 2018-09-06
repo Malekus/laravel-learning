@@ -3,7 +3,7 @@
     <div class="form-group row justify-content-center">
         {!! Form::label('categorie', 'Catégorie', ['class' => 'col-4 col-form-label']) !!}
         <div class="col-8">
-            {!! Form::select('categorie', \App\Configuration::where('champ', 'Catégorie')->orderBy('libelle')->pluck('libelle', 'id'), $probleme->categorie->libelle,['class' => 'form-control']) !!}
+            {!! Form::select('categorie', \App\Configuration::where('champ', 'Catégorie')->orderBy('libelle')->pluck('libelle', 'id'), $probleme->categorie->id,['class' => 'form-control']) !!}
             <div class="invalid-feedback">
                 Saisir une catégorie
             </div>
@@ -13,7 +13,7 @@
     <div class="form-group row justify-content-center">
         {!! Form::label('type', 'Type', ['class' => 'col-4 col-form-label']) !!}
         <div class="col-8">
-            {!! Form::select('type', \App\Configuration::where('champ', 'Type')->orderBy('libelle')->pluck('libelle', 'id'), $probleme->type->libelle,['class' => 'form-control']) !!}
+            {!! Form::select('type', \App\Configuration::where('champ', 'Type')->orderBy('libelle')->pluck('libelle', 'id'), $probleme->type->id,['class' => 'form-control']) !!}
             <div class="invalid-feedback">
                 Saisir un type
             </div>
@@ -23,7 +23,7 @@
     <div class="form-group row justify-content-center">
         {!! Form::label('accompagnement', 'Accompagnement', ['class' => 'col-4 col-form-label']) !!}
         <div class="col-8">
-            {!! Form::select('accompagnement', \App\Configuration::where('champ', 'Accompagnement')->orderBy('libelle')->pluck('libelle', 'id'), $probleme->accompagnement,['class' => 'form-control']) !!}
+            {!! Form::select('accompagnement', \App\Configuration::where('champ', 'Accompagnement')->orderBy('libelle')->pluck('libelle', 'id'), $probleme->accompagnement->id,['class' => 'form-control']) !!}
             <div class="invalid-feedback">
                 Saisir un accompagnement
             </div>

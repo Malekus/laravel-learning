@@ -27,8 +27,6 @@ class Configuration extends Model
         foreach ($row as $key => $line) {
             $tab[$line[$type]] = $line[$type];
         }
-
-        dd($tab);
         return $tab;
     }
 
@@ -48,4 +46,74 @@ class Configuration extends Model
         return $tab;
     }
 
+
+    public function accompagnement()
+    {
+        return $this->hasMany('App\Probleme');
+    }
+
+    public function logement()
+    {
+        return $this->hasMany('App\Personne', 'logement_id');
+    }
+
+    public function csp()
+    {
+        return $this->hasMany('App\Personne', 'csp_id');
+    }
+
+    public function action()
+    {
+        return $this->hasMany('App\Action');
+    }
+
+    public function categorie()
+    {
+        return $this->hasMany('App\Personne', 'categorie_id');
+    }
+
+    public function dirigieVers()
+    {
+        return $this->hasMany('App\Action');
+    }
+
+    public function situation()
+    {
+        return $this->hasMany('App\Personne');
+    }
+
+    public function structure()
+    {
+        return $this->hasMany('App\Personne');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($configuration) {
+
+
+            switch ($configuration->champ) {
+                case "Logement":
+                    $configuration->logement()->each(function ($personne) {
+                        $personne->logement()->dissociate();
+                        $personne->save();
+                    });
+                    break;
+                case "CSP":
+                    $configuration->csp()->each(function ($personne) {
+                        $personne->csp()->dissociate();
+                        $personne->save();
+                    });
+                    break;
+                case "Catégorie":
+                    $configuration->categorie()->each(function ($personne) {
+                        $personne->categorie()->dissociate();
+                        $personne->save();
+                    });
+                    break;
+            }
+
+        });
+    }
 }

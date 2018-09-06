@@ -20,7 +20,11 @@ class CreateConfigTable extends Migration
             $table->string('libelle');
             $table->timestamps();
             $table->unique(['categorie', 'champ', 'libelle']);
+
+
         });
+
+
 
         Schema::table('probleme', function (Blueprint $table){
             $table->integer('categorie_id')->unsigned()->index();
@@ -35,15 +39,15 @@ class CreateConfigTable extends Migration
         });
 
         Schema::table('personne', function (Blueprint $table){
-            $table->integer('logement_id')->unsigned()->index();
+            $table->integer('logement_id')->unsigned()->nullable()->index()->onDelete('null');
         });
 
         Schema::table('personne', function (Blueprint $table){
-            $table->integer('csp_id')->unsigned()->index();
+            $table->integer('csp_id')->unsigned()->nullable()->index();
         });
 
         Schema::table('personne', function (Blueprint $table){
-            $table->integer('categorie_id')->unsigned()->index();
+            $table->integer('categorie_id')->nullable()->unsigned()->index();
         });
 
         Schema::table('action', function (Blueprint $table){

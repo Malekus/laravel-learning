@@ -38,4 +38,12 @@ class Probleme extends Model
     {
         return $this->hasMany('App\Action');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($probleme) {
+            $probleme->actions()->delete();
+        });
+    }
 }

@@ -73,4 +73,9 @@ class Personne extends Model
         $this->attributes['date_naissance'] = $value;
     }
 
+    public function setNull()
+    {
+        $this->logement_id = null;
+    }
+
 }

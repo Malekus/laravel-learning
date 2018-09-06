@@ -170,14 +170,14 @@
     <div class="form-group row justify-content-center">
         {!! Form::label('csp', 'CSP', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
-            {!! Form::select('csp', \App\Configuration::where(['champ' => 'CSP', 'categorie' => 'Personne'])->pluck('libelle', 'id'), $personne->csp->libelle,['class' => 'form-control']) !!}
+            {!! Form::select('csp', \App\Configuration::where(['champ' => 'CSP', 'categorie' => 'Personne'])->pluck('libelle', 'id'), isset($personne->csp->libelle) ? $personne->csp->libelle : null ,['class' => 'form-control']) !!}
         </div>
     </div>
 
     <div class="form-group row justify-content-center">
         {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
-            {!! Form::select('categorie', \App\Configuration::where(['champ' => 'Catégorie', 'categorie' => 'Personne'])->pluck('libelle', 'id'), $personne->categorie->libelle,['class' => 'form-control']) !!}
+            {!! Form::select('categorie', \App\Configuration::where(['champ' => 'Catégorie', 'categorie' => 'Personne'])->pluck('libelle', 'id'), isset($personne->categorie->libelle) ? $personne->categorie->libelle : null ,['class' => 'form-control']) !!}
         </div>
     </div>
 
@@ -191,7 +191,7 @@
     <div class="form-group row justify-content-center">
         {!! Form::label('logement', 'Logement', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
-            {!! Form::select('logement', \App\Configuration::where('champ', 'Logement')->pluck('libelle', 'id'), $personne->logement->id,['class' => 'form-control']) !!}
+            {!! Form::select('logement', \App\Configuration::where('champ', 'Logement')->pluck('libelle', 'id'), isset($personne->logement->id) ? $personne->logement->id : null ,['class' => 'form-control']) !!}
         </div>
     </div>
 

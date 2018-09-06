@@ -50,12 +50,12 @@
                                 <li class="list-group-item"><span class="font-weight-bold">Sexe</span> : {{ $personne->sexe  }}</li>
                                 <li class="list-group-item"><span class="font-weight-bold">Enfant</span> : {{ $personne->enfant  }}</li>
                                 <li class="list-group-item"><span class="font-weight-bold">CSP</span>
-                                    : {{ $personne->csp->libelle  }}</li>
+                                    : {{ isset($personne->csp->libelle) ? $personne->csp->libelle : "non reseigné"  }}</li>
                                 <li class="list-group-item"><span class="font-weight-bold">Catégorie</span>
-                                    : {{ $personne->categorie->libelle  }}</li>
+                                    : {{ isset($personne->categorie->libelle) ? $personne->categorie->libelle : "non reseigné"  }}</li>
                                 <li class="list-group-item"><span class="font-weight-bold">Nationalité</span> : {{ $personne->nationalite  }}</li>
                                 <li class="list-group-item"><span class="font-weight-bold">Logement</span>
-                                    : {{ $personne->logement->libelle  }}</li>
+                                    : {{ isset($personne->logement->libelle) ? $personne->logement->libelle : "non reseigné"  }}</li>
                                 <li class="list-group-item"><span class="font-weight-bold">Prioritaire</span>
                                     : {{ $personne->prioritaire ? "oui" : "non" }}</li>
                             </ul>
@@ -184,7 +184,7 @@
     </div>
 @endsection
 
-{{--
+
 @section('javascript')
     <script>
         $(document).ready(function () {
@@ -272,5 +272,3 @@
         });
     </script>
 @endsection
-
---}}

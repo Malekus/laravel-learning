@@ -62,8 +62,9 @@ class PersonneController extends Controller
         if(!$personne){
             return response()->json(null, 404);
         }
-        $personne = Personne::create($request->except('logement', 'csp', 'categorie'));
-        $personne->logement()->dissociate();
+        $personne = Personne::updated($request->except('logement', 'csp', 'categorie'));
+        dd(!is_null($personne->logement()));
+        !is_null($personne->logement()) ?: $personne->logement()->dissociate();
         $personne->csp()->dissociate();
         $personne->categorie()->dissociate();
         $personne->logement()->associate(Configuration::find($request->get('logement')));

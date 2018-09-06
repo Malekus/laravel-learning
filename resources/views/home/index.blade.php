@@ -36,7 +36,7 @@
         <div class="col-12 p-2">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="">Activités de la semaine</h5>
+                    <h5 class="">Activité de la semaine</h5>
                     {!! $chart->container() !!}
                 </div>
             </div>
@@ -47,7 +47,7 @@
             <div class="col-6 p-2">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Activités de la semaine</h5>
+                        <h5 class="card-title">Activité de la semaine</h5>
                         Tab
                     </div>
                 </div>
@@ -55,7 +55,7 @@
             <div class="col-6 p-2">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Activités de la semaine</h5>
+                        <h5 class="card-title">Activité de la semaine</h5>
                         Tab
                     </div>
                 </div>
