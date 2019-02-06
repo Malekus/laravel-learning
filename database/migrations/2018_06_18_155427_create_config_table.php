@@ -50,6 +50,14 @@ class CreateConfigTable extends Migration
             $table->integer('categorie_id')->nullable()->unsigned()->index();
         });
 
+        Schema::table('personne', function (Blueprint $table){
+            $table->integer('scolaire_id')->nullable()->unsigned()->index();
+        });
+
+        Schema::table('personne', function (Blueprint $table){
+            $table->integer('situation_id')->nullable()->unsigned()->index();
+        });
+
         Schema::table('action', function (Blueprint $table){
             $table->integer('action_id')->unsigned()->index();
         });
@@ -58,6 +66,13 @@ class CreateConfigTable extends Migration
             $table->integer('complement_id')->unsigned()->nullable()->index();
         });
 
+        Schema::table('partenaire', function (Blueprint $table){
+            $table->integer('structure_id')->unsigned()->nullable()->index();
+        });
+
+        Schema::table('partenaire', function (Blueprint $table){
+            $table->integer('type_id')->nullable()->unsigned()->index();
+        });
 
     }
 

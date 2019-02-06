@@ -62,16 +62,17 @@ class PersonneController extends Controller
         if(!$personne){
             return response()->json(null, 404);
         }
-        $personne = Personne::updated($request->except('logement', 'csp', 'categorie'));
-        dd(!is_null($personne->logement()));
-        !is_null($personne->logement()) ?: $personne->logement()->dissociate();
-        $personne->csp()->dissociate();
-        $personne->categorie()->dissociate();
+
+        foreach ($request->except('logement', 'csp', 'categorie') as $key => $value){
+            if(!in_array($key, array('_method', '_token')))
+                $personne->$key = $value;
+        }
+
         $personne->logement()->associate(Configuration::find($request->get('logement')));
         $personne->csp()->associate(Configuration::find($request->get('csp')));
         $personne->categorie()->associate(Configuration::find($request->get('categorie')));
         $personne->save();
-        return redirect(route('personne.show', ['personne' => $personne]));
+        return redirect(route('personne.show', compact('personne')));
     }
 
     public function destroy($id)

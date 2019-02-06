@@ -14,6 +14,8 @@ $factory->define(App\Personne::class, function (Faker $faker) {
         'categorie_id' => \App\Configuration::where('champ', 'Catégorie')->get()->random()->id,
         'nationalite' => $faker->country ,
         'logement_id' => \App\Configuration::where('champ', 'Logement')->get()->random()->id,
+        'scolaire_id' => \App\Configuration::where('champ', 'Niveau Scolaire')->get()->random()->id,
+        'situation_id' => \App\Configuration::where('champ', 'Situation')->get()->random()->id,
         'telephone' => $faker->phoneNumber ,
         'email' => $faker->email ,
         'adresse' => $faker->address ,

@@ -62,9 +62,14 @@ class Configuration extends Model
         return $this->hasMany('App\Personne', 'csp_id');
     }
 
+    public function scolaire()
+    {
+        return $this->hasMany('App\Personne', 'scolaire_id');
+    }
+
     public function action()
     {
-        return $this->hasMany('App\Action');
+        return $this->hasMany('App\Action', 'action_id');
     }
 
     public function categorie()
@@ -79,7 +84,7 @@ class Configuration extends Model
 
     public function situation()
     {
-        return $this->hasMany('App\Personne');
+        return $this->hasMany('App\Personne', 'situation_id');
     }
 
     public function structure()
@@ -110,6 +115,26 @@ class Configuration extends Model
                     $configuration->categorie()->each(function ($personne) {
                         $personne->categorie()->dissociate();
                         $personne->save();
+                    });
+                    break;
+                case "Niveau Scolaire":
+                    $configuration->scolaire()->each(function ($personne) {
+                        $personne->scolaire()->dissociate();
+                        $personne->save();
+                    });
+                    break;
+
+                case "Situation":
+                    $configuration->situation()->each(function ($personne) {
+                        $personne->situation()->dissociate();
+                        $personne->save();
+                    });
+                    break;
+
+
+                case "Action":
+                    $configuration->action()->each(function ($action) {
+                        $action->delete();
                     });
                     break;
             }

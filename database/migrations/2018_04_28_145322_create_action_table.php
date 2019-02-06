@@ -15,15 +15,15 @@ class CreateActionTable extends Migration
     {
         Schema::create('action', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('deplacement')->nullable();
-            $table->string('duree')->nullable();
-            $table->boolean('information')->nullable();
-            $table->boolean('droitOuvert')->nullable();
-            $table->boolean('maintienDroit')->nullable();
-            $table->boolean('conflit')->nullable();
-            $table->boolean('perduDeVue')->nullable();
-            $table->boolean('judiciarisation')->nullable();
-            $table->string('avancement')->nullable();
+            $table->string('deplacement')->default(0)->nullable();
+            $table->integer('duree')->default(0)->nullable();
+            $table->boolean('information')->default(false)->nullable();
+            $table->boolean('droitOuvert')->default(false)->nullable();
+            $table->boolean('maintienDroit')->default(false)->nullable();
+            $table->boolean('conflit')->default(false)->nullable();
+            $table->boolean('perduDeVue')->default(false)->nullable();
+            $table->boolean('judiciarisation')->default(false)->nullable();
+            $table->string('avancement')->default("en cours")->nullable();
             $table->timestamps();
         });
     }

@@ -51,6 +51,16 @@ class Personne extends Model
         return $this->belongsTo('App\Configuration');
     }
 
+    public function scolaire()
+    {
+        return $this->belongsTo('App\Configuration');
+    }
+
+    public function situation()
+    {
+        return $this->belongsTo('App\Configuration');
+    }
+
 
     protected static function boot()
     {
@@ -73,9 +83,5 @@ class Personne extends Model
         $this->attributes['date_naissance'] = $value;
     }
 
-    public function setNull()
-    {
-        $this->logement_id = null;
-    }
 
 }

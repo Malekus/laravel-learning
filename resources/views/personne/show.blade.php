@@ -169,7 +169,20 @@
                                                 <td>{{ isset($action->complement->libelle) ? $action->complement->libelle : "non renseigné" }}</td>
                                                 <td>{{ $action->avancement ? "terminé" : "en cours"}}</td>
                                                 <td>{{ \Carbon\Carbon::parse($action->update_at)->format('d/m/Y') }}</td>
-                                                <td>Actions</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-success showModal"
+                                                            data-toggle="modal">
+                                                        <span class="icon"><i class="fas fa-search"></i></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary editModal"
+                                                            data-toggle="modal">
+                                                        <span class="icon"><i class="fas fa-edit"></i></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger deleteModal"
+                                                            data-toggle="modal">
+                                                        <span class="icon"><i class="fas fa-trash-alt"></i></span>
+                                                    </button>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -270,5 +283,23 @@
 
             });
         });
+    </script>
+
+    <script language=JavaScript>
+
+        var message = "function disabled";
+
+        function rtclickcheck(keyp) {
+            if (navigator.appName == "Netscape" && keyp.which == 3) {
+                return false;
+            }
+
+            if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) {
+                return false;
+            }
+        }
+
+        document.onmousedown = rtclickcheck;
+
     </script>
 @endsection
