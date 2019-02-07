@@ -14,9 +14,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ConfigurationsTableSeeder::class,
             PersonnesTableSeeder::class,
-            PartenaireTableSeeder::class,
+            /*PartenaireTableSeeder::class,
             ProblemesTableSeeder::class,
             ActionTableSeeder::class
+            */
         ]);
     }
 }

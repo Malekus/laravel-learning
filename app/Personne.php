@@ -29,7 +29,7 @@ class Personne extends Model
     ];
 
 
-    protected $table = 'personne';
+    protected $table = 'personnes';
 
     public function problemes()
     {

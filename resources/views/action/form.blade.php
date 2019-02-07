@@ -1,3 +1,21 @@
+@foreach($problemes as $probleme)
+    {{ $probleme->id }}
+@endforeach
+
+<div class="form-group row justify-content-center">
+    {!! Form::label('probleme', 'Problème', ['class' => 'col-lg-2 col-form-label']) !!}
+    <div class="col-lg-6">
+        <select class="form-control" id="probleme" name="probleme">
+            @foreach($problemes as $probleme)
+                <option value="{{ $probleme->id }}">{{ $probleme->categorie_id }}</option>
+            @endforeach
+        </select>
+        <div class="invalid-feedback">
+            Saisir un sujet
+        </div>
+    </div>
+</div>
+
 <div class="form-group row justify-content-center">
     {!! Form::label('action', 'Action', ['class' => 'col-lg-2 col-form-label']) !!}
     <div class="col-lg-6">

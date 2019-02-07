@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <div class="card">
+            <div class="card sizeCard">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-8">
@@ -25,7 +25,7 @@
                                     <a class="dropdown-item" href="{{ route('probleme.create', $personne) }}"><span
                                                 class="icon mr-2"><i class="fas fa-exclamation-triangle"></i></span>Ajouter
                                         un problème</a>
-                                    <a class="dropdown-item" href="#"><span class="icon mr-2"><i
+                                    <a class="dropdown-item" href="{{ route('action.create', $personne) }}"><span class="icon mr-2"><i
                                                     class="fas fa-cogs"></i></span>Ajouter un rendez-vous</a>
                                     <a class="dropdown-item" href="#"><span class="icon mr-2"><i
                                                     class="fas fa-redo-alt"></i></span>Ajouter une routine</a>
@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 p-2">
                             <ul class="list-group">
-                                <li class="list-group-item active bg-info text-white"><h5>Informations générales</h5>
+                                <li class="list-group-item atom text-white"><h5>Informations générales</h5>
                                 </li>
                                 <li class="list-group-item"><span class="font-weight-bold">Nom</span> : {{ $personne->nom  }}</li>
                                 <li class="list-group-item"><span class="font-weight-bold">Prénom</span> : {{ $personne->prenom  }}</li>
@@ -64,7 +64,7 @@
                             <div class="row">
                                 <div class="col-12 pb-2">
                                     <ul class="list-group">
-                                        <li class="list-group-item active bg-info text-white"><h5>Contact</h5></li>
+                                        <li class="list-group-item atom text-white"><h5>Contact</h5></li>
                                         <li class="list-group-item"><span class="font-weight-bold">Adresse</span> : {{ $personne->adresse  }}</li>
                                         <li class="list-group-item"><span class="font-weight-bold">Code postale</span> : {{ $personne->code_postale  }}</li>
                                         <li class="list-group-item"><span class="font-weight-bold">Ville</span> : {{ $personne->ville  }}</li>
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="col-12 pb-2">
                                     <ul class="list-group">
-                                        <li class="list-group-item active bg-info text-white"><h5>Activité</h5></li>
+                                        <li class="list-group-item atom text-white"><h5>Activité</h5></li>
                                         <li class="list-group-item"><span class="font-weight-bold">Nb problème</span>
                                             : {{ count($personne->problemes) }}</li>
                                         <li class="list-group-item"><span class="font-weight-bold">Nb rendez-vous</span>

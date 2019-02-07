@@ -14,7 +14,7 @@
                             <h1><i class="fas fa-user mr-3"></i>Ajouter un rendez-vous</h1>
                         </div>
                         <div class="col-lg-12">
-                            {!! Form::open(['method'=> 'post', 'url' => route('action.store', $probleme), 'class' => 'needs-validation', 'novalidate']) !!}
+                            {!! Form::open(['method'=> 'post', 'url' => route('action.store'), 'class' => 'needs-validation', 'novalidate']) !!}
 
                             @include('action.form')
 

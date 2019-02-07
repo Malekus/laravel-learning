@@ -6,6 +6,7 @@ use App\Action;
 use App\Configuration;
 use App\Probleme;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ActionController extends Controller
 {
@@ -26,8 +27,13 @@ class ActionController extends Controller
      */
     public function create($id)
     {
-        $probleme = Probleme::find($id);
-        return view('action.create', compact('probleme'));
+        //$problemes = Probleme::where('personne_id', $id)->get();
+        $problemes = DB::table('probleme')
+            ->join('configuration', 'configuration.id', '=', 'probleme.personne_id')
+            ->where('probleme.personne_id', $id)
+            ->get();
+        dump($problemes);
+        return view('action.create', compact('problemes'));
     }
 
     /**
@@ -36,9 +42,9 @@ class ActionController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-        $probleme = Probleme::find($id);
+        $probleme = Probleme::find(6);
         $action = new Action();
         $action->probleme()->associate($probleme);
         $action->action()->associate(Configuration::find($request->get('action')));
