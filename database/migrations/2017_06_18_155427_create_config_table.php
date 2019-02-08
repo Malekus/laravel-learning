@@ -24,17 +24,7 @@ class CreateConfigTable extends Migration
 
 
         /*
-        Schema::table('probleme', function (Blueprint $table){
-            $table->integer('categorie_id')->unsigned()->index();
-        });
 
-        Schema::table('probleme', function (Blueprint $table){
-            $table->integer('type_id')->unsigned()->index();
-        });
-
-        Schema::table('probleme', function (Blueprint $table){
-            $table->integer('accompagnement_id')->unsigned()->index();
-        });
 
 
 

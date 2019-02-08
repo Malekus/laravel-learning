@@ -11,7 +11,7 @@ class ProblemesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Probleme::class, 50)->create();
+        factory(\App\Probleme::class, 100)->create();
 
     }
 }
