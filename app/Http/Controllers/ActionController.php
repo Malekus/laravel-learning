@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Action;
 use App\Configuration;
+use App\Http\Resources\Personne;
 use App\Probleme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,11 +29,13 @@ class ActionController extends Controller
     public function create($id)
     {
         //$problemes = Probleme::where('personne_id', $id)->get();
-        $problemes = DB::table('probleme')
-            ->join('configuration', 'configuration.id', '=', 'probleme.personne_id')
-            ->where('probleme.personne_id', $id)
+        $problemes = DB::table('problemes')
+            ->join('personnes', 'personnes.id', '=', 'problemes.personne_id')
+            ->where('problemes.personne_id', $id)
+            ->join('configurations', 'configurations.id', '=', 'problemes.categorie_id')
             ->get();
-        dump($problemes);
+        $personne = \App\Personne::find($id);
+        dump($problemes, $personne->problemes);
         return view('action.create', compact('problemes'));
     }
 

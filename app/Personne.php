@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Personne extends Model
 {
@@ -33,7 +34,10 @@ class Personne extends Model
 
     public function problemes()
     {
-        return $this->hasMany('App\Probleme');
+        return $this->hasMany(Probleme::class)
+            ->join('configurations as categorie', 'configurations.id', '=', 'problemes.categorie_id')
+            //->join('configurations as type', 'configurations.id', '=', 'problemes.type_id')
+            ->select(['problemes.*', 'categorie.libelle']); //, 'type.libelle']);
     }
 
     public function logement()
@@ -48,7 +52,9 @@ class Personne extends Model
 
     public function categorie()
     {
-        return $this->belongsTo('App\Configuration');
+        return $this->belongsTo('App\Configuration')
+            ->join('configurations', 'configurations.id', '=', 'problemes.categorie_id')
+            ->select(['problemes.*', 'configurations.*']);
     }
 
     public function scolaire()
