@@ -13,11 +13,17 @@ class CreatePartenaireTable extends Migration
      */
     public function up()
     {
-        Schema::create('partenaire', function (Blueprint $table) {
+        Schema::create('partenaires', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nom');
             $table->string('prenom')->nullable();
-            $table->string('sexe', 256)->nullable();
+            $table->string('sexe')->nullable();
+
+            $table->integer('structure_id')->unsigned()->index();
+            $table->foreign('structure_id')->references('id')->on('configurations')->onDelete('cascade');
+            $table->integer('type_id')->unsigned()->index();
+            $table->foreign('type_id')->references('id')->on('configurations')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -29,6 +35,6 @@ class CreatePartenaireTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('partenaire');
+        Schema::dropIfExists('partenaires');
     }
 }

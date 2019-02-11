@@ -29,20 +29,13 @@ class CreateConfigTable extends Migration
 
 
         Schema::table('action', function (Blueprint $table){
-            $table->integer('action_id')->unsigned()->index();
+
         });
 
         Schema::table('action', function (Blueprint $table){
-            $table->integer('complement_id')->unsigned()->nullable()->index();
+
         });
 
-        Schema::table('partenaire', function (Blueprint $table){
-            $table->integer('structure_id')->unsigned()->nullable()->index();
-        });
-
-        Schema::table('partenaire', function (Blueprint $table){
-            $table->integer('type_id')->nullable()->unsigned()->index();
-        });
         */
 
     }
