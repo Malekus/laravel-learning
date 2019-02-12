@@ -10,8 +10,8 @@ class Partenaire extends Model
 
     public function __construct(array $attributes = [])
     {
-        foreach ($attributes as $key => $value){
-            if(!in_array($key, array('_method', '_token')))
+        foreach ($attributes as $key => $value) {
+            if (!in_array($key, array('_method', '_token')))
                 $this->$key = $value;
         }
     }
@@ -26,7 +26,8 @@ class Partenaire extends Model
         return $this->belongsTo('App\Configuration');
     }
 
-    public function scopeIndex($query){
+    public function scopeIndex($query)
+    {
         return $query
             ->select('id', 'nom', 'prenom', 'structure_id', 'updated_at')->orderBy('nom');
     }

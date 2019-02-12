@@ -19,14 +19,14 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="#"><span
-                                                class="icon mr-2"><i class="fas fa-edit"></i></span>Modifier le partenaire</a>
+                                                class="icon mr-2"><i class="fas fa-edit"></i></span>Modifier le
+                                        partenaire</a>
                                     <a class="dropdown-item" href="#"><span class="icon mr-2"><i
                                                     class="fas fa-trash-alt"></i></span>Supprimer le partenaire</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-
 
 
                 </div>

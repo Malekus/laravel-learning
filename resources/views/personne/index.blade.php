@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 pb-2">
-                            <h1><i class="fas fa-user"></i>  Personne</h1>
+                            <h1><i class="fas fa-user"></i> Personne</h1>
                         </div>
                     </div>
 
@@ -20,12 +20,12 @@
                         <div class="col-12">
                             <div class="float-left">
                                 {!! Form::open(['method' => 'get','url' => route('personne.index'), 'class' => 'form-inline']) !!}
-                                    <div class="form-group mb-2">
-                                        {!! Form::text('search', null, ['class' => 'form-control', 'placeholder' => "Nom ou Matricule CAF"]) !!}
-                                    </div>
-                                        <button type="submit" class="btn btn-info mx-sm-3 mb-2">
-                                            Rechercher
-                                        </button>
+                                <div class="form-group mb-2">
+                                    {!! Form::text('search', null, ['class' => 'form-control', 'placeholder' => "Nom ou Matricule CAF"]) !!}
+                                </div>
+                                <button type="submit" class="btn btn-info mx-sm-3 mb-2">
+                                    Rechercher
+                                </button>
                                 {!! Form::close() !!}
                             </div>
 
@@ -76,7 +76,8 @@
                                                        class="btn btn-warning">
                                                         <span class="icon"><i class="fas fa-calendar-alt"></i></span>
                                                     </a>
-                                                    <button type="button" class="btn btn-danger deleteModal" data-toggle="modal">
+                                                    <button type="button" class="btn btn-danger deleteModal"
+                                                            data-toggle="modal">
                                                         <span class="icon"><i class="fas fa-trash-alt"></i></span>
                                                     </button>
                                                 </td>
