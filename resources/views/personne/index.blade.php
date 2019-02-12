@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-                        @include('personne.ajax.pagination')
+                        @include('layout.pagination', ['model' => $personnes])
 
 
                     </div>

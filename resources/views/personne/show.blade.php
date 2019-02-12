@@ -144,6 +144,8 @@
                         </div>
                     @endif
 
+
+
                     @if(count($actions) != 0)
                         <div class="row">
                             <div class="col-12">

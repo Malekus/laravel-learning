@@ -2,28 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Configuration;
+use App\Partenaire;
 use Illuminate\Http\Request;
 
 class PartenaireController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return view('partenaire.index');
+
+        if($request->get('search') == null){
+            $partenaires = Partenaire::index()->paginate(10);
+            return view('partenaire.index', compact('partenaires'));
+        }
+
+        $partenaires = Partenaire::index()
+            ->where('nom', 'like', '%'.$request->get('search').'%')
+            ->orWhere('prenom', 'like', '%'.$request->get('search').'%')
+            ->paginate(10);
+        return view('partenaire.index', compact('partenaires'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+
     }
 
     /**
@@ -34,51 +37,36 @@ class PartenaireController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $partenaire = $request->isMethod('put') ? Partenaire::findOrFail($request->id) :
+            new Partenaire($request->except('structure', 'type'));
+        $partenaire->structure()->associate(Configuration::find($request->get('structure')));
+        $partenaire->type()->associate(Configuration::find($request->get('type')));
+        $partenaire->save();
+        return redirect(route('partenaire.show', compact('partenaire')));
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $partenaire = Partenaire::find($id);
+        return view('partenaire.show', ['partenaire' => $partenaire]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+
+    }
+
+    public function list_(Request $request){
+        $search = $request->get('search') ? $request->get('search') : null;
+        if($search === null){
+            $partenaires = Partenaire::index()->paginate(10)->withPath('partenaire');
+            return view('partenaire.list', compact('partenaires'));
+        }
+
+        $partenaires = Partenaire::index()
+            ->where('nom', 'like', '%'.$search.'%')
+            ->orWhere('prenom', 'like', '%'.$search.'%')->paginate(10)->withPath('partenaire');
+        return view('partenaire.list', compact('partenaires'));
     }
 }

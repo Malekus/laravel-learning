@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Action;
 use App\Configuration;
-use App\Http\Resources\Personne;
 use App\Probleme;
+use App\Personne;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -28,15 +28,8 @@ class ActionController extends Controller
      */
     public function create($id)
     {
-        //$problemes = Probleme::where('personne_id', $id)->get();
-        $problemes = DB::table('problemes')
-            ->join('personnes', 'personnes.id', '=', 'problemes.personne_id')
-            ->where('problemes.personne_id', $id)
-            ->join('configurations', 'configurations.id', '=', 'problemes.categorie_id')
-            ->get();
-        $personne = \App\Personne::find($id);
-        dump($problemes, $personne->problemes);
-        return view('action.create', compact('problemes'));
+        $personne = Personne::find($id);
+        return view('action.create', ['problemes' => $personne->problemes]);
     }
 
     /**
@@ -47,8 +40,13 @@ class ActionController extends Controller
      */
     public function store(Request $request)
     {
-        $probleme = Probleme::find(6);
+        $probleme = Probleme::find($request->get('probleme'));
         $action = new Action();
+
+        foreach ($request->except('probleme', 'action', 'complement') as $key => $value){
+            if(!in_array($key, array('_method', '_token')))
+                $action->$key = $value;
+        }
         $action->probleme()->associate($probleme);
         $action->action()->associate(Configuration::find($request->get('action')));
         $action->complement()->associate(Configuration::find($request->get('complement')));

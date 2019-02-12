@@ -1,13 +1,9 @@
-@foreach($problemes as $probleme)
-    {{ $probleme->id }}
-@endforeach
-
 <div class="form-group row justify-content-center">
     {!! Form::label('probleme', 'Problème', ['class' => 'col-lg-2 col-form-label']) !!}
     <div class="col-lg-6">
         <select class="form-control" id="probleme" name="probleme">
             @foreach($problemes as $probleme)
-                <option value="{{ $probleme->id }}">{{ $probleme->categorie_id }}</option>
+                <option value="{{ $probleme->id }}"> {{ $probleme->categorie->libelle}} - {{ $probleme->type->libelle }}</option>
             @endforeach
         </select>
         <div class="invalid-feedback">
@@ -77,9 +73,9 @@
 </div>
 
 <div class="form-group row justify-content-center">
-    {!! Form::label('maintientDroit', 'Maintien de droit', ['class' => 'col-lg-2 col-form-label']) !!}
+    {!! Form::label('maintienDroit', 'Maintien de droit', ['class' => 'col-lg-2 col-form-label']) !!}
     <div class="col-lg-6">
-        {!! Form::text('maintientDroit', null, ['class' => 'form-control']) !!}
+        {!! Form::text('maintienDroit', null, ['class' => 'form-control']) !!}
         <div class="invalid-feedback">
             Saisir un maintien de droit
         </div>

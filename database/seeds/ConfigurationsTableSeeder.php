@@ -159,7 +159,7 @@ class ConfigurationsTableSeeder extends Seeder
         App\Configuration::create(['categorie' => 'Partenaire', 'champ' => 'Type', 'libelle' => 'Sécurité']);
         App\Configuration::create(['categorie' => 'Partenaire', 'champ' => 'Type', 'libelle' => 'Justice']);
         App\Configuration::create(['categorie' => 'Partenaire', 'champ' => 'Structure', 'libelle' => 'Prevention specialisee']);
-        App\Configuration::create(['categorie' => 'Partenaire', 'champ' => 'Structure', 'libelle' => 'Universite']);
+        App\Configuration::create(['categorie' => 'Partenaire', 'champ' => 'Structure', 'libelle' => 'Université']);
         App\Configuration::create(['categorie' => 'Partenaire', 'champ' => 'Structure', 'libelle' => 'Entreprise privee']);
         App\Configuration::create(['categorie' => 'Partenaire', 'champ' => 'Structure', 'libelle' => 'Prestataire']);
         App\Configuration::create(['categorie' => 'Partenaire', 'champ' => 'Structure', 'libelle' => 'Politique de la ville']);

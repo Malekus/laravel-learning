@@ -34,10 +34,12 @@ class Personne extends Model
 
     public function problemes()
     {
-        return $this->hasMany(Probleme::class)
-            ->join('configurations as categorie', 'configurations.id', '=', 'problemes.categorie_id')
-            //->join('configurations as type', 'configurations.id', '=', 'problemes.type_id')
-            ->select(['problemes.*', 'categorie.libelle']); //, 'type.libelle']);
+        return $this->hasMany(Probleme::class);
+        /*
+            ->join('configurations as c1', 'c1.id', '=', 'problemes.categorie_id')
+            ->join('configurations as c2', 'c2.id', '=', 'problemes.type_id')
+            ->select(['problemes.*', 'c1.libelle as categorie', 'c2.libelle as type']); //, 'type.libelle']);
+        */
     }
 
     public function logement()
@@ -52,9 +54,7 @@ class Personne extends Model
 
     public function categorie()
     {
-        return $this->belongsTo('App\Configuration')
-            ->join('configurations', 'configurations.id', '=', 'problemes.categorie_id')
-            ->select(['problemes.*', 'configurations.*']);
+        return $this->belongsTo('App\Configuration');
     }
 
     public function scolaire()
