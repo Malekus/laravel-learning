@@ -26,7 +26,7 @@ class PartenaireController extends Controller
 
     public function create()
     {
-
+        return view('partenaire.create');
     }
 
     /**

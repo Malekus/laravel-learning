@@ -12,3 +12,6 @@ Route::post('/partenaire/list', 'PartenaireController@list_')
 Route::get('/partenaire/{partenaire}', 'PartenaireController@show')
     ->name('partenaire.show')
     ->where('partenaire', '[0-9]+');
+
+Route::post('/partenaire', 'PartenaireController@store')
+    ->name('partenaire.store');

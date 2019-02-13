@@ -199,7 +199,7 @@ canvas {
 }
 
 .sizeCard{
-    min-height: calc(100vh - 64px);
+    min-height: calc(100vh - 66px);
 }
 
 .working{

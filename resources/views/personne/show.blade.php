@@ -86,7 +86,7 @@
                             </div>
                         </div>
                     </div>
-                    <td></td>
+
 
                     @if(count($personne->problemes) != 0)
                         <div class="row">
