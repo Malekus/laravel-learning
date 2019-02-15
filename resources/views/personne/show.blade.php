@@ -22,7 +22,7 @@
                                                 class="icon mr-2"><i class="fas fa-edit"></i></span>Modifier la personne</a>
                                     <a class="dropdown-item" href="#"><span class="icon mr-2"><i
                                                     class="fas fa-trash-alt"></i></span>Supprimer la personne</a>
-                                    <a class="dropdown-item" href="{{ route('probleme.create', $personne) }}"><span
+                                    <a class="dropdown-item" href="{{ route('probleme.create', ['type' => 'personne', 'id' => $personne]) }}"><span
                                                 class="icon mr-2"><i class="fas fa-exclamation-triangle"></i></span>Ajouter
                                         un problème</a>
                                     <a class="dropdown-item" href="{{ route('action.create', $personne) }}"><span class="icon mr-2"><i
@@ -31,7 +31,7 @@
                                                     class="fas fa-redo-alt"></i></span>Ajouter une routine</a>
                                     <a class="dropdown-item" href="#"><span class="icon mr-2"><i
                                                     class="fas fa-list-ul"></i></span>Ajouter une date CAF</a>
-                                    <a class="dropdown-item" href="{{ route('personne.cafMois', $personne) }}"><span class="icon mr-2"><i
+                                    <a class="dropdown-item" href="{{ route('personne.cafMois', ['id' => $personne]) }}"><span class="icon mr-2"><i
                                                     class="fas fa-calendar-alt"></i></span>Ajouter à la liste CAF du
                                         mois</a>
                                 </div>

@@ -26,9 +26,16 @@ class Partenaire extends Model
         return $this->belongsTo('App\Configuration');
     }
 
+    public function problemes()
+    {
+        return $this->hasMany(Probleme::class);
+    }
+
     public function scopeIndex($query)
     {
         return $query
             ->select('id', 'nom', 'prenom', 'structure_id', 'updated_at')->orderBy('nom');
     }
+
+
 }

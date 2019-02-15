@@ -19,6 +19,11 @@ class Probleme extends Model
         return $this->belongsTo('App\Personne');
     }
 
+    public function partenaire()
+    {
+        return $this->belongsTo('App\Partenaire');
+    }
+
     public function categorie()
     {
         return $this->belongsTo('App\Configuration');

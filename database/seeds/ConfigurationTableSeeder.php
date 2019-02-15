@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ConfigurationsTableSeeder extends Seeder
+class ConfigurationTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,46 +11,46 @@ class ConfigurationsTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP',  'libelle' => 'Etudiant']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP',  'libelle' => 'RSA']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Catégorie',  'libelle' => 'RSA']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Situation',  'libelle' => 'Couple']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Logement',  'libelle' => 'HLM']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' =>  'Lycée']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Situation',  'libelle' => 'Célibataire']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Situation',  'libelle' => 'Union libre']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Situation',  'libelle' => 'Marié(e)']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Situation',  'libelle' => 'Divorcé(e)']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Catégorie',  'libelle' => 'MDPH']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Catégorie',  'libelle' => 'PLI']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Logement',  'libelle' => 'SDF']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Logement',  'libelle' => 'Maison']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Logement',  'libelle' => 'Foyer']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Logement',  'libelle' => 'Hebergé/hôtel social']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Logement',  'libelle' => 'Appartement']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' =>  'Bac pro']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' =>  'Bac+2']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' =>  'Bac+3/4']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' =>  'Collège']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' =>  'Bac+5']);
-        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' =>  'Bac+8']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Chomage -1AN']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Chomage +1AN']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Salarié(e)']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Scolarisé(e)']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Retraité(e)']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Partenaire']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Descolarisé']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Personne au foyer']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'MDPH']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Formation']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Stagiaire']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Indemnité jounalière']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'CADA']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Ne sais pas']);
-        App\Configuration::create(['categorie' =>  'Personne', 'champ' => 'CSP',  'libelle' => 'Autre']);
-        App\Configuration::create(['categorie' =>  'Problème', 'champ' => 'Accompagnement',  'libelle' => 'Ponctuel']);
-        App\Configuration::create(['categorie' =>  'Problème', 'champ' => 'Accompagnement',  'libelle' => 'Long-court']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Etudiant']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'RSA']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Catégorie', 'libelle' => 'RSA']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Situation', 'libelle' => 'Couple']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Logement', 'libelle' => 'HLM']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' => 'Lycée']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Situation', 'libelle' => 'Célibataire']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Situation', 'libelle' => 'Union libre']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Situation', 'libelle' => 'Marié(e)']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Situation', 'libelle' => 'Divorcé(e)']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Catégorie', 'libelle' => 'MDPH']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Catégorie', 'libelle' => 'PLI']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Logement', 'libelle' => 'SDF']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Logement', 'libelle' => 'Maison']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Logement', 'libelle' => 'Foyer']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Logement', 'libelle' => 'Hebergé/hôtel social']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Logement', 'libelle' => 'Appartement']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' => 'Bac pro']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' => 'Bac+2']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' => 'Bac+3/4']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' => 'Collège']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' => 'Bac+5']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'Niveau Scolaire', 'libelle' => 'Bac+8']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Chomage -1AN']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Chomage +1AN']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Salarié(e)']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Scolarisé(e)']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Retraité(e)']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Partenaire']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Descolarisé']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Personne au foyer']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'MDPH']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Formation']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Stagiaire']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Indemnité jounalière']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'CADA']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Ne sais pas']);
+        App\Configuration::create(['categorie' => 'Personne', 'champ' => 'CSP', 'libelle' => 'Autre']);
+        App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Accompagnement', 'libelle' => 'Ponctuel']);
+        App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Accompagnement', 'libelle' => 'Long-court']);
 
         App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'AS']);
         App\Configuration::create(['categorie' => 'Action', 'champ' => 'Action', 'libelle' => 'Renseignement']);
@@ -121,7 +121,7 @@ class ConfigurationsTableSeeder extends Seeder
         App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Maison des femmes']);
         App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Observatoire des violences faites aux femmes']);
         App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Unite médicale judiciaire']);
-        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Psychologue' ]);
+        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Psychologue']);
         App\Configuration::create(['categorie' => 'Action', 'champ' => 'Action', 'libelle' => 'Candidatures par mail/inernet/']);
         App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Chambre du commerce']);
         App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Centre maternel']);
@@ -278,6 +278,19 @@ class ConfigurationsTableSeeder extends Seeder
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Navigo/amethyste']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'APL']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Media']);
-
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Téléprocédure accompagnée']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Impression attestation de droits et/ou de QF']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Information générale sur la Caf et/ou les prestations']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Explication d\'un courrier']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Rédaction d\'un courrier, mail']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Complétude et/ou vérification d\'un dossier avant envoie']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Vers autre mode de contrat Caf']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Autre orientation']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Commentaire ou autre action']);
     }
 }
+
+
+/*
+
+ * */

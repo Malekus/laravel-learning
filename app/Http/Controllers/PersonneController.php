@@ -110,10 +110,6 @@ class PersonneController extends Controller
 
     public function cafMois($id)
     {
-        $personne = Personne::find($id);
-        dd($personne);
-        $datenow = new DateTime('now');
-
-        return redirect(route('personne.show', $personne));
+        return view('caf.create');
     }
 }

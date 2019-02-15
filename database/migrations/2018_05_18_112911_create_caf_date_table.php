@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateCafDateTable extends Migration
 {
@@ -13,9 +13,13 @@ class CreateCafDateTable extends Migration
      */
     public function up()
     {
-        Schema::create('caf_date', function (Blueprint $table) {
+        Schema::create('cafDates', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('ajout');
+            $table->date('dateCaf');
+            $table->integer('motif_id')->unsigned()->nullable();
+            $table->foreign('motif_id')->references('id')->on('configurations')->onDelete('cascade');
+            $table->integer('personne_id')->unsigned()->index();
+            $table->foreign('personne_id')->references('id')->on('personnes')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateCafDateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('caf_date');
+        Schema::dropIfExists('cafDates');
     }
 }

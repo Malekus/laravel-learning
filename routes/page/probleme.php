@@ -23,13 +23,13 @@ Route::get('/probleme/{probleme}', 'ProblemeController@show')
     ->name('probleme.show')
     ->where('probleme', '[0-9]+');
 
-Route::get('/probleme/create/{personne}', 'ProblemeController@create')
+Route::get('/probleme/create/{type}/{id}', 'ProblemeController@create')
     ->name('probleme.create')
-    ->where('personne', '[0-9]+');
+    ->where('id', '[0-9]+');
 
-Route::post('/probleme/{personne}', 'ProblemeController@store')
+Route::post('/probleme/{type}/{id}', 'ProblemeController@store')
     ->name('probleme.store')
-    ->where('personne', '[0-9]+');
+    ->where('id', '[0-9]+');
 
 
 Route::put('/probleme/{probleme}', 'ProblemeController@update')

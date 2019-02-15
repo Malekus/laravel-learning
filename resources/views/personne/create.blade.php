@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body sizeCard">
                     <div class="row">
                         <div class="col-12 pb-2">
                             <h1><i class="fas fa-user mr-3"></i>Ajouter une personne</h1>

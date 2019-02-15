@@ -15,7 +15,7 @@
                         </div>
 
                         <div class="col-lg-12">
-                            {!! Form::open(['url' => route('probleme.store', ['personne' => $personne]), 'class' => 'needs-validation', 'novalidate']) !!}
+                            {!! Form::open(['url' => route('probleme.store', ['type' => $type, 'id' => $id]), 'class' => 'needs-validation', 'novalidate']) !!}
 
                             @include('probleme.form')
 

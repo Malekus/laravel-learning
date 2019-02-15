@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Configuration;
+use App\Partenaire;
 use App\Personne;
 use App\Probleme;
 use Illuminate\Http\Request;
@@ -24,10 +25,16 @@ class ProblemeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create($type, $id)
     {
-        $personne = Personne::findOrFail($id);
-        return view('probleme.create', compact('personne'));
+        if($type == 'personne'){
+            $personne = Personne::findOrFail($id);
+            return view('probleme.create', (['id' => $personne, 'type' => $type]));
+        }
+        if($type == 'partenaire'){
+            $partenaire = Partenaire::findOrFail($id);
+            return view('probleme.create', (['id' => $partenaire, 'type' => $type]));
+        }
     }
 
     /**
@@ -36,16 +43,23 @@ class ProblemeController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, $type, $id)
     {
-
         $probleme = new Probleme();
-        $probleme->personne()->associate(Personne::find($request->route('personne')));
+
+        if($type == 'personne')
+            $probleme->personne()->associate(Personne::find($id));
+        else
+            $probleme->partenaire()->associate(Partenaire::find($id));
+
         $probleme->categorie()->associate(Configuration::find($request->get('categorie')));
         $probleme->type()->associate(Configuration::find($request->get('type')));
         $probleme->accompagnement()->associate(Configuration::find($request->get('accompagnement')));
         $probleme->save();
-        return redirect(route('personne.show', ['personne' => $request->route('personne')]));
+        if($type == 'personne')
+            return redirect(route('personne.show', ['personne' => $id]));
+        if($type == 'partenaire')
+        return redirect(route('partenaire.show', ['partenaire' => $id]));
     }
 
     /**
