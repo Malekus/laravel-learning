@@ -67,6 +67,11 @@ class Personne extends Model
         return $this->belongsTo('App\Configuration');
     }
 
+    public function listeCaf()
+    {
+        return $this->hasMany(CafDate::class);
+    }
+
 
     protected static function boot()
     {

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Action;
+use App\CafDate;
 use App\Configuration;
 use App\Personne;
 use App\Probleme;
+use Carbon\Carbon;
 use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -104,12 +106,47 @@ class PersonneController extends Controller
         return \response()->json(\view('personne.ajax.delete')->with(['personne' => $personne])->render());
     }
 
-    public function routine($id){
+    public function routine(Request $request, $id){
+
+        if($request->isMethod('post')){
+            dd($request->all());
+        }
+
+        return view('personne.routine', ['personne' => $id]);
 
     }
 
-    public function cafMois($id)
+    public function createCafDate(Request $request, $id)
     {
-        return view('caf.create');
+        if($request->isMethod('get')){
+            return view('caf.create', ['personne' => Personne::findOrFail($id)]);
+        }
+
+        if($request->isMethod('post')){
+            $cafDate = new CafDate();
+            $cafDate->dateCaf = $request->get('dateCaf');
+            $cafDate->motif()->associate(Configuration::find($request->get('motif')));
+            $cafDate->personne()->associate(Personne::find($id));
+            $cafDate->save();
+            return redirect(route('personne.show', ['personne' => $id]));
+        }
+        return abort(404);
+
     }
+
+    public function addListCafDate($id){
+        $caf = CafDate::where(['personne_id' => $id, 'dateCaf' => Carbon::now()->format('Y-m-d')])->get();
+        if(count($caf) != 0){
+            foreach ($caf as $c)
+                $c->delete();
+            return redirect(route('personne.show', ['personne' => $id]));
+        }
+        $cafDate = new CafDate();
+        $cafDate->dateCaf = Carbon::now();
+        $cafDate->personne()->associate(Personne::find($id));
+        $cafDate->save();
+        return redirect(route('personne.show', ['personne' => $id]));
+
+    }
+
 }

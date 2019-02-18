@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Action;
 use App\Configuration;
 use App\Partenaire;
 use Illuminate\Http\Request;
@@ -49,7 +50,8 @@ class PartenaireController extends Controller
     public function show($id)
     {
         $partenaire = Partenaire::find($id);
-        return view('partenaire.show', ['partenaire' => $partenaire]);
+        $actions = Action::whereIn('probleme_id', $partenaire->problemes->pluck('id')->toArray())->get();
+        return view('partenaire.show', ['partenaire' => $partenaire, 'actions' => $actions]);
     }
 
     public function destroy($id)

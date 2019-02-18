@@ -5,6 +5,7 @@ use Faker\Generator as Faker;
 $factory->define(\App\Action::class, function (Faker $faker) {
     return [
         'avancement' => $faker->randomElement(["en cours", "terminé"]),
+        'dateAction' =>  $faker->dateTimeBetween($startDate = '-3 years', $endDate = 'now'),
         'duree' => $faker->randomElement([0,5,10,15,20,25,30,35,45,50,55,60]),
         'deplacement' => $faker->randomElement([true, false]),
         'information' => $faker->randomElement([true, false]),

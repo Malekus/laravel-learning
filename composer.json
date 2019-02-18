@@ -9,6 +9,7 @@
         "consoletvs/charts": "6.*",
         "fideloper/proxy": "^4.0",
         "illuminate/html": "^5.0",
+        "kris/laravel-form-builder": "^1.16",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.6"

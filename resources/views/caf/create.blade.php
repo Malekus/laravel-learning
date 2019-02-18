@@ -12,7 +12,7 @@
                     <div class="row">
                         @include('layout.title', ['title' => "Ajouter une date Caf"])
                         <div class="col-lg-12">
-                            {!! Form::open(['url' => route('personne.store'), 'class' => 'needs-validation', 'novalidate']) !!}
+                            {!! Form::open(['method' => 'post', 'url' => route('personne.createCafDate', $personne), 'class' => 'needs-validation', 'novalidate']) !!}
 
                             @include('caf.form')
 

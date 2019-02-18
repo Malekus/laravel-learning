@@ -1,7 +1,9 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateProblemeTable extends Migration
@@ -16,7 +18,7 @@ class CreateProblemeTable extends Migration
         Schema::create('problemes', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('resolu')->default(false);
-
+            $table->date('dateProbleme')->default(Carbon::now());
             $table->integer('personne_id')->nullable()->unsigned();
             $table->foreign('personne_id')->references('id')->on('personnes')->onDelete('set null');
             $table->integer('partenaire_id')->nullable()->unsigned();

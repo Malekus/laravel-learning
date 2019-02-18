@@ -278,15 +278,15 @@ class ConfigurationTableSeeder extends Seeder
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Navigo/amethyste']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'APL']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Media']);
-        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Téléprocédure accompagnée']);
-        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Impression attestation de droits et/ou de QF']);
-        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Information générale sur la Caf et/ou les prestations']);
-        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Explication d\'un courrier']);
-        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Rédaction d\'un courrier, mail']);
-        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Complétude et/ou vérification d\'un dossier avant envoie']);
-        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Vers autre mode de contrat Caf']);
-        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Autre orientation']);
-        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Action', 'libelle' => 'Commentaire ou autre action']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Téléprocédure accompagnée']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Impression attestation de droits et/ou de QF']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Information générale sur la Caf et/ou les prestations']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Explication d\'un courrier']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Rédaction d\'un courrier, mail']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Complétude et/ou vérification d\'un dossier avant envoie']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Vers autre mode de contrat Caf']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Autre orientation']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Commentaire ou autre action']);
     }
 }
 

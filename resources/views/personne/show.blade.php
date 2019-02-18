@@ -22,17 +22,23 @@
                                                 class="icon mr-2"><i class="fas fa-edit"></i></span>Modifier la personne</a>
                                     <a class="dropdown-item" href="#"><span class="icon mr-2"><i
                                                     class="fas fa-trash-alt"></i></span>Supprimer la personne</a>
-                                    <a class="dropdown-item" href="{{ route('probleme.create', ['type' => 'personne', 'id' => $personne]) }}"><span
+                                    <a class="dropdown-item"
+                                       href="{{ route('probleme.create', ['type' => 'personne', 'id' => $personne]) }}"><span
                                                 class="icon mr-2"><i class="fas fa-exclamation-triangle"></i></span>Ajouter
                                         un problème</a>
-                                    <a class="dropdown-item" href="{{ route('action.create', $personne) }}"><span class="icon mr-2"><i
+                                    <a class="dropdown-item" href="{{ route('action.create', $personne) }}"><span
+                                                class="icon mr-2"><i
                                                     class="fas fa-cogs"></i></span>Ajouter un rendez-vous</a>
-                                    <a class="dropdown-item" href="#"><span class="icon mr-2"><i
+                                    <a class="dropdown-item" href="{{ route('personne.routine', ['id' => $personne]) }}"><span class="icon mr-2"><i
                                                     class="fas fa-redo-alt"></i></span>Ajouter une routine</a>
-                                    <a class="dropdown-item" href="#"><span class="icon mr-2"><i
-                                                    class="fas fa-list-ul"></i></span>Ajouter une date CAF</a>
-                                    <a class="dropdown-item" href="{{ route('personne.cafMois', ['id' => $personne]) }}"><span class="icon mr-2"><i
-                                                    class="fas fa-calendar-alt"></i></span>Ajouter à la liste CAF du
+                                    <a class="dropdown-item"
+                                       href="{{ route('personne.createCafDate', ['id' => $personne]) }}"><span
+                                                class="icon mr-2"><i
+                                                    class="fas fa-list-ul"></i></span>Ajouter une date Caf</a>
+                                    <a class="dropdown-item"
+                                       href="{{ route('personne.addListCafDate', ['id' => $personne]) }}"><span
+                                                class="icon mr-2"><i
+                                                    class="fas fa-calendar-alt"></i></span>Ajouter à la liste Caf du
                                         mois</a>
                                 </div>
                             </div>
@@ -44,18 +50,27 @@
                             <ul class="list-group">
                                 <li class="list-group-item atom text-white"><h5>Informations générales</h5>
                                 </li>
-                                <li class="list-group-item"><span class="font-weight-bold">Nom</span> : {{ $personne->nom  }}</li>
-                                <li class="list-group-item"><span class="font-weight-bold">Prénom</span> : {{ $personne->prenom  }}</li>
-                                <li class="list-group-item"><span class="font-weight-bold">Date de naissance</span> : {{ \Carbon\Carbon::parse($personne->date_naissance)->format('d/m/Y')  }}</li>
-                                <li class="list-group-item"><span class="font-weight-bold">Sexe</span> : {{ $personne->sexe  }}</li>
-                                <li class="list-group-item"><span class="font-weight-bold">Enfant</span> : {{ $personne->enfant  }}</li>
+                                <li class="list-group-item"><span class="font-weight-bold">Nom</span>
+                                    : {{ $personne->nom  }}</li>
+                                <li class="list-group-item"><span class="font-weight-bold">Prénom</span>
+                                    : {{ $personne->prenom  }}</li>
+                                <li class="list-group-item"><span class="font-weight-bold">Date de naissance</span>
+                                    : {{ \Carbon\Carbon::parse($personne->date_naissance)->format('d/m/Y')  }}</li>
+                                <li class="list-group-item"><span class="font-weight-bold">Sexe</span>
+                                    : {{ $personne->sexe  }}</li>
+                                <li class="list-group-item"><span class="font-weight-bold">Enfant</span>
+                                    : {{ $personne->enfant  }}</li>
                                 <li class="list-group-item"><span class="font-weight-bold">CSP</span>
-                                    : {{ isset($personne->csp->libelle) ? $personne->csp->libelle : "non reseigné"  }}</li>
+                                    : {{ isset($personne->csp->libelle) ? $personne->csp->libelle : "non renseigné"  }}
+                                </li>
                                 <li class="list-group-item"><span class="font-weight-bold">Catégorie</span>
-                                    : {{ isset($personne->categorie->libelle) ? $personne->categorie->libelle : "non reseigné"  }}</li>
-                                <li class="list-group-item"><span class="font-weight-bold">Nationalité</span> : {{ $personne->nationalite  }}</li>
+                                    : {{ isset($personne->categorie->libelle) ? $personne->categorie->libelle : "non renseigné"  }}
+                                </li>
+                                <li class="list-group-item"><span class="font-weight-bold">Nationalité</span>
+                                    : {{ $personne->nationalite  }}</li>
                                 <li class="list-group-item"><span class="font-weight-bold">Logement</span>
-                                    : {{ isset($personne->logement->libelle) ? $personne->logement->libelle : "non reseigné"  }}</li>
+                                    : {{ isset($personne->logement->libelle) ? $personne->logement->libelle : "non renseigné"  }}
+                                </li>
                                 <li class="list-group-item"><span class="font-weight-bold">Prioritaire</span>
                                     : {{ $personne->prioritaire ? "oui" : "non" }}</li>
                             </ul>
@@ -65,11 +80,16 @@
                                 <div class="col-12 pb-2">
                                     <ul class="list-group">
                                         <li class="list-group-item atom text-white"><h5>Contact</h5></li>
-                                        <li class="list-group-item"><span class="font-weight-bold">Adresse</span> : {{ $personne->adresse  }}</li>
-                                        <li class="list-group-item"><span class="font-weight-bold">Code postale</span> : {{ $personne->code_postale  }}</li>
-                                        <li class="list-group-item"><span class="font-weight-bold">Ville</span> : {{ $personne->ville  }}</li>
-                                        <li class="list-group-item"><span class="font-weight-bold">Téléphone</span> : {{ $personne->telephone  }}</li>
-                                        <li class="list-group-item"><span class="font-weight-bold">Email</span> : {{ $personne->email  }}</li>
+                                        <li class="list-group-item"><span class="font-weight-bold">Adresse</span>
+                                            : {{ $personne->adresse  }}</li>
+                                        <li class="list-group-item"><span class="font-weight-bold">Code postale</span>
+                                            : {{ $personne->code_postale  }}</li>
+                                        <li class="list-group-item"><span class="font-weight-bold">Ville</span>
+                                            : {{ $personne->ville  }}</li>
+                                        <li class="list-group-item"><span class="font-weight-bold">Téléphone</span>
+                                            : {{ $personne->telephone  }}</li>
+                                        <li class="list-group-item"><span class="font-weight-bold">Email</span>
+                                            : {{ $personne->email  }}</li>
                                     </ul>
                                 </div>
                                 <div class="col-12 pb-2">
@@ -80,7 +100,9 @@
                                         <li class="list-group-item"><span class="font-weight-bold">Nb rendez-vous</span>
                                             : {{ count($actions) }}
                                         </li>
-                                        <li class="list-group-item"><span class="font-weight-bold">Dernière activité</span> : {{ \Carbon\Carbon::parse($personne->update_at)->format('d/m/Y') }}</li>
+                                        <li class="list-group-item"><span
+                                                    class="font-weight-bold">Dernière activité</span>
+                                            : {{ \Carbon\Carbon::parse($personne->update_at)->format('d/m/Y') }}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -94,50 +116,51 @@
                                 <h2>Problèmes</h2>
                                 <table class="table table-bordered table-hover">
                                     <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Catégorie</th>
-                                            <th>Type</th>
-                                            <th>Date</th>
-                                            <th>Résolu</th>
-                                            <th>Dernière modification</th>
-                                            <th>Action</th>
-                                        </tr>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Catégorie</th>
+                                        <th>Type</th>
+                                        <th>Date</th>
+                                        <th>Résolu</th>
+                                        <th>Dernière modification</th>
+                                        <th>Action</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($personne->problemes as $key => $probleme)
-                                            <tr id="{{ $probleme->id  }}">
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $probleme->categorie->libelle }}</td>
-                                                <td>{{ isset($probleme->type->libelle) ? $probleme->type->libelle : "non renseigné" }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($probleme->created_at)->format('d/m/Y') }}</td>
-                                                <td>{{ $probleme->resolu ? "oui" : "non" }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($probleme->update_at)->format('d/m/Y') }}</td>
-                                                <td class="text-center">
+                                    @foreach($personne->problemes as $key => $probleme)
+                                        <tr id="{{ $probleme->id  }}">
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $probleme->categorie->libelle }}</td>
+                                            <td>{{ isset($probleme->type->libelle) ? $probleme->type->libelle : "non renseigné" }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($probleme->created_at)->format('d/m/Y') }}</td>
+                                            <td>{{ $probleme->resolu ? "oui" : "non" }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($probleme->update_at)->format('d/m/Y') }}</td>
+                                            <td class="text-center">
 
-                                                    <a href="{{ route('probleme.resoudre', $probleme) }}" class="btn btn-dark">
-                                                        <span class="icon"><i class="fas fa-check"></i></span>
-                                                    </a>
+                                                <a href="{{ route('probleme.resoudre', $probleme) }}"
+                                                   class="btn btn-dark">
+                                                    <span class="icon"><i class="fas fa-check"></i></span>
+                                                </a>
 
-                                                    <a href="{{ route('action.create', $probleme) }}" class="btn btn-info">
-                                                        <span class="icon"><i class="fas fa-plus"></i></span>
-                                                    </a>
+                                                <a href="{{ route('action.create', $probleme) }}" class="btn btn-info">
+                                                    <span class="icon"><i class="fas fa-plus"></i></span>
+                                                </a>
 
-                                                    <button type="button" class="btn btn-success showModal"
-                                                            data-toggle="modal">
-                                                        <span class="icon"><i class="fas fa-search"></i></span>
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary editModal"
-                                                            data-toggle="modal">
-                                                        <span class="icon"><i class="fas fa-edit"></i></span>
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger deleteModal"
-                                                            data-toggle="modal">
-                                                        <span class="icon"><i class="fas fa-trash-alt"></i></span>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                                <button type="button" class="btn btn-success showModal"
+                                                        data-toggle="modal">
+                                                    <span class="icon"><i class="fas fa-search"></i></span>
+                                                </button>
+                                                <button type="button" class="btn btn-primary editModal"
+                                                        data-toggle="modal">
+                                                    <span class="icon"><i class="fas fa-edit"></i></span>
+                                                </button>
+                                                <button type="button" class="btn btn-danger deleteModal"
+                                                        data-toggle="modal">
+                                                    <span class="icon"><i class="fas fa-trash-alt"></i></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -163,35 +186,84 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($actions as $key => $action)
-                                            <tr id="{{ $action->id  }}">
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $action->probleme->categorie->libelle }} - {{ $action->probleme->type->libelle }}</td>
-                                                <td>{{ $action->action->libelle }}</td>
-                                                <td>{{ isset($action->complement->libelle) ? $action->complement->libelle : "non renseigné" }}</td>
-                                                <td>{{ $action->avancement ? "terminé" : "en cours"}}</td>
-                                                <td>{{ \Carbon\Carbon::parse($action->update_at)->format('d/m/Y') }}</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-success showModal"
-                                                            data-toggle="modal">
-                                                        <span class="icon"><i class="fas fa-search"></i></span>
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary editModal"
-                                                            data-toggle="modal">
-                                                        <span class="icon"><i class="fas fa-edit"></i></span>
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger deleteModal"
-                                                            data-toggle="modal">
-                                                        <span class="icon"><i class="fas fa-trash-alt"></i></span>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                    @foreach($actions as $key => $action)
+                                        <tr id="{{ $action->id  }}">
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $action->probleme->categorie->libelle }}
+                                                - {{ $action->probleme->type->libelle }}</td>
+                                            <td>{{ $action->action->libelle }}</td>
+                                            <td>{{ isset($action->complement->libelle) ? $action->complement->libelle : "non renseigné" }}</td>
+                                            <td>{{ $action->avancement ? "terminé" : "en cours"}}</td>
+                                            <td>{{ \Carbon\Carbon::parse($action->update_at)->format('d/m/Y') }}</td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-success showModal"
+                                                        data-toggle="modal">
+                                                    <span class="icon"><i class="fas fa-search"></i></span>
+                                                </button>
+                                                <button type="button" class="btn btn-primary editModal"
+                                                        data-toggle="modal">
+                                                    <span class="icon"><i class="fas fa-edit"></i></span>
+                                                </button>
+                                                <button type="button" class="btn btn-danger deleteModal"
+                                                        data-toggle="modal">
+                                                    <span class="icon"><i class="fas fa-trash-alt"></i></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     @endif
+
+
+                    @if(count($personne->listeCaf) != 0)
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>Liste date Caf</h2>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Date</th>
+                                        <th>Motif</th>
+                                        <th>Crée le</th>
+                                        <th>Dernière modification</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($personne->listeCaf as $key => $value)
+                                        <tr id="{{ $value->id  }}">
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($value->dateCaf)->format('d/m/Y') }}</td>
+                                            <td>{{ isset($value->motif->libelle) ? $value->motif->libelle : "non renseigné"  }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($value->created_at)->format('d/m/Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($value->updated_at)->format('d/m/Y') }}</td>
+                                            <td class="text-center">
+
+                                                <button type="button" class="btn btn-success showModal"
+                                                        data-toggle="modal">
+                                                    <span class="icon"><i class="fas fa-search"></i></span>
+                                                </button>
+                                                <button type="button" class="btn btn-primary editModal"
+                                                        data-toggle="modal">
+                                                    <span class="icon"><i class="fas fa-edit"></i></span>
+                                                </button>
+                                                <button type="button" class="btn btn-danger deleteModal"
+                                                        data-toggle="modal">
+                                                    <span class="icon"><i class="fas fa-trash-alt"></i></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+
 
                 </div>
             </div>

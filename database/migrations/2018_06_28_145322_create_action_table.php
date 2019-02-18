@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateActionTable extends Migration
 {
@@ -17,6 +18,7 @@ class CreateActionTable extends Migration
             $table->increments('id');
             $table->string('deplacement')->default(0)->nullable();
             $table->integer('duree')->default(0)->nullable();
+            $table->date('dateAction')->default(Carbon::now());
             $table->boolean('information')->default(false)->nullable();
             $table->boolean('droitOuvert')->default(false)->nullable();
             $table->boolean('maintienDroit')->default(false)->nullable();

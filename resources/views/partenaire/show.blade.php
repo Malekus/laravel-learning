@@ -135,8 +135,161 @@
                         </div>
                     @endif
 
+                    @if(count($actions) != 0)
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>Rendez-vous</h2>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Problème</th>
+                                        <th>Type</th>
+                                        <th>Dirigé vers</th>
+                                        <th>Avancement</th>
+                                        <th>Dernière modification</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($actions as $key => $action)
+                                        <tr id="{{ $action->id  }}">
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $action->probleme->categorie->libelle }} - {{ $action->probleme->type->libelle }}</td>
+                                            <td>{{ $action->action->libelle }}</td>
+                                            <td>{{ isset($action->complement->libelle) ? $action->complement->libelle : "non renseigné" }}</td>
+                                            <td>{{ $action->avancement ? "terminé" : "en cours"}}</td>
+                                            <td>{{ \Carbon\Carbon::parse($action->update_at)->format('d/m/Y') }}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-success showModal"
+                                                        data-toggle="modal">
+                                                    <span class="icon"><i class="fas fa-search"></i></span>
+                                                </button>
+                                                <button type="button" class="btn btn-primary editModal"
+                                                        data-toggle="modal">
+                                                    <span class="icon"><i class="fas fa-edit"></i></span>
+                                                </button>
+                                                <button type="button" class="btn btn-danger deleteModal"
+                                                        data-toggle="modal">
+                                                    <span class="icon"><i class="fas fa-trash-alt"></i></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('javascript')
+    <script>
+        $(document).ready(function () {
+
+            $(document).on('click', '.showModal', function (e) {
+                e.preventDefault();
+                console.log('showModal');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                var url = '{{ url('probleme/:probleme/showModal') }}';
+                url = url.replace(':probleme', $(this).parents('tr').attr('id'));
+
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (data) {
+                        $('.no-height').empty().append(data);
+                        $('#modalShowProbleme').modal();
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log("fail");
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.editModal', function (e) {
+                e.preventDefault();
+                console.log('editModal');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                var url = '{{ url('probleme/:probleme/editModal') }}';
+                url = url.replace(':probleme', $(this).parents('tr').attr('id'));
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (data) {
+                        $('.no-height').empty().append(data);
+                        $('#modalEditProbleme').modal();
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log("fail");
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.deleteModal', function (e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                var url = '{{ url('probleme/:probleme/deleteModal') }}';
+                url = url.replace(':probleme', $(this).parents('tr').attr('id'));
+
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (data) {
+                        $('.no-height').empty().append(data);
+                        $('#modalDeleteProbleme').modal();
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log("fail");
+                    }
+                });
+
+            });
+        });
+    </script>
+
+    <script language=JavaScript>
+
+        var message = "function disabled";
+
+        function rtclickcheck(keyp) {
+            if (navigator.appName == "Netscape" && keyp.which == 3) {
+                return false;
+            }
+
+            if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) {
+                return false;
+            }
+        }
+
+        document.onmousedown = rtclickcheck;
+
+    </script>
 @endsection

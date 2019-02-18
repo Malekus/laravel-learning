@@ -122,8 +122,3 @@
     </div>
 </div>
 
-<div class="form-row text-center">
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">Ajouter</button>
-    </div>
-</div>

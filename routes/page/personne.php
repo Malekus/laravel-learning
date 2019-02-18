@@ -22,7 +22,10 @@ Route::get('/personne/{personne}', 'PersonneController@show')
 Route::get('/personne/{personne}/edit', 'PersonneController@edit')
     ->name('personne.edit');
 
-Route::get('/personne/{personne}/routine', 'PersonneController@routine')
+Route::get('/personne/routine/{id}', 'PersonneController@routine')
+    ->name('personne.routine');
+
+Route::post('/personne/routine/{id}', 'PersonneController@routine')
     ->name('personne.routine');
 
 Route::post('/personne/list', 'PersonneController@list_')
@@ -32,5 +35,11 @@ Route::get('/personne/{personne}/{action}', 'PersonneController@modal')
     ->name('personne.modal')
     ->where('personne', '[0-9]+');
 
-Route::get('/personne/cafMois/{id}', 'PersonneController@cafMois')
-    ->name('personne.cafMois');
+Route::get('/personne/cafMois/{id}', 'PersonneController@createCafDate')
+    ->name('personne.createCafDate');
+
+Route::post('/personne/cafMois/{id}', 'PersonneController@createCafDate')
+    ->name('personne.createCafDate');
+
+Route::get('/personne/addListCafDate/{id}', 'PersonneController@addListCafDate')
+    ->name('personne.addListCafDate');
