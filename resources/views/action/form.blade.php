@@ -1,13 +1,13 @@
 <div class="form-group row justify-content-center">
     {!! Form::label('probleme', 'Problème', ['class' => 'col-lg-2 col-form-label']) !!}
     <div class="col-lg-6">
-        <select class="form-control" id="probleme" name="probleme">
+        <select class="form-control" id="probleme" name="probleme" required="required">
             @foreach($problemes as $probleme)
                 <option value="{{ $probleme->id }}"> {{ $probleme->categorie->libelle}} - {{ $probleme->type->libelle }}</option>
             @endforeach
         </select>
         <div class="invalid-feedback">
-            Saisir un sujet
+            Saisir un problème
         </div>
     </div>
 </div>
@@ -17,7 +17,7 @@
     <div class="col-lg-6">
         {!! Form::select('action', \App\Configuration::where(['champ' => 'Action', 'categorie' => 'Action'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
         <div class="invalid-feedback">
-            Saisir un sujet
+            Saisir un action
         </div>
     </div>
 </div>

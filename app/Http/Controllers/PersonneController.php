@@ -5,26 +5,34 @@ namespace App\Http\Controllers;
 use App\Action;
 use App\CafDate;
 use App\Configuration;
+use App\Forms\PersonneForm;
 use App\Personne;
-use App\Probleme;
 use Carbon\Carbon;
-use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Kris\LaravelFormBuilder\Form;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class PersonneController extends Controller
 {
+
+    private $formBuilder;
+
+    public function __construct(FormBuilder $formBuilder)
+    {
+        $this->formBuilder = $formBuilder;
+    }
+
     public function index(Request $request)
     {
 
-        if($request->get('search') == null){
+        if ($request->get('search') == null) {
             $personnes = Personne::index()->paginate(10);
             return view('personne.index', compact('personnes'));
         }
 
         $personnes = Personne::index()
-            ->where('nom', 'like', '%'.$request->get('search').'%')
-            ->orWhere('matricule_caf', 'like', '%'.$request->get('search').'%')
+            ->where('nom', 'like', '%' . $request->get('search') . '%')
+            ->orWhere('matricule_caf', 'like', '%' . $request->get('search') . '%')
             //->get()
             ->paginate(10);
         return view('personne.index', compact('personnes'));
@@ -32,12 +40,21 @@ class PersonneController extends Controller
     }
 
 
-    public function create(){
-        return view('personne.create');
+    public function create()
+    {
+        $form = $this->getForm();
+
+        return view('personne.create', compact('form'));
     }
 
     public function store(Request $request)
     {
+
+        $form = $this->getForm();
+        //$form->validate(['nom' => 'required']);
+        $form->redirectIfNotValid();
+        dd($form->getFieldValues());
+
         $personne = Personne::create($request->except('logement', 'csp', 'categorie'));
         $personne->logement()->associate(Configuration::find($request->get('logement')));
         $personne->csp()->associate(Configuration::find($request->get('csp')));
@@ -53,7 +70,8 @@ class PersonneController extends Controller
         return view('personne.show', compact(['personne', 'actions']));
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $personne = Personne::findOrFail($id);
         return view('personne.edit', compact('personne'));
     }
@@ -61,12 +79,12 @@ class PersonneController extends Controller
     public function update(Request $request, $id)
     {
         $personne = Personne::find($id);
-        if(!$personne){
+        if (!$personne) {
             return response()->json(null, 404);
         }
 
-        foreach ($request->except('logement', 'csp', 'categorie') as $key => $value){
-            if(!in_array($key, array('_method', '_token')))
+        foreach ($request->except('logement', 'csp', 'categorie') as $key => $value) {
+            if (!in_array($key, array('_method', '_token')))
                 $personne->$key = $value;
         }
 
@@ -80,35 +98,38 @@ class PersonneController extends Controller
     public function destroy($id)
     {
         $personne = Personne::find($id);
-        if(!$personne){
+        if (!$personne) {
             return response()->json(null, 404);
         }
         $personne->delete();
         return redirect(route('personne.index'));
     }
 
-    public function list_(Request $request){
+    public function list_(Request $request)
+    {
         $search = $request->get('search') ? $request->get('search') : null;
-        if($search === null){
+        if ($search === null) {
             $personnes = Personne::index()->paginate(10)->withPath('personne');
             return view('personne.ajax.list', compact('personnes'));
         }
 
         $personnes = Personne::index()
-            ->where('nom', 'like', '%'.$search.'%')
-            ->orWhere('matricule_caf', 'like', '%'.$search.'%')->paginate(10)->withPath('personne');
+            ->where('nom', 'like', '%' . $search . '%')
+            ->orWhere('matricule_caf', 'like', '%' . $search . '%')->paginate(10)->withPath('personne');
 
         return view('personne.ajax.list', compact('personnes'));
     }
 
-    public function modal($id){
+    public function modal($id)
+    {
         $personne = Personne::findOrFail($id);
         return \response()->json(\view('personne.ajax.delete')->with(['personne' => $personne])->render());
     }
 
-    public function routine(Request $request, $id){
+    public function routine(Request $request, $id)
+    {
 
-        if($request->isMethod('post')){
+        if ($request->isMethod('post')) {
             dd($request->all());
         }
 
@@ -118,11 +139,11 @@ class PersonneController extends Controller
 
     public function createCafDate(Request $request, $id)
     {
-        if($request->isMethod('get')){
+        if ($request->isMethod('get')) {
             return view('caf.create', ['personne' => Personne::findOrFail($id)]);
         }
 
-        if($request->isMethod('post')){
+        if ($request->isMethod('post')) {
             $cafDate = new CafDate();
             $cafDate->dateCaf = $request->get('dateCaf');
             $cafDate->motif()->associate(Configuration::find($request->get('motif')));
@@ -134,9 +155,10 @@ class PersonneController extends Controller
 
     }
 
-    public function addListCafDate($id){
+    public function addListCafDate($id)
+    {
         $caf = CafDate::where(['personne_id' => $id, 'dateCaf' => Carbon::now()->format('Y-m-d')])->get();
-        if(count($caf) != 0){
+        if (count($caf) != 0) {
             foreach ($caf as $c)
                 $c->delete();
             return redirect(route('personne.show', ['personne' => $id]));
@@ -149,4 +171,17 @@ class PersonneController extends Controller
 
     }
 
+
+    private function getForm($type = 'create'){
+        return $this->formBuilder->create(PersonneForm::class,
+            [
+                'method' => 'POST',
+                'route' => 'personne.store',
+                'data' => [
+                    'type' => $type
+                ],
+                'class' => 'needs-validation',
+                'novalidate',
+            ]);
+    }
 }

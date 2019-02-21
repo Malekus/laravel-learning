@@ -14,11 +14,36 @@
                             <h1><i class="fas fa-user mr-3"></i>Ajouter une personne</h1>
                         </div>
                         <div class="col-lg-12">
+
+                            {{--
                             {!! Form::open(['url' => route('personne.store'), 'class' => 'needs-validation', 'novalidate']) !!}
 
                             @include('personne.form')
 
                             {!! Form::close() !!}
+
+                            --}}
+
+                            {!! form_start($form) !!}
+
+
+
+                            {{-- {!! form_until($form, 'matricule_caf') !!} --}}
+
+                            {!! form_label($form->nom) !!}
+                            {!! form_widget($form->nom) !!}
+                            {!! form_errors($form->nom) !!}
+                            <div class="invalid-feedback">
+                                Saisir un nom
+                            </div>
+
+
+                            <div class="form-row text-center">
+                                {!! form_row($form->ajouter) !!}
+                            </div>
+
+                            {!! form_end($form) !!}
+
                         </div>
                     </div>
                 </div>
@@ -28,26 +53,32 @@
 @endsection
 
 
-@section('javascript')
-        <script>
-            // Example starter JavaScript for disabling form submissions if there are invalid fields
-            (function() {
-                'use strict';
-                window.addEventListener('load', function() {
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    var forms = document.getElementsByClassName('needs-validation');
-                    // Loop over them and prevent submission
-                    var validation = Array.prototype.filter.call(forms, function(form) {
-                        form.addEventListener('submit', function(event) {
-                            if (form.checkValidity() === false) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                        }, false);
-                    });
-                }, false);
-            })();
-        </script>
-@endsection
 
+@section('javascript')
+    <script>
+
+
+
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+
+            $('form').off('focusout.bs.validator');
+
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+@endsection
