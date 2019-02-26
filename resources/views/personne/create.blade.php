@@ -14,36 +14,25 @@
                             <h1><i class="fas fa-user mr-3"></i>Ajouter une personne</h1>
                         </div>
                         <div class="col-lg-12">
-
-                            {{--
-                            {!! Form::open(['url' => route('personne.store'), 'class' => 'needs-validation', 'novalidate']) !!}
-
-                            @include('personne.form')
-
-                            {!! Form::close() !!}
-
-                            --}}
-
                             {!! form_start($form) !!}
+                            @foreach($form->getFields() as $key => $value)
+                                @if($key != 'ajouter')
+                                    <div class="form-group row justify-content-center">
 
-
-
-                            {{-- {!! form_until($form, 'matricule_caf') !!} --}}
-
-                            {!! form_label($form->nom) !!}
-                            {!! form_widget($form->nom) !!}
-                            {!! form_errors($form->nom) !!}
-                            <div class="invalid-feedback">
-                                Saisir un nom
-                            </div>
-
-
-                            <div class="form-row text-center">
+                                        <div class="col-2">
+                                            {!! form_label($form->$key) !!}
+                                        </div>
+                                        <div class="col-6">
+                                            {!! form_widget($form->$key) !!}
+                                            {!! form_errors($form->$key) !!}
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                            <div class="form-row text-center col-">
                                 {!! form_row($form->ajouter) !!}
                             </div>
-
                             {!! form_end($form) !!}
-
                         </div>
                     </div>
                 </div>
@@ -58,12 +47,8 @@
     <script>
 
 
-
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
-
-            $('form').off('focusout.bs.validator');
-
             'use strict';
             window.addEventListener('load', function () {
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to

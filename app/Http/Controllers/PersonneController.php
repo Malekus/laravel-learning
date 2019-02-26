@@ -51,7 +51,6 @@ class PersonneController extends Controller
     {
 
         $form = $this->getForm();
-        //$form->validate(['nom' => 'required']);
         $form->redirectIfNotValid();
         dd($form->getFieldValues());
 
@@ -172,15 +171,17 @@ class PersonneController extends Controller
     }
 
 
-    private function getForm($type = 'create'){
+    private function getForm(?Personne $personne = null, $type = 'create'){
+
+        $model = $personne ?: new Personne();
+
         return $this->formBuilder->create(PersonneForm::class,
             [
-                'method' => 'POST',
-                'route' => 'personne.store',
+                'model' => $model,
                 'data' => [
                     'type' => $type
                 ],
-                'class' => 'needs-validation',
+                'class' => '', //'needs-validation',
                 'novalidate',
             ]);
     }
