@@ -20,7 +20,7 @@ class CreatePersonneTable extends Migration
             $table->string('prenom')->nullable();
             $table->date('date_naissance')->nullable();
             $table->string('sexe')->nullable();
-            $table->integer('enfant')->nullable();
+            $table->integer('enfant')->nullable()->default(0);
             $table->string('nationalite')->nullable();
             $table->string('telephone')->nullable();
             $table->string('email')->nullable();

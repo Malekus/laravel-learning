@@ -9,7 +9,6 @@ use App\Forms\PersonneForm;
 use App\Personne;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Kris\LaravelFormBuilder\Form;
 use Kris\LaravelFormBuilder\FormBuilder;
 
 class PersonneController extends Controller
@@ -49,15 +48,12 @@ class PersonneController extends Controller
 
     public function store(Request $request)
     {
-
-        $form = $this->getForm();
+        $personne = new Personne();
+        $form = $this->getForm($personne);
         $form->redirectIfNotValid();
-        dd($form->getFieldValues());
-
-        $personne = Personne::create($request->except('logement', 'csp', 'categorie'));
-        $personne->logement()->associate(Configuration::find($request->get('logement')));
-        $personne->csp()->associate(Configuration::find($request->get('csp')));
-        $personne->categorie()->associate(Configuration::find($request->get('categorie')));
+        $personne->logement()->associate($request->get('logement'));
+        $personne->csp()->associate($request->get('csp'));
+        $personne->categorie()->associate($request->get('categorie'));
         $personne->save();
         return redirect(route('personne.show', ['personne' => $personne]));
     }
@@ -171,7 +167,8 @@ class PersonneController extends Controller
     }
 
 
-    private function getForm(?Personne $personne = null, $type = 'create'){
+    private function getForm(?Personne $personne = null, $type = 'create')
+    {
 
         $model = $personne ?: new Personne();
 
