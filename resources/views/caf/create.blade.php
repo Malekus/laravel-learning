@@ -10,7 +10,8 @@
             <div class="card">
                 <div class="card-body sizeCard">
                     <div class="row">
-                        @include('layout.title', ['title' => "Ajouter une date Caf"])
+                        @include('layout.title', ['title' => "Ajouter une date Caf", 'icon' => "fa-calendar-alt"])
+
                         <div class="col-lg-12">
                             {!! Form::open(['method' => 'post', 'url' => route('personne.createCafDate', $personne), 'class' => 'needs-validation', 'novalidate']) !!}
 

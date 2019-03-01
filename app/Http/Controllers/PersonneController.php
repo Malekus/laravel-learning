@@ -42,7 +42,6 @@ class PersonneController extends Controller
     public function create()
     {
         $form = $this->getForm();
-
         return view('personne.create', compact('form'));
     }
 
@@ -54,7 +53,7 @@ class PersonneController extends Controller
         $personne->logement()->associate($request->get('logement'));
         $personne->csp()->associate($request->get('csp'));
         $personne->categorie()->associate($request->get('categorie'));
-        $personne->save();
+        $form->getModel()->save();
         return redirect(route('personne.show', ['personne' => $personne]));
     }
 
@@ -65,10 +64,14 @@ class PersonneController extends Controller
         return view('personne.show', compact(['personne', 'actions']));
     }
 
-    public function edit($id)
+    public function edit(Personne $personne)
     {
-        $personne = Personne::findOrFail($id);
-        return view('personne.edit', compact('personne'));
+        /*$personne = Personne::findOrFail($id);
+        return view('personne.edit', compact('personne'));*/
+
+        $form = $this->getForm($personne, 'edit');
+        return view('personne.edit', compact('form'));
+
     }
 
     public function update(Request $request, $id)
@@ -178,7 +181,7 @@ class PersonneController extends Controller
                 'data' => [
                     'type' => $type
                 ],
-                'class' => '', //'needs-validation',
+                'class' => '',
                 'novalidate',
             ]);
     }
