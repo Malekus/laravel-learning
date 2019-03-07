@@ -132,7 +132,7 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $probleme->categorie->libelle }}</td>
                                             <td>{{ isset($probleme->type->libelle) ? $probleme->type->libelle : "non renseigné" }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($probleme->created_at)->format('d/m/Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($probleme->dateProbleme)->format('d/m/Y') }}</td>
                                             <td>{{ $probleme->resolu ? "oui" : "non" }}</td>
                                             <td>{{ \Carbon\Carbon::parse($probleme->update_at)->format('d/m/Y') }}</td>
                                             <td class="text-center">
@@ -146,15 +146,15 @@
                                                     <span class="icon"><i class="fas fa-plus"></i></span>
                                                 </a>
 
-                                                <button type="button" class="btn btn-success showModal"
+                                                <button type="button" class="btn btn-success showModalProbleme"
                                                         data-toggle="modal">
                                                     <span class="icon"><i class="fas fa-search"></i></span>
                                                 </button>
-                                                <button type="button" class="btn btn-primary editModal"
+                                                <button type="button" class="btn btn-primary editModalProbleme"
                                                         data-toggle="modal">
                                                     <span class="icon"><i class="fas fa-edit"></i></span>
                                                 </button>
-                                                <button type="button" class="btn btn-danger deleteModal"
+                                                <button type="button" class="btn btn-danger deleteModalProbleme"
                                                         data-toggle="modal">
                                                     <span class="icon"><i class="fas fa-trash-alt"></i></span>
                                                 </button>
@@ -196,15 +196,15 @@
                                             <td>{{ $action->avancement ? "terminé" : "en cours"}}</td>
                                             <td>{{ \Carbon\Carbon::parse($action->update_at)->format('d/m/Y') }}</td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-success showModal"
+                                                <button type="button" class="btn btn-success showModalAction"
                                                         data-toggle="modal">
                                                     <span class="icon"><i class="fas fa-search"></i></span>
                                                 </button>
-                                                <button type="button" class="btn btn-primary editModal"
+                                                <button type="button" class="btn btn-primary editModalAction"
                                                         data-toggle="modal">
                                                     <span class="icon"><i class="fas fa-edit"></i></span>
                                                 </button>
-                                                <button type="button" class="btn btn-danger deleteModal"
+                                                <button type="button" class="btn btn-danger deleteModalAction"
                                                         data-toggle="modal">
                                                     <span class="icon"><i class="fas fa-trash-alt"></i></span>
                                                 </button>
@@ -276,9 +276,9 @@
     <script>
         $(document).ready(function () {
 
-            $(document).on('click', '.showModal', function (e) {
+            $(document).on('click', '.showModalProbleme', function (e) {
                 e.preventDefault();
-                console.log('showModal');
+                console.log('showModalProbleme');
 
                 $.ajaxSetup({
                     headers: {
@@ -304,7 +304,7 @@
 
             });
 
-            $(document).on('click', '.editModal', function (e) {
+            $(document).on('click', '.editModalProbleme', function (e) {
                 e.preventDefault();
                 console.log('editModal');
 
@@ -331,7 +331,7 @@
 
             });
 
-            $(document).on('click', '.deleteModal', function (e) {
+            $(document).on('click', '.deleteModalProbleme', function (e) {
                 e.preventDefault();
                 $.ajaxSetup({
                     headers: {
@@ -348,6 +348,61 @@
                     success: function (data) {
                         $('.no-height').empty().append(data);
                         $('#modalDeleteProbleme').modal();
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log("fail");
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.showModalAction', function (e) {
+                e.preventDefault();
+                console.log('showModalAction');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                var url = '{{ url('action/:id/showModal') }}';
+                url = url.replace(':id', $(this).parents('tr').attr('id'));
+
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (data) {
+                        $('.no-height').empty().append(data);
+                        $('#modalShowAction').modal();
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log("fail");
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.editModalAction', function (e) {
+                e.preventDefault();
+                console.log('editModalAction');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                var url = '{{ url('action/:id/editModal') }}';
+                url = url.replace(':id', $(this).parents('tr').attr('id'));
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (data) {
+                        $('.no-height').empty().append(data);
+                        $('#modalEditAction').modal();
                         console.log(data);
                     },
                     error: function (data) {

@@ -29,6 +29,16 @@
             </div>
         </div>
     </div>
+
+    <div class="form-group row justify-content-center">
+        {!! Form::label('dateProbleme', 'Date', ['class' => 'col-4 col-form-label']) !!}
+        <div class="col-8">
+            {!! Form::date('dateProbleme', $probleme->dateProbleme,['class' => 'form-control']) !!}
+            <div class="invalid-feedback">
+                Saisir une date
+            </div>
+        </div>
+    </div>
 @else
     <div class="form-group row justify-content-center">
         {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-2 col-form-label']) !!}

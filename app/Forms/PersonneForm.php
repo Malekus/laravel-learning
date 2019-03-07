@@ -6,16 +6,30 @@ use App\Configuration;
 
 class PersonneForm extends Form
 {
+
     public function buildForm()
     {
 
-        parent::buildForm();
+        if ($this->getModel() && $this->getModel()->id) {
+            $method = 'PUT';
+            $url = route('personne.update', $this->getModel()->id);
+        } else {
+            $method = 'POST';
+            $url = route('personne.store');
+
+        }
+
+        $this->formOptions = [
+            'method' => $method,
+            'url' => $url,
+            'novalidate'
+
+        ];
 
         $wrapper = 'form-group row justify-content-center';
-        $attr_class = 'form-control'; // col-lg-6';
-        $label_attr = 'col-form-label'; // col-lg-2 ';
+        $attr_class = 'form-control';
+        $label_attr = 'col-form-label';
 
-        //if ($this->getData('type') === 'create') {
         $this
             ->add('nom', 'text', [
                 'label' => 'Nom',

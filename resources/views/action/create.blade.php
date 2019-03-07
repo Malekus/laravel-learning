@@ -1,4 +1,47 @@
 @extends('layout.base')
+{{--
+
+
+
+@section('titre')
+    · Ajouter un rendez-vous
+@endsection
+
+@section('content')
+    @include('layout.headerTop', ['titleHeader' => "Ajouter un rendez-vous", 'iconHeader' => 'fa-cogs'])
+    <div class="col-lg-12">
+        {!! form_start($form) !!}
+        @foreach($form->getFields() as $key => $value)
+            @if($key != 'submit')
+                <div class="form-group row justify-content-center">
+
+                    <div class="col-2">
+                        {!! form_label($form->$key) !!}
+                    </div>
+                    <div class="col-6">
+                        {!! form_widget($form->$key) !!}
+                        {!! form_errors($form->$key) !!}
+                    </div>
+                </div>
+            @endif
+        @endforeach
+        <div class="form-row text-center col-12">
+            {!! form_row($form->submit) !!}
+        </div>
+        {!! form_end($form) !!}
+    </div>
+    @include('layout.headerBottom')
+@endsection
+
+
+
+--}}
+
+
+
+
+
+
 
 @section('titre')
     · Ajouter un rendez-vous
@@ -14,7 +57,7 @@
                             <h1><i class="fas fa-user mr-3"></i>Ajouter un rendez-vous</h1>
                         </div>
                         <div class="col-lg-12">
-                            {!! Form::open(['method'=> 'post', 'url' => route('action.store'), 'class' => 'needs-validation', 'novalidate']) !!}
+                            {!! Form::open(['method'=> 'post', 'url' => route('action.store'), 'novalidate']) !!}
 
                             @include('action.form')
 
@@ -57,3 +100,8 @@
     </script>
 @endsection
 
+{{--
+
+ 'class' => 'needs-validation',
+
+--}}

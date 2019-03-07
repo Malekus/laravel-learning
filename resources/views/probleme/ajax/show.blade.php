@@ -12,7 +12,7 @@
                         <li class="list-group-item"><span class="font-weight-bold">Type : </span>{{ $probleme->type->libelle  }}</li>
                         <li class="list-group-item"><span class="font-weight-bold">Accompagnement : </span>{{ $probleme->accompagnement->libelle  }}</li>
                         <li class="list-group-item"><span class="font-weight-bold">Résolu : </span>{{ $probleme->resolu ? "oui" : "non"  }}</li>
-                        <li class="list-group-item"><span class="font-weight-bold">Créé le : </span>{{ \Carbon\Carbon::parse($probleme->created_at)->format('d/m/Y')  }}</li>
+                        <li class="list-group-item"><span class="font-weight-bold">Date : </span>{{ \Carbon\Carbon::parse($probleme->dateProbleme)->format('d/m/Y')  }}</li>
                         <li class="list-group-item"><span class="font-weight-bold">Dernière modification : </span>{{ \Carbon\Carbon::parse($probleme->updated_at)->format('d/m/Y')  }}</li>
                     </ul>
                 </div>

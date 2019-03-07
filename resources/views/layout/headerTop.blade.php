@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body sizeCard">
                 <div class="row">
                     <div class="col-12 pb-2">
                         @if(isset($iconHeader))

@@ -22,27 +22,4 @@ class Form extends \Kris\LaravelFormBuilder\Form
         }
         parent::redirectIfNotValid($destination);
     }
-
-    public function buildForm()
-    {
-        if ($this->getModel() && $this->getModel()->id) {
-            $method = 'PUT';
-            $url = route('personne.update', $this->getModel()->id);
-        } else {
-            $method = 'POST';
-            $url = route('personne.store');
-
-        }
-
-        $this->formOptions = [
-            'method' => $method,
-            'url' => $url,
-            'novalidate',
-
-        ];
-
-        parent::buildForm();
-    }
-
-
 }

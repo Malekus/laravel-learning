@@ -3,94 +3,57 @@
 namespace App\Http\Controllers;
 
 use App\Configuration;
+use App\Forms\ProblemeForm;
 use App\Partenaire;
 use App\Personne;
 use App\Probleme;
 use Illuminate\Http\Request;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class ProblemeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private $formBuilder;
+
+    public function __construct(FormBuilder $formBuilder)
+    {
+        $this->formBuilder = $formBuilder;
+    }
+
     public function index()
     {
         return view('probleme.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($type, $id)
     {
-        if($type == 'personne'){
-            $personne = Personne::findOrFail($id);
-            return view('probleme.create', (['id' => $personne, 'type' => $type]));
-        }
-        if($type == 'partenaire'){
-            $partenaire = Partenaire::findOrFail($id);
-            return view('probleme.create', (['id' => $partenaire, 'type' => $type]));
-        }
+        $model = $type == 'personne' ? Personne::findOrFail($id) : Partenaire::findOrFail($id);
+        $form = $this->getForm(null, 'create', $type, $model);
+        return view('probleme.create', compact('form'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request, $type, $id)
     {
         $probleme = new Probleme();
 
-        if($type == 'personne')
+        if ($type == 'personne')
             $probleme->personne()->associate(Personne::find($id));
         else
             $probleme->partenaire()->associate(Partenaire::find($id));
 
-        $probleme->categorie()->associate(Configuration::find($request->get('categorie')));
-        $probleme->type()->associate(Configuration::find($request->get('type')));
-        $probleme->accompagnement()->associate(Configuration::find($request->get('accompagnement')));
+        $form = $this->getForm($probleme);
+        $form->redirectIfNotValid();
+        $probleme->categorie()->associate($request->get('categorie'));
+        $probleme->type()->associate($request->get('type'));
+        $probleme->accompagnement()->associate($request->get('accompagnement'));
+        //dd($probleme);
         $probleme->save();
-        if($type == 'personne')
+        if ($type == 'personne')
             return redirect(route('personne.show', ['personne' => $id]));
-        if($type == 'partenaire')
-        return redirect(route('partenaire.show', ['partenaire' => $id]));
+        if ($type == 'partenaire')
+            return redirect(route('partenaire.show', ['partenaire' => $id]));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $probleme = Probleme::findOrFail($id);
@@ -103,16 +66,11 @@ class ProblemeController extends Controller
         $probleme->categorie()->associate(Configuration::find($request->get('categorie')));
         $probleme->type()->associate(Configuration::find($request->get('type')));
         $probleme->accompagnement()->associate(Configuration::find($request->get('accompagnement')));
+        $probleme->dateProbleme = $request->get('dateProbleme');
         $probleme->save();
         return redirect(route('personne.show', ['id' => $probleme->personne]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $probleme = Probleme::find($id);
@@ -125,8 +83,8 @@ class ProblemeController extends Controller
 
     public function resoudre($id)
     {
-       $probleme = Probleme::findOrFail($id);
-       if (!$probleme) {
+        $probleme = Probleme::findOrFail($id);
+        if (!$probleme) {
             return response()->json(null, 404);
         }
         $probleme->resolu = !$probleme->resolu;
@@ -150,5 +108,21 @@ class ProblemeController extends Controller
             return \response()->json(\view('probleme.ajax.delete')->with(['probleme' => $probleme])->render());
         }
         return null;
+    }
+
+    private function getForm(?Probleme $probleme = null, $typeForm = 'create', $modelType = null, $id = null)
+    {
+
+        $model = $probleme ?: new Probleme();
+
+        return $this->formBuilder->create(ProblemeForm::class,
+            [
+                'model' => $model,
+                'data' => [
+                    'typeForm' => $typeForm,
+                    'type' => $modelType,
+                    'id' => $id,
+                ]
+            ]);
     }
 }

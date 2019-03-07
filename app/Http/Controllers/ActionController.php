@@ -4,21 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Action;
 use App\Configuration;
-use App\Probleme;
+use App\Forms\ActionForm;
 use App\Personne;
+use App\Probleme;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class ActionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    private $formBuilder;
+
+    public function __construct(FormBuilder $formBuilder)
     {
-        //
+        $this->formBuilder = $formBuilder;
     }
 
     /**
@@ -42,9 +40,8 @@ class ActionController extends Controller
     {
         $probleme = Probleme::find($request->get('probleme'));
         $action = new Action();
-
-        foreach ($request->except('probleme', 'action', 'complement') as $key => $value){
-            if(!in_array($key, array('_method', '_token')))
+        foreach ($request->except('probleme', 'action', 'complement') as $key => $value) {
+            if (!in_array($key, array('_method', '_token')))
                 $action->$key = $value;
         }
         $action->probleme()->associate($probleme);
@@ -86,7 +83,9 @@ class ActionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $action = Action::find($id);
+        dd($action);
+
     }
 
     /**
@@ -98,5 +97,35 @@ class ActionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function modal($id, $action)
+    {
+        $model = Action::find($id);
+
+        if ($action == "showModal") {
+            return \response()->json(\view('action.ajax.show')->with(['action' => $model])->render());
+        }
+        if ($action == "editModal") {
+            return \response()->json(\view('action.ajax.edit')->with(['action' => $model])->render());
+        }
+        if ($action == "deleteModal") {
+            return \response()->json(\view('action.ajax.delete')->with(['action' => $model])->render());
+        }
+        return null;
+    }
+
+    private function getForm(?Action $action = null, $typeForm = 'create')
+    {
+
+        $model = $action ?: new Action();
+
+        return $this->formBuilder->create(ActionForm::class,
+            [
+                'model' => $model,
+                'data' => [
+                    'typeForm' => $typeForm
+                ]
+            ]);
     }
 }

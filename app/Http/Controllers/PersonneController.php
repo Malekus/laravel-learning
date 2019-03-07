@@ -174,15 +174,13 @@ class PersonneController extends Controller
     {
 
         $model = $personne ?: new Personne();
-
         return $this->formBuilder->create(PersonneForm::class,
             [
                 'model' => $model,
                 'data' => [
                     'type' => $type
                 ],
-                'class' => '',
-                'novalidate',
+                'novalidate'
             ]);
     }
 }
