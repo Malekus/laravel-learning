@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Action;
 use App\Configuration;
 use App\Forms\ActionForm;
+use App\Forms\RoutineActionForm;
 use App\Personne;
 use App\Probleme;
 use Illuminate\Http\Request;
@@ -24,10 +25,17 @@ class ActionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create($id, $idProbleme = null)
     {
-        $personne = Personne::find($id);
-        return view('action.create', ['problemes' => $personne->problemes]);
+        if(!isset($idProbleme)){
+            $personne = Personne::find($id);
+
+            return view('action.create', ['problemes' => $personne->problemes]);
+        }
+        $probleme = Probleme::find($idProbleme);
+        $form = $this->getForm();
+        return view('action.create', ['probleme' => $probleme, 'form' => $form]);
+
     }
 
     /**
@@ -84,7 +92,15 @@ class ActionController extends Controller
     public function update(Request $request, $id)
     {
         $action = Action::find($id);
-        dd($action);
+        //dd($action);
+        foreach ($request->except('probleme', 'action', 'complement') as $key => $value) {
+            if (!in_array($key, array('_method', '_token')))
+                $action->$key = $value;
+        }
+        $action->action()->associate(Configuration::find($request->get('action')));
+        $action->complement()->associate(Configuration::find($request->get('complement')));
+        $action->save();
+        return redirect(route('personne.show', ['personne' => $action->probleme->personne]));
 
     }
 
@@ -96,7 +112,12 @@ class ActionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $action = Action::find($id);
+        if (!$action) {
+            return response()->json(null, 404);
+        }
+        $action->delete();
+        return redirect(route('personne.show', ['personne' => $action->probleme->personne]));
     }
 
     public function modal($id, $action)
@@ -120,7 +141,7 @@ class ActionController extends Controller
 
         $model = $action ?: new Action();
 
-        return $this->formBuilder->create(ActionForm::class,
+        return $this->formBuilder->create(RoutineActionForm::class,
             [
                 'model' => $model,
                 'data' => [

@@ -1,3 +1,5 @@
+{{--
+
 @extends('layout.base')
 
 @section('titre')
@@ -11,7 +13,7 @@
                 <div class="card-body sizeCard">
                     <div class="row">
 
-                        @include('layout.title', ['title' => 'Ajouter une routine'])
+                        @include('layout.title', ['title' => 'Ajouter une routine', 'icon' => 'fa-user'])
 
                         <div class="col-lg-12">
 
@@ -19,116 +21,8 @@
 
                             @include('probleme.form')
 
+                            @include('action.form')
 
-                            <div class="form-group row justify-content-center">
-                                {!! Form::label('action', 'Action', ['class' => 'col-lg-2 col-form-label']) !!}
-                                <div class="col-lg-6">
-                                    {!! Form::select('action', \App\Configuration::where(['champ' => 'Action', 'categorie' => 'Action'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
-                                    <div class="invalid-feedback">
-                                        Saisir un sujet
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row justify-content-center">
-                                {!! Form::label('complement', 'Dirigé vers', ['class' => 'col-lg-2 col-form-label']) !!}
-                                <div class="col-lg-6">
-                                    {!! Form::select('complement', \App\Configuration::where(['champ' => 'Dirigé vers', 'categorie' => 'Action'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
-                                    <div class="invalid-feedback">
-                                        Saisir un complément
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row justify-content-center">
-                                {!! Form::label('deplacement', 'Déplacement', ['class' => 'col-lg-2 col-form-label']) !!}
-                                <div class="col-lg-6">
-                                    {!! Form::text('deplacement', null, ['class' => 'form-control']) !!}
-                                    <div class="invalid-feedback">
-                                        Saisir un déplacement
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row justify-content-center">
-                                {!! Form::label('duree', 'Durée', ['class' => 'col-lg-2 col-form-label']) !!}
-                                <div class="col-lg-6">
-                                    {!! Form::text('duree', null, ['class' => 'form-control']) !!}
-                                    <div class="invalid-feedback">
-                                        Saisir une durée
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row justify-content-center">
-                                {!! Form::label('information', 'Information', ['class' => 'col-lg-2 col-form-label']) !!}
-                                <div class="col-lg-6">
-                                    {!! Form::text('information', null, ['class' => 'form-control']) !!}
-                                    <div class="invalid-feedback">
-                                        Saisir une information
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row justify-content-center">
-                                {!! Form::label('droitOuvert', 'Ouverture de droit', ['class' => 'col-lg-2 col-form-label']) !!}
-                                <div class="col-lg-6">
-                                    {!! Form::text('droitOuvert', null, ['class' => 'form-control']) !!}
-                                    <div class="invalid-feedback">
-                                        Saisir une ouverture de droit
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row justify-content-center">
-                                {!! Form::label('maintienDroit', 'Maintien de droit', ['class' => 'col-lg-2 col-form-label']) !!}
-                                <div class="col-lg-6">
-                                    {!! Form::text('maintienDroit', null, ['class' => 'form-control']) !!}
-                                    <div class="invalid-feedback">
-                                        Saisir un maintien de droit
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row justify-content-center">
-                                {!! Form::label('conflit', 'Conflit', ['class' => 'col-lg-2 col-form-label']) !!}
-                                <div class="col-lg-6">
-                                    {!! Form::text('conflit', null, ['class' => 'form-control']) !!}
-                                    <div class="invalid-feedback">
-                                        Saisir un conflit
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row justify-content-center">
-                                {!! Form::label('perduDeVue', 'Nom', ['class' => 'col-lg-2 col-form-label']) !!}
-                                <div class="col-lg-6">
-                                    {!! Form::text('perduDeVue', null, ['class' => 'form-control',]) !!}
-                                    <div class="invalid-feedback">
-                                        Saisir une perdu de vue
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row justify-content-center">
-                                {!! Form::label('judiciarisation', 'Judiciarisation', ['class' => 'col-lg-2 col-form-label']) !!}
-                                <div class="col-lg-6">
-                                    {!! Form::text('judiciarisation', null, ['class' => 'form-control']) !!}
-                                    <div class="invalid-feedback">
-                                        Saisir un nom
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row justify-content-center">
-                                {!! Form::label('avancement', 'Avancement', ['class' => 'col-lg-2 col-form-label']) !!}
-                                <div class="col-lg-6">
-                                    {!! Form::select('avancement', ['en cours' => 'en cours', 'terminé' => 'terminé'], 'en cours', ['class' => 'form-control']) !!}
-                                    <div class="invalid-feedback">
-                                        Saisir un nom
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="form-row text-center">
                                 <div class="col-12">
@@ -145,3 +39,72 @@
         </div>
     </div>
 @endsection
+
+{!! form($form) !!}
+
+--}}
+
+@extends('layout.base')
+
+@section('titre')
+    · Ajouter une routine
+@endsection
+
+@section('content')
+    @include('layout.headerTop', ['titleHeader' => "Ajouter une routine", 'iconHeader' => 'fa-user'])
+
+    <div class="col-lg-12">
+        {!! form_start($form) !!}
+        @foreach($form->probleme->getFields() as $key => $value)
+            <div class="form-group row justify-content-center">
+                <div class="col-2">
+                    {!! form_label($form->probleme->$key) !!}
+                </div>
+                <div class="col-6">
+                    {!! form_widget($form->probleme->$key) !!}
+                    {!! form_errors($form->probleme->$key) !!}
+                </div>
+            </div>
+        @endforeach
+
+        @foreach($form->action->getFields() as $key => $value)
+            <div class="form-group row justify-content-center">
+                <div class="col-2">
+                    {!! form_label($form->action->$key) !!}
+                </div>
+                <div class="col-6">
+                    {!! form_widget($form->action->$key) !!}
+                    {!! form_errors($form->action->$key) !!}
+                </div>
+            </div>
+        @endforeach
+        <div class="form-row text-center col-12">
+            {!! form_row($form->submit) !!}
+        </div>
+        {!! form_end($form) !!}
+    </div>
+
+    @include('layout.headerBottom')
+@endsection
+
+{{--
+{!! form_start($form) !!}
+        @foreach($form->getFields() as $key => $value)
+            @if($key != 'submit')
+                <div class="form-group row justify-content-center">
+
+                    <div class="col-2">
+                        {!! form_label($form->$key) !!}
+                    </div>
+                    <div class="col-6">
+                        {!! form_widget($form->$key) !!}
+                        {!! form_errors($form->$key) !!}
+                    </div>
+                </div>
+            @endif
+        @endforeach
+        <div class="form-row text-center col-12">
+            {!! form_row($form->submit) !!}
+        </div>
+        {!! form_end($form) !!}
+--}}

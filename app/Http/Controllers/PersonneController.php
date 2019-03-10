@@ -6,6 +6,7 @@ use App\Action;
 use App\CafDate;
 use App\Configuration;
 use App\Forms\PersonneForm;
+use App\Forms\RoutineForm;
 use App\Personne;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -126,12 +127,15 @@ class PersonneController extends Controller
 
     public function routine(Request $request, $id)
     {
-
         if ($request->isMethod('post')) {
+            $form = $this->formBuilder->create(RoutineForm::class, ['model' => Personne::find($id)], ['id' => $id]);
+            $form->redirectIfNotValid();
             dd($request->all());
         }
 
-        return view('personne.routine', ['personne' => $id]);
+        $form = $this->formBuilder->create(RoutineForm::class, [], ['id' => $id]);
+
+        return view('personne.routine', compact('form'));
 
     }
 

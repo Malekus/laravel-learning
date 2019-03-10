@@ -142,7 +142,7 @@
                                                     <span class="icon"><i class="fas fa-check"></i></span>
                                                 </a>
 
-                                                <a href="{{ route('action.create', $probleme) }}" class="btn btn-info">
+                                                <a href="{{ route('action.create', ['personne' => $personne, 'probleme' => $probleme]) }}" class="btn btn-info">
                                                     <span class="icon"><i class="fas fa-plus"></i></span>
                                                 </a>
 
@@ -403,6 +403,33 @@
                     success: function (data) {
                         $('.no-height').empty().append(data);
                         $('#modalEditAction').modal();
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log("fail");
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.deleteModalAction', function (e) {
+                e.preventDefault();
+                console.log('deleteModalAction');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                var url = '{{ url('action/:id/deleteModal') }}';
+                url = url.replace(':id', $(this).parents('tr').attr('id'));
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (data) {
+                        $('.no-height').empty().append(data);
+                        $('#modalDeleteAction').modal();
                         console.log(data);
                     },
                     error: function (data) {

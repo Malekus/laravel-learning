@@ -1,5 +1,4 @@
 @if(isset($probleme))
-
     <div class="form-group row justify-content-center">
         {!! Form::label('categorie', 'Catégorie', ['class' => 'col-4 col-form-label']) !!}
         <div class="col-8">
@@ -66,6 +65,16 @@
             {!! Form::select('accompagnement', \App\Configuration::where(['champ' => 'Accompagnement', 'categorie' => 'Problème'])->orderBy('libelle')->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
             <div class="invalid-feedback">
                 Saisir un accompagnement
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row justify-content-center">
+        {!! Form::label('dateProbleme', 'Date', ['class' => 'col-lg-2 col-form-label']) !!}
+        <div class="col-lg-6">
+            {!! Form::date('dateProbleme', \Carbon\Carbon::now(),['class' => 'form-control']) !!}
+            <div class="invalid-feedback">
+                Saisir une date
             </div>
         </div>
     </div>

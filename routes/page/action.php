@@ -1,9 +1,9 @@
 <?php
 
 
-Route::get('/action/create/{probleme}', 'ActionController@create')
+Route::get('/action/create/{personne}/{probleme?}', 'ActionController@create')
     ->name('action.create')
-    ->where('probleme', '[0-9]+');
+    ->where('personne', '[0-9]+');
 
 Route::post('/action', 'ActionController@store')
     ->name('action.store');
@@ -15,4 +15,8 @@ Route::get('/action/{id}/{action}', 'ActionController@modal')
 
 Route::put('/action/{action}', 'ActionController@update')
     ->name('action.update')
+    ->where('action', '[0-9]+');
+
+Route::delete('/action/{action}', 'ActionController@destroy')
+    ->name('action.destroy')
     ->where('action', '[0-9]+');

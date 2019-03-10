@@ -2,32 +2,12 @@
 
 namespace App\Forms;
 
-use App\Configuration;
-
-class ProblemeForm extends Form
+/*
+class ProblemeForm
 {
     public function buildForm()
     {
-        if ($this->getModel() && $this->getModel()->id) {
-            $method = 'PUT';
-            $url = route('probleme.update', $this->getModel()->id);
-        } else {
-            $method = 'POST';
-            $url = route('probleme.store', ['type' => $this->getData('type'), 'id' => $this->getData('id')]);
 
-        }
-
-        $this->formOptions = [
-            'method' => $method,
-            'url' => $url,
-            'novalidate'
-
-        ];
-
-
-        $wrapper = 'form-group row justify-content-center';
-        $attr_class = 'form-control';
-        $label_attr = 'col-form-label';
 
         $this
             ->add('categorie', 'entity', [
@@ -85,21 +65,35 @@ class ProblemeForm extends Form
                 'label_attr' => ['class' => $label_attr],
                 'value' => \Carbon\Carbon::now()->format('Y-m-d'),
             ]);
+    }
+}
+*/
 
-        if ($this->getData('typeForm') === 'create') {
-            $this->
-            add('submit', 'submit', [
+class RoutineForm extends Form
+{
+    public function buildForm()
+    {
+        $this->formOptions = [
+            'method' => 'POST',
+            'url' => route('personne.routine', $this->getData('id')),
+            'novalidate'
+
+        ];
+
+        $this
+            ->add('probleme', 'form', [
+                'label' => 'Problème',
+                'class' => RoutineProblemeForm::class
+            ])
+            ->add('action', 'form', [
+                'label' => 'Action',
+                'class' => RoutineActionForm::class
+            ])
+            ->add('submit', 'submit', [
                 'label' => 'Ajouter',
                 'wrapper' => ['class' => 'col-12'],
                 'attr' => ['class' => 'btn btn-primary'],
             ]);
-        } else {
-            $this->
-            add('submit', 'submit', [
-                'label' => 'Mettre à jour',
-                'wrapper' => ['class' => 'col-12'],
-                'attr' => ['class' => 'btn btn-success'],
-            ]);
-        }
+
     }
 }
