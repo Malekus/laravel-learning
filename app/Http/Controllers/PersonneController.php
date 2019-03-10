@@ -8,6 +8,7 @@ use App\Configuration;
 use App\Forms\PersonneForm;
 use App\Forms\RoutineForm;
 use App\Personne;
+use App\Probleme;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -130,7 +131,23 @@ class PersonneController extends Controller
         if ($request->isMethod('post')) {
             $form = $this->formBuilder->create(RoutineForm::class, ['model' => Personne::find($id)], ['id' => $id]);
             $form->redirectIfNotValid();
-            dd($request->all());
+            $probleme = new Probleme();
+            $probleme->categorie()->associate(Configuration::find($request->get('probleme')['categorie']));
+            $probleme->type()->associate(Configuration::find($request->get('probleme')['type']));
+            $probleme->accompagnement()->associate(Configuration::find($request->get('probleme')['accompagnement']));
+            $probleme->dateProbleme = $request->get('probleme')['dateProbleme'];
+            $probleme->personne()->associate(Personne::find($id));
+            $probleme->save();
+            $action = new Action();
+            foreach ($request->get('action') as $key => $value) {
+                if (!in_array($key, ['action', 'complement']))
+                    $action->$key = $value;
+            }
+            $action->probleme()->associate($probleme);
+            $action->action()->associate(Configuration::find($request->get('action')['action']));
+            $action->complement()->associate(Configuration::find($request->get('action')['complement']));
+            $action->save();
+            return redirect(route('personne.show', ['personne' => $id]));
         }
 
         $form = $this->formBuilder->create(RoutineForm::class, [], ['id' => $id]);

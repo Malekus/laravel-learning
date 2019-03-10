@@ -14,7 +14,7 @@ class RoutineActionForm extends Form
 
         $this
             ->add('action', 'entity', [
-                'label' => 'Type',
+                'label' => 'Action',
                 'wrapper' => ['class' => $wrapper],
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
@@ -30,7 +30,7 @@ class RoutineActionForm extends Form
                 ]
             ])
             ->add('complement', 'entity', [
-                'label' => 'Type',
+                'label' => 'Dirigé vers',
                 'wrapper' => ['class' => $wrapper],
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
@@ -46,7 +46,7 @@ class RoutineActionForm extends Form
                 ]
             ])
             ->add('dateAction', 'date', [
-                'label' => 'Date rendez-vous',
+                'label' => 'Date du rendez-vous',
                 'wrapper' => ['class' => $wrapper],
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
@@ -73,14 +73,14 @@ class RoutineActionForm extends Form
                 'label_attr' => ['class' => $label_attr],
                 'choices' => [1 => 'oui', 0 => 'non'],
             ])
-            ->add('ouvertureDeDroit', 'select', [
+            ->add('droitOuvert', 'select', [
                 'label' => 'Ouverture de droit',
                 'wrapper' => ['class' => $wrapper],
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
                 'choices' => [1 => 'oui', 0 => 'non'],
             ])
-            ->add('maintienDeDroit', 'select', [
+            ->add('maintienDroit', 'select', [
                 'label' => 'Maintien de droit',
                 'wrapper' => ['class' => $wrapper],
                 'attr' => ['class' => $attr_class],

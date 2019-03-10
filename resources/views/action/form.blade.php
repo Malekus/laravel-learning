@@ -175,7 +175,7 @@
     </div>
 
     <div class="form-group row justify-content-center">
-        {!! Form::label('dateAction', 'Date', ['class' => 'col-lg-2 col-form-label']) !!}
+        {!! Form::label('dateAction', 'Date du rendez-vous', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
             {!! Form::date('dateAction', \Carbon\Carbon::now(),['class' => 'form-control']) !!}
             <div class="invalid-feedback">
