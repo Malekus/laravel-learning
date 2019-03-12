@@ -85,9 +85,22 @@ class RoutineForm extends Form
                 'label' => 'Problème',
                 'class' => RoutineProblemeForm::class
             ])
-            ->add('action', 'form', [
+            /*->add('action', 'form', [
                 'label' => 'Action',
                 'class' => RoutineActionForm::class
+            ])*/
+
+            ->add('action', 'collection', [
+                'type' => 'form',
+                'property' => 'name',    // Which property to use on the tags model for value, defualts to id
+
+                'data' => [],            // Data is automatically bound from model, here we can override it
+                'options' => [    // these are options for a single type
+                    'label' => false,
+//                    'attr' => ['class' => 'tag'],
+  //                  'label' => 'Action',
+                    'class' => RoutineActionForm::class,
+                ]
             ])
             ->add('submit', 'submit', [
                 'label' => 'Ajouter',

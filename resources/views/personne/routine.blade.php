@@ -67,17 +67,23 @@
             </div>
         @endforeach
 
-        @foreach($form->action->getFields() as $key => $value)
-            <div class="form-group row justify-content-center">
-                <div class="col-2">
-                    {!! form_label($form->action->$key) !!}
+        @dd($form->action)
+
+        <div class="collection-container" data-prototype="{{ form_row($form->action->prototype()) }}">
+            @foreach($form->action->prototype()->getFields() as $key => $value)
+                <div class="form-group row justify-content-center">
+                    <div class="col-2">
+                        {!! form_label($form->action->prototype()->getFields()[$key]) !!}
+                    </div>
+                    <div class="col-6">
+                        {!! form_widget($form->action->prototype()->getFields()[$key]) !!}
+                        {!! form_errors($form->action->prototype()->getFields()[$key]) !!}
+                    </div>
                 </div>
-                <div class="col-6">
-                    {!! form_widget($form->action->$key) !!}
-                    {!! form_errors($form->action->$key) !!}
-                </div>
-            </div>
-        @endforeach
+            @endforeach
+            <button type="button" class="add-to-collection">Add to collection</button>
+        </div>
+
         <div class="form-row text-center col-12">
             {!! form_row($form->submit) !!}
         </div>
@@ -87,24 +93,16 @@
     @include('layout.headerBottom')
 @endsection
 
-{{--
-{!! form_start($form) !!}
-        @foreach($form->getFields() as $key => $value)
-            @if($key != 'submit')
-                <div class="form-group row justify-content-center">
-
-                    <div class="col-2">
-                        {!! form_label($form->$key) !!}
-                    </div>
-                    <div class="col-6">
-                        {!! form_widget($form->$key) !!}
-                        {!! form_errors($form->$key) !!}
-                    </div>
-                </div>
-            @endif
-        @endforeach
-        <div class="form-row text-center col-12">
-            {!! form_row($form->submit) !!}
-        </div>
-        {!! form_end($form) !!}
---}}
+@section('javascript')
+    <script>
+        $(document).ready(function () {
+            $('.add-to-collection').on('click', function (e) {
+                e.preventDefault();
+                var container = $('.collection-container');
+                var count = container.children().length;
+                var proto = container.data('prototype').replace(/__NAME__/g, count);
+                container.append(proto);
+            });
+        });
+    </script>
+@endsection
