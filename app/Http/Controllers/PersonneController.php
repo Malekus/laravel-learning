@@ -131,6 +131,7 @@ class PersonneController extends Controller
         if ($request->isMethod('post')) {
             $form = $this->formBuilder->create(RoutineForm::class, ['model' => Personne::find($id)], ['id' => $id]);
             $form->redirectIfNotValid();
+            //dd($form, $request->get('action'));
             $probleme = new Probleme();
             $probleme->categorie()->associate(Configuration::find($request->get('probleme')['categorie']));
             $probleme->type()->associate(Configuration::find($request->get('probleme')['type']));
@@ -138,15 +139,17 @@ class PersonneController extends Controller
             $probleme->dateProbleme = $request->get('probleme')['dateProbleme'];
             $probleme->personne()->associate(Personne::find($id));
             $probleme->save();
-            $action = new Action();
-            foreach ($request->get('action') as $key => $value) {
-                if (!in_array($key, ['action', 'complement']))
-                    $action->$key = $value;
+            foreach ($request->get('action') as $new){
+                $action = new Action();
+                foreach ($new as $key => $value) {
+                    if (!in_array($key, ['action', 'complement']))
+                        $action->$key = $value;
+                }
+                $action->probleme()->associate($probleme);
+                $action->action()->associate(Configuration::find($new['action']));
+                $action->complement()->associate(Configuration::find($new['complement']));
+                $action->save();
             }
-            $action->probleme()->associate($probleme);
-            $action->action()->associate(Configuration::find($request->get('action')['action']));
-            $action->complement()->associate(Configuration::find($request->get('action')['complement']));
-            $action->save();
             return redirect(route('personne.show', ['personne' => $id]));
         }
 

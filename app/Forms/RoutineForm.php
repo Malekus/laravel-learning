@@ -73,10 +73,15 @@ class RoutineForm extends Form
 {
     public function buildForm()
     {
+        $wrapper = 'form-group row justify-content-center A';
+        $attr_class = 'form-control B';
+        $label_attr = 'col-form-label C';
+
         $this->formOptions = [
             'method' => 'POST',
             'url' => route('personne.routine', $this->getData('id')),
-            'novalidate'
+            'novalidate',
+            'class' => 'needs-validation'
 
         ];
 
@@ -85,28 +90,21 @@ class RoutineForm extends Form
                 'label' => 'Problème',
                 'class' => RoutineProblemeForm::class
             ])
-            /*->add('action', 'form', [
-                'label' => 'Action',
-                'class' => RoutineActionForm::class
-            ])*/
-
             ->add('action', 'collection', [
                 'type' => 'form',
-                'property' => 'name',    // Which property to use on the tags model for value, defualts to id
-
-                'data' => [],            // Data is automatically bound from model, here we can override it
-                'options' => [    // these are options for a single type
+                'data' => [],
+                'options' => [
                     'label' => false,
-//                    'attr' => ['class' => 'tag'],
-  //                  'label' => 'Action',
                     'class' => RoutineActionForm::class,
-                ]
+                ],
+                'label' => false,
+                'template' => 'personne.form_action',
+                'rules' => 'nullable',
             ])
             ->add('submit', 'submit', [
                 'label' => 'Ajouter',
                 'wrapper' => ['class' => 'col-12'],
                 'attr' => ['class' => 'btn btn-primary'],
             ]);
-
     }
 }

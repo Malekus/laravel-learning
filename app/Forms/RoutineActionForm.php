@@ -8,8 +8,8 @@ class RoutineActionForm extends Form
 {
     public function buildForm()
     {
-        $wrapper = 'form-group row justify-content-center';
-        $attr_class = 'form-control';
+        $wrapper = 'form-group row';
+        $attr_class = 'form-control subFormAction';
         $label_attr = 'col-form-label';
 
         $this
