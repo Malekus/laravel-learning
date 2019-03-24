@@ -35,11 +35,15 @@ class ProblemeController extends Controller
     public function store(Request $request, $type, $id)
     {
         $probleme = new Probleme();
-
-        if ($type == 'personne')
-            $probleme->personne()->associate(Personne::find($id));
-        else
-            $probleme->partenaire()->associate(Partenaire::find($id));
+        $dateNow = \Carbon\Carbon::now();
+        if ($type == 'personne'){
+            $personne = Personne::where('id', $id)->update(['updated_at' => $dateNow]);
+            $probleme->personne()->associate($personne);
+        }
+        else{
+            $partenaire = Partenaire::where('id', $id)->update(['updated_at' => $dateNow]);
+            $probleme->partenaire()->associate($partenaire);
+        }
 
         $form = $this->getForm($probleme);
         $form->redirectIfNotValid();

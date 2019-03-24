@@ -148,6 +148,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         \ConsoleTVs\Charts\ChartsServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
+        RezaAr\Highcharts\Provider::class,
 
         /*
          * Package Service Providers...
@@ -213,6 +214,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Illuminate\Html\FormFacade::class,
         'Html' => Illuminate\Html\HtmlFacade::class,
+        'Chart' => RezaAr\Highcharts\Facade::class,
 
     ],
 
