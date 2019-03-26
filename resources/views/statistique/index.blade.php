@@ -33,16 +33,17 @@
                     <div class="row">
                         <div class="col-12 my-5">
 
-                            {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats('sexe') !!}
+                            {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats($dateNow, 'sexe') !!}
 
 
                         </div>
 
                         <div class="col-12 my-5">
+                            {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats($dateNow, 'probleme') !!}
+                        </div>
 
-                            {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats('toto') !!}
-
-
+                        <div class="col-12 my-5">
+                            {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats($dateNow, 'action') !!}
                         </div>
 
                     </div>

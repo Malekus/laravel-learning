@@ -2,33 +2,119 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use function PHPSTORM_META\type;
 
 class StatistiqueController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+
+        if ($request->get('search') == null) {
+            $dateNow = \Carbon\Carbon::now()->format('Y');
+            return view('statistique.index', compact('dateNow'));
+        }
         return view('statistique.index');
     }
 
-    public function stats($type = null)
+    public function stats($date, $type = null)
     {
         $nom_graphe = $type . 'Chart';
         if ($type == 'sexe') {
             $personnes = DB::table('personnes')
                 ->select(DB::raw('count(*) as nb, sexe as label'))
+                ->where('updated_at', 'like', '%' . $date . '%')
                 ->groupBy('sexe')
                 ->orderBy('sexe')
                 ->get();
             $r = $this->exploite($personnes);
             $categorie = $r[0];
+
             $values = $r[1];
-            $chart = $this->createChart('Nombre de bénéficiaire en 2018', 'column', $nom_graphe, ['categories' => $categorie, 'data' => $values, 'nameLegend' => 'Nombre de personne', 'dataLabels' => true]);
+            $chart = $this->createChart('Nombre de bénéficiaire en ' . $date, 'column', $nom_graphe, ['categories' => $categorie, 'data' => $values, 'nameLegend' => 'Nombre de personne', 'dataLabels' => true]);
             return view('statistique.chart', ['idChart' => $nom_graphe, 'chart' => $chart]);
         }
 
-        $chart = $this->createPie('Nombre de bénéficiare en 2018', $nom_graphe );
+        if ($type == 'probleme') {
+            $problemes = DB::table('problemes')
+                ->join('configurations', 'categorie_id', '=', 'configurations.id')
+                ->select(DB::raw('count(*) as nb, libelle as label'))// DB::raw('label, count(*) as nbSpe')
+                ->groupBy('libelle')
+                ->orderBy('libelle')
+                ->get();
+            $r = $this->exploite($problemes);
+            $categorie = $r[0];
+            $values = $r[1];
+            $chart = $this->createChart('Nombre de problème en ' . $date, 'column', $nom_graphe, ['categories' => $categorie, 'data' => $values, 'nameLegend' => 'Nombre de personne', 'dataLabels' => true]);
+            return view('statistique.chart', ['idChart' => $nom_graphe, 'chart' => $chart]);
+        }
+
+        if ($type == 'action') {
+            $actions = DB::table('actions')
+                ->select(DB::raw('count(actions.id) as nb, (select libelle from configurations where id = action_id) as label, (select libelle from configurations where id = probleme_id) as field')) // , (select libelle from configurations where id = probleme_id) as field
+                ->groupBy('label')
+                ->orderBy('label')
+                ->get();
+            $r = $this->exploite($actions);
+            $categorie = $r[0];
+            $values = $r[1];
+            $fields = $r[2];
+            dd($actions, $categorie, $values, $fields);
+
+            $chart = \Chart::title([
+                'text' => 'Voting ballon d`or 2018',
+            ])
+                ->chart([
+                    'type' => 'line', // pie , columnt ect
+                    'renderTo' => 'chart1', // render the chart into your div with id
+                ])
+                ->subtitle([
+                    'text' => 'This Subtitle',
+                ])
+                ->colors([
+                    '#0c2959'
+                ])
+                ->xaxis([
+                    'categories' => [
+                        'Alex Turner',
+                        'Julian Casablancas',
+                        'Bambang Pamungkas',
+                        'Mbah Surip',
+                    ],
+                    'labels' => [
+                        'rotation' => 15,
+                        'align' => 'top',
+                        'formatter' => 'startJs:function(){return this.value + " (Footbal Player)"}:endJs',
+                        // use 'startJs:yourjavasscripthere:endJs'
+                    ],
+                ])
+                ->yaxis([
+                    'text' => 'This Y Axis',
+                ])
+                ->legend([
+                    'layout' => 'vertikal',
+                    'align' => 'right',
+                    'verticalAlign' => 'middle',
+                ])
+                ->series(
+                    [
+                        [
+                            'name' => 'Voting',
+                            'data' => [43934, 52503, 57177, 69658],
+                            // 'color' => '#0c2959',
+                        ],
+                    ]
+                )
+                ->display();
+
+
+            return view('statistique.chart', ['idChart' => $nom_graphe, 'chart' => $chart]);
+        }
+
+        $chart = $this->createPie('Graphe vide en ' . $date, $nom_graphe);
 
         return view('statistique.chart', ['idChart' => $nom_graphe, 'chart' => [$chart]]);
     }
@@ -99,14 +185,23 @@ class StatistiqueController extends Controller
     private function exploite($data)
     {
 
-        $keys = $values = [];
+        if (count(get_object_vars($data[0])) == 2) {
+            $keys = $values = [];
+            foreach ($data as $key => $value) {
+                array_push($values, $value->nb);
+                array_push($keys, ucfirst($value->label));
+            }
+            return [$keys, $values];
+        }
 
+        $keys = $values = $fields = [];
         foreach ($data as $key => $value) {
             array_push($values, $value->nb);
             array_push($keys, ucfirst($value->label));
+            array_push($fields, ucfirst($value->field));
         }
+        return [$keys, $values, $fields];
 
-        return [$keys, $values];
     }
 
 }
