@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use function PHPSTORM_META\type;
+use Illuminate\Support\Facades\DB;
 
 class StatistiqueController extends Controller
 {
@@ -17,7 +15,9 @@ class StatistiqueController extends Controller
             $dateNow = \Carbon\Carbon::now()->format('Y');
             return view('statistique.index', compact('dateNow'));
         }
-        return view('statistique.index');
+
+        $dateNow = $request->get('search');
+        return view('statistique.index', compact('dateNow'));
     }
 
     public function stats($date, $type = null)
@@ -54,16 +54,14 @@ class StatistiqueController extends Controller
 
         if ($type == 'action') {
             $actions = DB::table('actions')
-                ->select(DB::raw('count(actions.id) as nb, (select libelle from configurations where id = action_id) as label, (select libelle from configurations where id = probleme_id) as field')) // , (select libelle from configurations where id = probleme_id) as field
-                ->groupBy('label')
+                ->select(DB::raw('count(actions.id) as nb, (select libelle from configurations where id = action_id) as label, (select libelle from configurations where id = probleme_id) as field'))// , (select libelle from configurations where id = probleme_id) as field
+                ->groupBy('label', 'field')
                 ->orderBy('label')
                 ->get();
             $r = $this->exploite($actions);
             $categorie = $r[0];
             $values = $r[1];
             $fields = $r[2];
-            dd($actions, $categorie, $values, $fields);
-
             $chart = \Chart::title([
                 'text' => 'Voting ballon d`or 2018',
             ])

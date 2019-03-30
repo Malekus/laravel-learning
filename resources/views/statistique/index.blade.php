@@ -35,7 +35,6 @@
 
                             {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats($dateNow, 'sexe') !!}
 
-
                         </div>
 
                         <div class="col-12 my-5">

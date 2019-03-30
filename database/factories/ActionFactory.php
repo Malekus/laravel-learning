@@ -15,7 +15,7 @@ $factory->define(\App\Action::class, function (Faker $faker) {
         'perduDeVue' => $faker->randomElement([true, false]),
         'judiciarisation' => $faker->randomElement([true, false]),
         'probleme_id' => \App\Probleme::all()->random()->id,
-        'action_id' => \App\Configuration::where(['champ'=>'Action', 'categorie'=>'Action'])->get()->random()->id,
-        'complement_id' => \App\Configuration::where('champ', 'Dirigé vers')->get()->random()->id,
+        'action_id' => \App\Configuration::where(['categorie'=>'Action', 'champ'=>'Action'])->get()->random()->id,
+        'complement_id' => \App\Configuration::where(['categorie'=>'Action', 'champ' =>'Dirigé vers'])->get()->random()->id,
     ];
 });
