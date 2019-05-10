@@ -45,6 +45,14 @@
                             {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats($dateNow, 'action') !!}
                         </div>
 
+                        <div class="col-12 my-5">
+                            {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats($dateNow, 'age') !!}
+                        </div>
+
+                        <div class="col-12 my-5">
+                            {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats($dateNow, 'rdv_courrier') !!}
+                        </div>
+
                     </div>
                 </div>
             </div>

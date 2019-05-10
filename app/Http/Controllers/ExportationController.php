@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Personne;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 
 class ExportationController extends Controller
@@ -11,74 +13,37 @@ class ExportationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('exportation.index');
+        if ($request->get('search') == null) {
+            $dateNow = \Carbon\Carbon::now()->format('Y');
+            return view('exportation.index', compact('dateNow'));
+        }
+
+        $dateNow = $request->get('search');
+        return view('exportation.index', compact('dateNow'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function ajaxModel($date, $model){
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if($date == null)  $date = \Carbon\Carbon::now()->format('Y');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if($model == 'personne'){
+            $personne = new Personne;
+            $models = Personne::where('updated_at', 'like', '%'.$date.'%')->select(array_diff($personne->getFillable(), array('nom','prenom')))->get();
+            $categories = array_diff($personne->getFillable(), array('nom','prenom'));
+            foreach ($categories as $key => $value){
+                if($value == 'id') continue;
+                if(strpos($value, '_id') !== false) {
+                    $value = str_replace("_id", "", $value);
+                    $categories[$key] = $value;
+                }
+                if(strpos($value, '_') !== false) $categories[$key] = str_replace("_", " ", $value);
+                $categories[$key] = ucfirst($categories[$key]);
+            }
+            return view('exportation.table', compact(['models', 'categories']));
+        }
+        return null;
     }
 }

@@ -63,18 +63,6 @@
         </div>
     </div>
 
-    <div class="row no-gutters">
-        <div class="col-12 p-2">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="">Activité de la semaine</h5>
-
-                    {{ App::make(\App\Http\Controllers\StatistiqueController::class)->stats('sexe') }}
-
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <div class="row no-gutters">

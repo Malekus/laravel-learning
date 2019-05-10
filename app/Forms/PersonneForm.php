@@ -9,14 +9,12 @@ class PersonneForm extends Form
 
     public function buildForm()
     {
-
         if ($this->getModel() && $this->getModel()->id) {
             $method = 'PUT';
             $url = route('personne.update', $this->getModel()->id);
         } else {
             $method = 'POST';
             $url = route('personne.store');
-
         }
 
         $this->formOptions = [
@@ -25,6 +23,7 @@ class PersonneForm extends Form
             'novalidate'
 
         ];
+
 
         $wrapper = 'form-group row justify-content-center';
         $attr_class = 'form-control';
@@ -78,7 +77,7 @@ class PersonneForm extends Form
                 'query_builder' => function (\App\Configuration $model) {
                     return $model->where(['champ' => 'CSP', 'categorie' => 'Personne']);
                 },
-                'empty_value' => 'Sélectionnez un Contrat de sécurisation professionnelle(CSP)'
+                'empty_value' => isset($this->getModel()->csp) ? $this->getModel()->csp->libelle : 'Sélectionnez un Contrat de sécurisation professionnelle(CSP)',
             ])
             ->add('categorie', 'entity', [
                 'label' => 'Catégorie',
@@ -90,7 +89,7 @@ class PersonneForm extends Form
                 'query_builder' => function (\App\Configuration $model) {
                     return $model->where(['champ' => 'Catégorie', 'categorie' => 'Personne']);
                 },
-                'empty_value' => 'Sélectionnez une catégorie'
+                'empty_value' => isset($this->getModel()->categorie) ? $this->getModel()->categorie->libelle : 'Sélectionnez une catégorie',
             ])
             ->add('nationalite', 'text', [
                 'label' => 'Nationalité',
@@ -108,7 +107,8 @@ class PersonneForm extends Form
                 'query_builder' => function (\App\Configuration $model) {
                     return $model->where(['champ' => 'Logement', 'categorie' => 'Personne']);
                 },
-                'empty_value' => 'Sélectionnez un logement'
+                'empty_value' => isset($this->getModel()->logement) ? $this->getModel()->logement->libelle : 'Sélectionnez un logement',
+
             ])
             ->add('telephone', 'text', [
                 'label' => 'Téléphone',

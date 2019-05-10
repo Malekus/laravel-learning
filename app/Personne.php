@@ -11,15 +11,16 @@ class Personne extends Model
 
 
     protected $fillable = [
+        'id',
         'nom',
         'prenom',
         'date_naissance',
         'sexe',
         'enfant',
-        'csp',
-        'categorie',
+        'csp_id',
+        'categorie_id',
         'nationalite',
-        'logement',
+        'logement_id',
         'telephone',
         'email',
         'adresse',
@@ -94,5 +95,9 @@ class Personne extends Model
         $this->attributes['date_naissance'] = $value;
     }
 
+    public function scopeExclude($query, $value = array())
+    {
+        return $query->select(array_diff( $this->columns, $value));
+    }
 
 }
