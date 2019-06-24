@@ -50,7 +50,7 @@ class ConfigurationController extends Controller
     public function show($id)
     {
         $configuration = Configuration::findOrFail($id);
-        return \response()->json(\view('ajax.configuration.show')->with(['configuration' => $configuration, 'titleModal' => 'Personne'])->render());
+        return \response()->json(\view('ajax.configuration.show')->with(['configuration' => $configuration, 'titleModal' => 'PersonneResource'])->render());
     }
 
     /**
@@ -121,7 +121,7 @@ class ConfigurationController extends Controller
         return null;
     }
 
-    public static function content($title = 'Personne')
+    public static function content($title = 'PersonneResource')
     {
         $configurations = Configuration::where('categorie', $title)
             ->orderBy('champ', 'asc')

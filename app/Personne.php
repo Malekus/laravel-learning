@@ -4,34 +4,20 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Personne extends Model
 {
-
-
-    protected $fillable = [
-        'id',
-        'nom',
-        'prenom',
-        'date_naissance',
-        'sexe',
-        'enfant',
-        'csp_id',
-        'categorie_id',
-        'nationalite',
-        'logement_id',
-        'telephone',
-        'email',
-        'adresse',
-        'code_postale',
-        'ville',
-        'prioritaire',
-        'matricule_caf'
-    ];
-
+    protected $fillable = ['*'];
 
     protected $table = 'personnes';
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($personne) {
+            $personne->problemes()->delete();
+        });
+    }
 
     public function problemes()
     {
@@ -58,7 +44,7 @@ class Personne extends Model
         return $this->belongsTo('App\Configuration');
     }
 
-    public function scolaire()
+    public function scolarite()
     {
         return $this->belongsTo('App\Configuration');
     }
@@ -73,23 +59,16 @@ class Personne extends Model
         return $this->hasMany(CafDate::class);
     }
 
-
-    protected static function boot()
+    public function scopeIndex($query)
     {
-        parent::boot();
-        static::deleting(function ($personne) {
-            $personne->problemes()->delete();
-        });
-    }
-
-    public function scopeIndex($query){
         return $query
             ->select('id', 'nom', 'prenom', 'matricule_caf', 'updated_at');
     }
 
-    public function setDateNaissanceAttribute($value){
-        if($value instanceof string){
-            $date = Carbon::createFromFormat('d/m/Y',$value);
+    public function setDateNaissanceAttribute($value)
+    {
+        if ($value instanceof string) {
+            $date = Carbon::createFromFormat('d/m/Y', $value);
             $this->attributes['date_naissance'] = $date;
         }
         $this->attributes['date_naissance'] = $value;
@@ -97,7 +76,7 @@ class Personne extends Model
 
     public function scopeExclude($query, $value = array())
     {
-        return $query->select(array_diff( $this->columns, $value));
+        return $query->select(array_diff($this->columns, $value));
     }
 
 }

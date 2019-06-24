@@ -11,7 +11,7 @@
                     <div class="form-group row justify-content-center">
                         {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-4 col-form-label']) !!}
                         <div class="col-lg-8">
-                            {!! Form::select('categorie', \App\Configuration::field('Personne', 'categorie'), $configuration->categorie,['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('categorie', \App\Configuration::field('PersonneResource', 'categorie'), $configuration->categorie,['class' => 'form-control', 'required']) !!}
                             <div class="invalid-feedback">
                                 Saisir une catégorie
                             </div>

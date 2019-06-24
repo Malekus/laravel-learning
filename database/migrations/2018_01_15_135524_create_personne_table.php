@@ -36,8 +36,8 @@ class CreatePersonneTable extends Migration
             $table->foreign('csp_id')->references('id')->on('configurations')->onDelete('set null');
             $table->integer('categorie_id')->nullable()->unsigned()->index();
             $table->foreign('categorie_id')->references('id')->on('configurations')->onDelete('set null');
-            $table->integer('scolaire_id')->nullable()->unsigned()->index();
-            $table->foreign('scolaire_id')->references('id')->on('configurations')->onDelete('set null');
+            $table->integer('scolarite_id')->nullable()->unsigned()->index();
+            $table->foreign('scolarite_id')->references('id')->on('configurations')->onDelete('set null');
             $table->integer('situation_id')->nullable()->unsigned()->index();
             $table->foreign('situation_id')->references('id')->on('configurations')->onDelete('set null');
 

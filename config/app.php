@@ -149,6 +149,7 @@ return [
         \ConsoleTVs\Charts\ChartsServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
         RezaAr\Highcharts\Provider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -215,7 +216,7 @@ return [
         'Form' => Illuminate\Html\FormFacade::class,
         'Html' => Illuminate\Html\HtmlFacade::class,
         'Chart' => RezaAr\Highcharts\Facade::class,
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

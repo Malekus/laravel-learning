@@ -40,14 +40,14 @@
     <div class="form-group row justify-content-center">
         {!! Form::label('csp', 'CSP', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
-            {!! Form::select('csp', \App\Configuration::where(['champ' => 'CSP', 'categorie' => 'Personne'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
+            {!! Form::select('csp', \App\Configuration::where(['champ' => 'CSP', 'categorie' => 'PersonneResource'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
         </div>
     </div>
 
     <div class="form-group row justify-content-center">
         {!! Form::label('categorie', 'Catégorie', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
-            {!! Form::select('categorie', \App\Configuration::where(['champ' => 'Catégorie', 'categorie' => 'Personne'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
+            {!! Form::select('categorie', \App\Configuration::where(['champ' => 'Catégorie', 'categorie' => 'PersonneExport'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
         </div>
     </div>
 

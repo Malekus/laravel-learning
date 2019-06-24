@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+    @dump($dateNow)
+
     <div class="row">
         <div class="col-12">
             <div class="card sizeCard">
@@ -39,12 +41,13 @@
                                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapsePersonne" aria-expanded="true" aria-controls="collapsePersonne">
                                                 Personne
                                             </button>
+                                            <a href="{{ route('exportation.exportExcel', [$dateNow, 'personne']) }}"><span><i class="fas fa-download"></i></span></a>
                                         </h5>
                                     </div>
 
                                     <div id="collapsePersonne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            {!! App::make(\App\Http\Controllers\ExportationController::class)->ajaxModel($dateNow, 'personne') !!}
                                         </div>
                                     </div>
                                 </div>
@@ -54,11 +57,12 @@
                                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsePartenaire" aria-expanded="false" aria-controls="collapsePartenaire">
                                                 Partenaire
                                             </button>
+                                            <a href="{{ route('exportation.exportExcel', [$dateNow, 'partenaire']) }}"><span><i class="fas fa-download"></i></span></a>
                                         </h5>
                                     </div>
                                     <div id="collapsePartenaire" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            {!! App::make(\App\Http\Controllers\ExportationController::class)->ajaxModel($dateNow, 'partenaire') !!}
                                         </div>
                                     </div>
                                 </div>
@@ -68,11 +72,12 @@
                                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseProbleme" aria-expanded="false" aria-controls="collapseProbleme">
                                                 Problème
                                             </button>
+                                            <a href="{{ route('exportation.exportExcel', [$dateNow, 'probleme']) }}"><span><i class="fas fa-download"></i></span></a>
                                         </h5>
                                     </div>
                                     <div id="collapseProbleme" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            {!! App::make(\App\Http\Controllers\ExportationController::class)->ajaxModel($dateNow, 'probleme') !!}
                                         </div>
                                     </div>
                                 </div>
@@ -82,11 +87,12 @@
                                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseAction" aria-expanded="false" aria-controls="collapseAction">
                                                 Rendez-vous
                                             </button>
+                                            <a href="{{ route('exportation.exportExcel', [$dateNow, 'action']) }}"><span><i class="fas fa-download"></i></span></a>
                                         </h5>
                                     </div>
                                     <div id="collapseAction" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            {!! App::make(\App\Http\Controllers\ExportationController::class)->ajaxModel($dateNow, 'action') !!}
                                         </div>
                                     </div>
                                 </div>
@@ -96,11 +102,12 @@
                                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseCaf" aria-expanded="false" aria-controls="collapseCaf">
                                                 Liste Caf
                                             </button>
+                                            <a href="{{ route('exportation.exportExcel', [$dateNow, 'listeCaf']) }}"><span><i class="fas fa-download"></i></span></a>
                                         </h5>
                                     </div>
                                     <div id="collapseCaf" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            {!! App::make(\App\Http\Controllers\ExportationController::class)->ajaxModel($dateNow, 'listeCaf') !!}
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +115,7 @@
                         </div>
                     </div>
 
-                    {!! App::make(\App\Http\Controllers\ExportationController::class)->ajaxModel($dateNow, 'personne') !!}
+
 
                 </div>
             </div>
