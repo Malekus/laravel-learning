@@ -23,8 +23,7 @@ class StatistiqueController extends Controller
 
     public function stats($date, $type = null)
     {
-        if ($date == null)
-            $date = Carbon::now();
+        if ($date == null) $date = Carbon::now();
 
         $nom_graphe = $type . 'Chart';
         if ($type == 'sexe') {
@@ -41,7 +40,7 @@ class StatistiqueController extends Controller
             return view('statistique.chart', ['idChart' => $nom_graphe, 'chart' => $chart]);
         }
 
-        if ($type == 'probleme') {
+        if ($type == 'problemes') {
             $problemes = DB::table('problemes')
                 ->join('configurations', 'categorie_id', '=', 'configurations.id')
                 ->select(DB::raw('count(*) as nb, libelle as label'))// DB::raw('label, count(*) as nbSpe')
@@ -51,7 +50,7 @@ class StatistiqueController extends Controller
             $r = $this->exploite($problemes);
             $categorie = $r[0];
             $values = $r[1];
-            $chart = $this->createChart('Nombre de problème en ' . $date, 'column', $nom_graphe, ['subtitle' => array_sum($values) . ' problèmes', 'categories' => $categorie, 'data' => $values, 'nameLegend' => 'Nombre de personne', 'dataLabels' => true]);
+            $chart = $this->createChart('Nombre de problème en ' . $date, 'column', $nom_graphe, ['subtitle' => array_sum($values) . ' problèmes', 'categories' => $categorie, 'data' => $values, 'nameLegend' => 'Nombre de personne', 'dataLabels' => false], $categorie);
             return view('statistique.chart', ['idChart' => $nom_graphe, 'chart' => $chart]);
         }
 
@@ -64,18 +63,42 @@ class StatistiqueController extends Controller
             $r = $this->exploite($actions);
             $categorie = $r[0];
             $values = $r[1];
-            $fields = $r[2];
-            $chart = $this->createChart('Nombre de rendez-vous en ' . $date, 'column', $nom_graphe, ['categories' => $categorie, 'data' => $values, 'nameLegend' => 'Nombre de personne', 'dataLabels' => true]);
+            $chart = $this->createChart('Nombre de rendez-vous en ' . $date, 'column', $nom_graphe, ['subtitle' => array_sum($values) . ' rendez-vous', 'categories' => $categorie, 'data' => $values, 'nameLegend' => 'Nombre de personne', 'dataLabels' => true]);
             return view('statistique.chart', ['idChart' => $nom_graphe, 'chart' => $chart]);
         }
 
         if ($type == 'age') {
             $ages = DB::table('personnes')
-                ->select(DB::raw('YEAR(CURRENT_DATE) - YEAR(date_naissance) as age'))
+                ->select(DB::raw('count(*) as nb, YEAR(CURRENT_DATE) - YEAR(date_naissance) as age'))
                 ->where('updated_at', 'like', '%' . $date . '%')
-                ->orderBy('age')
+                ->groupBy('age')
+                ->orderBy('age', 'desc')
                 ->get();
-            return;
+
+            $categorie = [strval('-18 ans') => 0, '18-25 ans' => 0, '25-35 ans' => 0, '35-45 ans' => 0, '45-65 ans' => 0, '+65 ans' => 0];
+            foreach ($ages as $age) {
+                if ($age->age >= 65) {
+                    $categorie['+65 ans'] = $categorie['+65 ans'] + $age->nb;
+                } elseif ($age->age >= 45) {
+                    $categorie['45-65 ans'] = $categorie['45-65 ans'] + $age->nb;
+                } elseif ($age->age >= 35) {
+                    $categorie['35-45 ans'] = $categorie['35-45 ans'] + $age->nb;
+                } elseif ($age->age >= 25) {
+                    $categorie['25-35 ans'] = $categorie['25-35 ans'] + $age->nb;
+                } elseif ($age->age >= 18) {
+                    $categorie['18-25 ans'] = $categorie['18-25 ans'] + $age->nb;
+                } else {
+                    $categorie['-18 ans'] = $categorie['-18 ans'] + $age->nb;
+                }
+
+            }
+
+            $cat = array_keys($categorie);
+            $values = array_values($categorie);
+
+            $chart = $this->createChart('Nombre de personne par tranche d\'âge en ' . $date, 'column', $nom_graphe,
+                ['categories' => $cat, 'data' => $values, 'nameLegend' => 'Nombre de personne', 'dataLabels' => true]);
+            return view('statistique.chart', ['idChart' => $nom_graphe, 'chart' => $chart]);
         }
 
         if ($type == 'rdv_courrier') {
@@ -88,10 +111,20 @@ class StatistiqueController extends Controller
                     })
                     ->groupBy('label')
                     ->get();
-            return;
-        }
-        $chart = $this->createPie('Graphe vide en ' . $date, $nom_graphe);
 
+            $r = $this->exploite($rdv_courrier);
+            $categorie = $r[0];
+            $values = $r[1];
+            $chart = $this->createChart('Nombre de rendez-vous en ' . $date, 'column', $nom_graphe, ['categories' => $categorie, 'data' => $values, 'nameLegend' => 'Nombre de personne', 'dataLabels' => true]);
+            return view('statistique.chart', ['idChart' => $nom_graphe, 'chart' => $chart]);
+        }
+
+        if( $type == "sexeWithDomain"){
+            return view('statistique.chart', ['idChart' => $nom_graphe]);
+        }
+
+
+        $chart = $this->createPie('Graphe vide en ' . $date, $nom_graphe);
         return view('statistique.chart', ['idChart' => $nom_graphe, 'chart' => [$chart]]);
     }
 
@@ -117,20 +150,20 @@ class StatistiqueController extends Controller
 
     }
 
-    private function createChart($titre_graphe, $type_graphe, $nom_graphe, $options = [])
+    private function createChart($titre_graphe, $type_graphe, $nom_graphe, $options = [], $categorie = null)
     {
         $chart = \Chart::title([
             'text' => $titre_graphe,
         ])
             ->subtitle([
-                'text' => $options['subtitle'] ?? null
+                'text' =>  $options['subtitle'] ?? null
             ])
             ->chart([
                 'type' => $type_graphe,
                 'renderTo' => $nom_graphe,
             ])
             ->xaxis([
-                'categories' => $options['categories'],
+                'categories' => $categorie ? $categorie : $options['categories'],
                 'labels' => [
                     'rotation' => 15,
                     'align' => 'top',
@@ -154,10 +187,6 @@ class StatistiqueController extends Controller
             ->credits([
                 'enabled' => false
             ])
-            /*;
-            if(isset($options['dataLabels'])){
-
-            }*/
             ->plotOptions([
                 'column' => [
                     'dataLabels' => [
@@ -183,4 +212,14 @@ class StatistiqueController extends Controller
         return $chart;
     }
 
+
 }
+
+
+/*
+select count(*), (select libelle from configurations where id = probleme_id), (select libelle from configurations where id = action_id)
+from actions where action_id in (select id from configurations where libelle like '%courrier%' and champ = 'Action')
+group by probleme_id
+
+
+*/

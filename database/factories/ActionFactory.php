@@ -17,5 +17,6 @@ $factory->define(\App\Action::class, function (Faker $faker) {
         'probleme_id' => \App\Probleme::all()->random()->id,
         'action_id' => \App\Configuration::where(['categorie'=>'Action', 'champ'=>'Action'])->get()->random()->id,
         'complement_id' => \App\Configuration::where(['categorie'=>'Action', 'champ' =>'Dirigé vers'])->get()->random()->id,
+        'updated_at' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now'),
     ];
 });

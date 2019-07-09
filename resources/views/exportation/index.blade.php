@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @dump($dateNow)
 
     <div class="row">
         <div class="col-12">

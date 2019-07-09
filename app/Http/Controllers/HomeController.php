@@ -18,6 +18,12 @@ class HomeController extends Controller
         $chart->labels(['a', 'z', 'e', 'r', 't']);
         $chart->dataset('Mecé', 'line', [54, 465, 6, 98, 21]);
 
+        $chart->options([
+            'bezierCurve' => false,
+            'onAnimationComplete' => 'done'
+        ]);
+
+
         $chart1 = \Chart::title([
             'text' => 'Voting ballon d`or 2018',
         ])

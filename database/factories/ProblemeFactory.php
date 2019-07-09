@@ -11,6 +11,7 @@ $factory->define(\App\Probleme::class, function (Faker $faker) {
             'categorie_id' => \App\Configuration::where(['categorie' => 'Problème', 'champ' => 'Catégorie'])->get()->random()->id,
             'type_id' => \App\Configuration::where(['categorie' => 'Problème', 'champ' => 'Type'])->get()->random()->id,
             'accompagnement_id' => \App\Configuration::where(['categorie' => 'Problème', 'champ' => 'Accompagnement'])->get()->random()->id,
+            'updated_at' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now'),
         ];
 
     return [
@@ -20,6 +21,7 @@ $factory->define(\App\Probleme::class, function (Faker $faker) {
         'categorie_id' => \App\Configuration::where(['categorie' => 'Problème', 'champ' => 'Catégorie'])->get()->random()->id,
         'type_id' => \App\Configuration::where(['categorie' => 'Problème', 'champ' => 'Type'])->get()->random()->id,
         'accompagnement_id' => \App\Configuration::where(['categorie' => 'Problème', 'champ' => 'Accompagnement'])->get()->random()->id,
+        'updated_at' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now'),
     ];
 
 });

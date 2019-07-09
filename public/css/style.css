@@ -222,8 +222,10 @@ canvas {
     text-decoration: none !important;
 }
 
-
-
 .atom{
     background-color:#34495E!important;
+}
+
+.highcharts-container, .highcharts-root {
+    width: 100% !important;
 }

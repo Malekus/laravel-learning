@@ -30,13 +30,11 @@
                         </div>
                     </div>
 
+                    {{--
                     <div class="row">
                         <div class="col-12 my-5">
-
                             {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats($dateNow, 'sexe') !!}
-
                         </div>
-
                         <div class="col-12 my-5">
                             {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats($dateNow, 'probleme') !!}
                         </div>
@@ -52,11 +50,85 @@
                         <div class="col-12 my-5">
                             {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats($dateNow, 'rdv_courrier') !!}
                         </div>
-
                     </div>
+                                        --}}
+                    <script src="https://code.highcharts.com/highcharts.js"></script>
+                    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+                    <script src="https://code.highcharts.com/modules/broken-axis.js"></script>
+
+                    <script type="text/javascript">
+                        Highcharts.wrap(Highcharts.Chart.prototype, 'init', function (proceed, options, callback) {
+                            if (options.chart && options.chart.forExport && options.series) {
+                                $.each(options.series, function () {
+                                    //if (this.visible === false) {
+                                        this.showInLegend = false;
+                                        //console.log(this)
+                                    //}
+                                });
+                            }
+                            return proceed.call(this, options, callback);
+                        });
+                    </script>
+
+                    <div class="row">
+                        <div class="col-12 my-5">
+                            {!! App::make(\App\Http\Controllers\GrapheController::class)->makeChart($dateNow, 'sexe') !!}
+                        </div>
+
+                        <div class="col-12 my-5">
+                            {!! App::make(\App\Http\Controllers\GrapheController::class)->makeChart($dateNow, 'probleme') !!}
+                        </div>
+
+                        <div class="col-12 my-5">
+                            {!! App::make(\App\Http\Controllers\GrapheController::class)->makeChart($dateNow, 'action') !!}
+                        </div>
+
+                        <div class="col-12 my-5">
+                            {!! App::make(\App\Http\Controllers\GrapheController::class)->makeChart($dateNow, 'age') !!}
+                        </div>
+
+                        <div class="col-12 my-5">
+                            {!! App::make(\App\Http\Controllers\GrapheController::class)->makeChart($dateNow, 'rdvCourrier') !!}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 @endsection
 
+@section('javascript')
+    <script>
+        /*
+        $('.highcharts-legend-item.highcharts-column-series').on('click', function() {
+            //chart.setTitle(null, { text: 'New subtitle '});
+
+            console.log("On est la");
+            $(this).parent().children().each(function(){
+                console.log($(this).children('text'));
+            });
+
+            $(this).parent().find('text').each(function (index, element) {
+                console.log($(this))
+            });
+
+        });
+        */
+    </script>
+@endsection
+
+{{--
+
+                        <div class="col-12 my-5">
+                            {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats($dateNow, 'sexeWithDomain') !!}
+                        </div>
+
+
+
+                        <div class="row col-12 my-5">
+                            {!! App::make(\App\Http\Controllers\StatistiqueController::class)->stats($dateNow, 'test') !!}
+                        </div>
+
+ --}}

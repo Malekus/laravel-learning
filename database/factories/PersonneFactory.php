@@ -7,7 +7,7 @@ $factory->define(App\Personne::class, function (Faker $faker) {
     return [
         'nom' => $faker->lastName ,
         'prenom' => $faker->name ,
-        'date_naissance' => $faker->dateTime ,
+        'date_naissance' => $faker->dateTimeBetween($startDate = '-80 years', $endDate = 'now'),
         'sexe' => $faker->randomElement(['homme', 'femme']),
         'enfant' => $faker->numberBetween(0, 5) ,
         'csp_id' => \App\Configuration::where(['categorie' => 'Personne', 'champ' => 'CSP'])->get()->random()->id,

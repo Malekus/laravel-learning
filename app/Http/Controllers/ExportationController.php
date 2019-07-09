@@ -73,8 +73,8 @@ class ExportationController extends Controller
         if ($model == 'personne') return Excel::download(new PersonneExport($dateNow), 'personnes_' . $dateNow . '_.xlsx');
         if ($model == 'partenaire') return Excel::download(new PartenaireExport($dateNow), 'partenaires_' . $dateNow . '_.xlsx');
         if ($model == 'probleme') return Excel::download(new ProblemeExport($dateNow), 'problemes_' . $dateNow . '_.xlsx');
-        if ($model == 'action') return Excel::download(new ActionExport($dateNow), 'rendezvous_' . $dateNow . '_.xlsx');
-        if ($model == 'listeCaf') return Excel::download(new ListeCafExport($dateNow), 'listeCafs_' . $dateNow . '_.xlsx');
+        if ($model == 'action') return Excel::download(new ActionExport($dateNow), 'rendez_vous_' . $dateNow . '_.xlsx');
+        if ($model == 'listeCaf') return Excel::download(new ListeCafExport($dateNow), 'liste_cafs_' . $dateNow . '_.xlsx');
         return null;
     }
 
