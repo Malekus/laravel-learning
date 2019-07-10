@@ -37,11 +37,11 @@ class ProblemeController extends Controller
         $probleme = new Probleme();
         $dateNow = \Carbon\Carbon::now();
         if ($type == 'personne'){
-            $personne = Personne::where('id', $id)->update(['updated_at' => $dateNow]);
+            $personne = Personne::find($id);
             $probleme->personne()->associate($personne);
         }
         else{
-            $partenaire = Partenaire::where('id', $id)->update(['updated_at' => $dateNow]);
+            $partenaire = Partenaire::find($id);
             $probleme->partenaire()->associate($partenaire);
         }
 

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Probleme extends Model
@@ -47,8 +48,19 @@ class Probleme extends Model
     protected static function boot()
     {
         parent::boot();
-        static::deleting(function ($probleme) {
-            $probleme->actions()->delete();
+
+        self::deleting(function ($model) {
+            $model->actions()->delete();
+        });
+
+        self::created(function ($model) {
+            $model->personne->updated_at = new Carbon('now');
+            $model->personne->save();
+        });
+
+        self::updated(function ($model) {
+            $model->personne->updated_at = new Carbon('now');
+            $model->personne->save();
         });
     }
 }

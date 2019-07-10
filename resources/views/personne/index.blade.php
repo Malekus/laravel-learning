@@ -57,7 +57,7 @@
                                                 <th scope="row">{{ $key + 1 }}</th>
                                                 <td>{{ $personne->nom  }}</td>
                                                 <td>{{ $personne->prenom  }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($personne->update_at)->format('d/m/Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($personne->updated_at)->format('d/m/Y') }}</td>
                                                 <td>{{ $personne->matricule_caf  }}</td>
                                                 <td class="text-center">
                                                     <a href="{{ route('personne.show', $personne) }}"

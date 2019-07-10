@@ -14,8 +14,9 @@ class Personne extends Model
     protected static function boot()
     {
         parent::boot();
-        static::deleting(function ($personne) {
-            $personne->problemes()->delete();
+
+        self::deleting(function ($model) {
+            $model->problemes()->delete();
         });
     }
 

@@ -446,7 +446,7 @@ class GrapheController extends Controller
                                 events: {
                                     legendItemClick: function() {
                                         if(breaksRdvCourrier.has(this.xData[0])) {
-                                        breaksRdvCourrier.delete(this.xData[0])
+                                            breaksRdvCourrier.delete(this.xData[0])
                                       }
                                       else {
                                         breaksRdvCourrier.set(this.xData[0], {from: this.xData[0] - 0.5,to: this.xData[0] + 0.5,breakSize: 0})
@@ -474,6 +474,89 @@ class GrapheController extends Controller
             return view('graphe.makeChart', ['idGraphe' => $idGraphe, 'chart' => $chart]);
         }
 
+        if ($type == 'nbAccompagnement') {
+            $nbAccompagnement =
+                DB::table('actions')
+                    ->join('configurations', 'action_id', '=', 'configurations.id')
+                    ->select([DB::raw('count(*) as nb'), DB::raw('(select libelle from configurations where id = complement_id) as label')])
+                    ->where('actions.updated_at', 'like', '%' . $date . '%')
+                    ->groupBy('label')
+                    ->get();
+
+            $r = $this->exploite($nbAccompagnement);
+            $categories = $r[0];
+            $values = $r[1];
+
+            $series = "";
+            foreach($categories as $key => $value){
+                $series.= "{ name: '$value', data: [{name: '$value', y:$values[$key], x:$key}] },";
+            }
+
+            $chart = "var breaksNbAccompagnement = new Map();\n    Highcharts.chart('".$idGraphe."', {
+                        chart: {
+                            type: 'column',
+                            events: {
+                                render: function() {
+                                  let series = this.series
+                                  let sum = 0
+                                  for(let i = 0; i < series.length; i++) {
+                                    if(series[i].visible){
+                                      for(let j = 0; j < series[i].data.length; j++) {
+                                        sum += series[i].data[j]
+                                      }
+                                    }
+                                  }
+                                  this.setTitle(false, {text: sum + ((sum != 1) ? ' accompagnements' : ' accompagnement')}, false) 
+                                }
+                            }
+                        },
+                        title: {
+                            text: 'Nombre d\'accompagnement en ". $date ."'
+                        },
+                        xAxis: {
+                           type: 'category',
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Nombre d\'accompagnement'
+                            }
+                        },
+                        plotOptions: {
+                            column: {
+                                grouping: false,
+                                pointPadding: 0.2,
+                                borderWidth: 0,
+                                events: {
+                                    legendItemClick: function() {
+                                        if(breaksNbAccompagnement.has(this.xData[0])) {
+                                            breaksNbAccompagnement.delete(this.xData[0])
+                                      }
+                                      else {
+                                        breaksNbAccompagnement.set(this.xData[0], {from: this.xData[0] - 0.5,to: this.xData[0] + 0.5,breakSize: 0})
+                                      }
+                                      this.chart.xAxis[0].update({
+                                        breaks: [... breaksNbAccompagnement.values()]
+                                      });
+                                    }
+      							}
+                            },
+                            series: {
+                                dataLabels: { enabled: true }
+                            }
+                        },
+                        
+                        series: [
+                            ". $series ."
+                        ],
+                        
+                        credits: { enabled: false },
+                        tooltip: { enabled: false },
+                        });";
+
+
+            return view('graphe.makeChart', ['idGraphe' => $idGraphe, 'chart' => $chart]);
+        }
         return "";
     }
 
@@ -484,7 +567,7 @@ class GrapheController extends Controller
             $keys = $values = [];
             foreach ($data as $key => $value) {
                 array_push($values, $value->nb);
-                array_push($keys, ucfirst($value->label));
+                array_push($keys, addslashes(ucfirst($value->label)));
             }
             return [$keys, $values];
         }

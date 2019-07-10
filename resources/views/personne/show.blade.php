@@ -104,7 +104,7 @@
                                         </li>
                                         <li class="list-group-item"><span
                                                     class="font-weight-bold">Dernière activité</span>
-                                            : {{ \Carbon\Carbon::parse($personne->update_at)->format('d/m/Y') }}</li>
+                                            : {{ \Carbon\Carbon::parse($personne->updated_at)->format('d/m/Y') }}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                                             <td>{{ isset($probleme->type->libelle) ? $probleme->type->libelle : "non renseigné" }}</td>
                                             <td>{{ \Carbon\Carbon::parse($probleme->dateProbleme)->format('d/m/Y') }}</td>
                                             <td>{{ $probleme->resolu ? "oui" : "non" }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($probleme->update_at)->format('d/m/Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($probleme->updated_at)->format('d/m/Y') }}</td>
                                             <td class="text-center">
 
                                                 <a href="{{ route('probleme.resoudre', $probleme) }}"
@@ -196,7 +196,7 @@
                                             <td>{{ $action->action->libelle }}</td>
                                             <td>{{ isset($action->complement->libelle) ? $action->complement->libelle : "non renseigné" }}</td>
                                             <td>{{ $action->avancement ? "terminé" : "en cours"}}</td>
-                                            <td>{{ \Carbon\Carbon::parse($action->update_at)->format('d/m/Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($action->updated_at)->format('d/m/Y') }}</td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-success showModalAction"
                                                         data-toggle="modal">

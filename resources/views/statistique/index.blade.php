@@ -91,6 +91,11 @@
                         <div class="col-12 my-5">
                             {!! App::make(\App\Http\Controllers\GrapheController::class)->makeChart($dateNow, 'rdvCourrier') !!}
                         </div>
+
+                        <div class="col-12 my-5">
+                        {!! App::make(\App\Http\Controllers\GrapheController::class)->makeChart($dateNow, 'nbAccompagnement') !!}
+                        </div>
+
                     </div>
 
                 </div>
