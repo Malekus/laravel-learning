@@ -60,13 +60,24 @@ class GrapheController extends Controller
 
             $chart = "Highcharts.chart('".$idGraphe."', {
                         chart: {
-                            type: 'column'
+                            type: 'column',
+                            events: {
+                                render: function() {
+                                  let series = this.series
+                                  let sum = 0
+                                  for(let i = 0; i < series.length; i++) {
+                                    if(series[i].visible){
+                                      for(let j = 0; j < series[i].data.length; j++) {
+                                        sum += series[i].data[j].y
+                                      }
+                                    }
+                                  }
+                                this.setTitle(false, {text: sum + ' personnes'}, false) 
+                                }
+                              }
                         },
                         title: {
                             text: 'Nombre de personne en ". $date ."'
-                        },
-                        subtitle: {
-                            text: '".array_sum($values)." personnes'
                         },
                         xAxis: {
                            type: 'category',
@@ -98,7 +109,6 @@ class GrapheController extends Controller
                         }],
                         
                         credits: { enabled: false },
-                        //legend: { enabled: false },
                         tooltip: { enabled: false }
                         
                         });";
@@ -126,7 +136,7 @@ class GrapheController extends Controller
             }
 
 
-            $chart = "var breaksProbleme = new Map();\nHighcharts.chart('".$idGraphe."', {
+            $chart = "var breaksProbleme = new Map();\n    Highcharts.chart('" . $idGraphe . "', {
                         chart: {
                             type: 'column',
                             events: {
@@ -152,6 +162,7 @@ class GrapheController extends Controller
                         },
                         yAxis: {
                             min: 0,
+                            
                             title: {
                                 text: 'Nombre de problème'
                             }
@@ -169,7 +180,6 @@ class GrapheController extends Controller
                                       else {
                                         breaksProbleme.set(this.xData[0], {from: this.xData[0] - 0.5,to: this.xData[0] + 0.5,breakSize: 0})
                                       }
-                                      
                                       this.chart.xAxis[0].update({
                                         breaks: [... breaksProbleme.values()]
                                       });
@@ -180,13 +190,10 @@ class GrapheController extends Controller
                                 dataLabels: { enabled: true }
                             }
                         },
-                        
                         series: [
                             ". $series ."
                         ],
-                        
                         credits: { enabled: false },
-                        //legend: { enabled: false },
                         tooltip: { enabled: false },
                         });";
 
@@ -210,9 +217,23 @@ class GrapheController extends Controller
                 $series.= "{ name: '$value', data: [{name: '$value', y:$values[$key], x:$key}] },";
             }
 
-            $chart = "Highcharts.chart('".$idGraphe."', {
+            $chart = "var breaksAction = new Map();\n    Highcharts.chart('" . $idGraphe . "', {
                         chart: {
-                            type: 'column'
+                            type: 'column',
+                            events: {
+                            render: function() {
+                              let series = this.series
+                              let sum = 0
+                              for(let i = 0; i < series.length; i++) {
+                                if(series[i].visible){
+                                  for(let j = 0; j < series[i].data.length; j++) {
+                                    sum += series[i].data[j].y
+                                  }
+                                }
+                              }
+                            this.setTitle(false, {text: sum + ' rendez-vous'}, false) 
+                            }
+                          }
                         },
                         title: {
                             text: 'Nombre de rendez-vous en ". $date ."'
@@ -233,7 +254,21 @@ class GrapheController extends Controller
                             column: {
                                 grouping: false,
                                 pointPadding: 0.2,
-                                borderWidth: 0
+                                borderWidth: 0,
+                                events: {
+                                    legendItemClick: function() {
+                                        if(breaksAction.has(this.xData[0])) {
+                                        breaksAction.delete(this.xData[0])
+                                      }
+                                      else {
+                                        breaksAction.set(this.xData[0], {from: this.xData[0] - 0.5,to: this.xData[0] + 0.5,breakSize: 0})
+                                      }
+                                      
+                                      this.chart.xAxis[0].update({
+                                        breaks: [... breaksAction.values()]
+                                      });
+                                    }
+      							}
                             },
                             series: {
                                 dataLabels: { enabled: true }
@@ -286,15 +321,26 @@ class GrapheController extends Controller
                 $series.= "{ name: '$value', data: [{name: '$value', y:$values[$key], x:$key}] },";
             }
 
-            $chart = "Highcharts.chart('".$idGraphe."', {
+            $chart = "var breaksAge = new Map();\n    Highcharts.chart('" . $idGraphe . "', {
                         chart: {
-                            type: 'column'
+                            type: 'column',
+                            events: {
+                                render: function() {
+                                  let series = this.series
+                                  let sum = 0
+                                  for(let i = 0; i < series.length; i++) {
+                                    if(series[i].visible){
+                                      for(let j = 0; j < series[i].data.length; j++) {
+                                        sum += series[i].data[j].y
+                                      }
+                                    }
+                                  }
+                                  this.setTitle(false, {text: sum + ' personnes'}, false) 
+                                }
+                            }
                         },
                         title: {
                             text: 'Nombre de personne par tranche d\'âge en ". $date ."'
-                        },
-                        subtitle: {
-                            text: '".array_sum($values)." personnes'
                         },
                         xAxis: {
                            type: 'category',
@@ -309,7 +355,20 @@ class GrapheController extends Controller
                             column: {
                                 grouping: false,
                                 pointPadding: 0.2,
-                                borderWidth: 0
+                                borderWidth: 0,
+                                events: {
+                                    legendItemClick: function() {
+                                        if(breaksAge.has(this.xData[0])) {
+                                        breaksAge.delete(this.xData[0])
+                                      }
+                                      else {
+                                        breaksAge.set(this.xData[0], {from: this.xData[0] - 0.5,to: this.xData[0] + 0.5,breakSize: 0})
+                                      }
+                                      this.chart.xAxis[0].update({
+                                        breaks: [... breaksAge.values()]
+                                      });
+                                    }
+      							}
                             },
                             series: {
                                 dataLabels: { enabled: true }
@@ -321,7 +380,6 @@ class GrapheController extends Controller
                         ],
                         
                         credits: { enabled: false },
-                        //legend: { enabled: false },
                         tooltip: { enabled: false },
                         });";
 
@@ -350,15 +408,26 @@ class GrapheController extends Controller
                 $series.= "{ name: '$value', data: [{name: '$value', y:$values[$key], x:$key}] },";
             }
 
-            $chart = "Highcharts.chart('".$idGraphe."', {
+            $chart = "var breaksRdvCourrier = new Map();\n    Highcharts.chart('".$idGraphe."', {
                         chart: {
-                            type: 'column'
+                            type: 'column',
+                            events: {
+                                render: function() {
+                                  let series = this.series
+                                  let sum = 0
+                                  for(let i = 0; i < series.length; i++) {
+                                    if(series[i].visible){
+                                      for(let j = 0; j < series[i].data.length; j++) {
+                                        sum += series[i].data[j].y
+                                      }
+                                    }
+                                  }
+                                  this.setTitle(false, {text: sum + ((sum != 1) ? ' courriers' : ' courrier')}, false) 
+                                }
+                            }
                         },
                         title: {
                             text: 'Nombre de courrier en ". $date ."'
-                        },
-                        subtitle: {
-                            text: '".array_sum($values)." courriers'
                         },
                         xAxis: {
                            type: 'category',
@@ -373,7 +442,20 @@ class GrapheController extends Controller
                             column: {
                                 grouping: false,
                                 pointPadding: 0.2,
-                                borderWidth: 0
+                                borderWidth: 0,
+                                events: {
+                                    legendItemClick: function() {
+                                        if(breaksRdvCourrier.has(this.xData[0])) {
+                                        breaksRdvCourrier.delete(this.xData[0])
+                                      }
+                                      else {
+                                        breaksRdvCourrier.set(this.xData[0], {from: this.xData[0] - 0.5,to: this.xData[0] + 0.5,breakSize: 0})
+                                      }
+                                      this.chart.xAxis[0].update({
+                                        breaks: [... breaksRdvCourrier.values()]
+                                      });
+                                    }
+      							}
                             },
                             series: {
                                 dataLabels: { enabled: true }
@@ -385,7 +467,6 @@ class GrapheController extends Controller
                         ],
                         
                         credits: { enabled: false },
-                        //legend: { enabled: false },
                         tooltip: { enabled: false },
                         });";
 
