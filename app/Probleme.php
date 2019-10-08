@@ -54,13 +54,26 @@ class Probleme extends Model
         });
 
         self::created(function ($model) {
-            $model->personne->updated_at = new Carbon('now');
-            $model->personne->save();
+            if ($model->personne){
+                $model->personne->updated_at = new Carbon('now');
+                $model->personne->save();
+            }
+            else {
+                $model->partenaire->updated_at = new Carbon('now');
+                $model->partenaire->save();
+            }
+
         });
 
         self::updated(function ($model) {
-            $model->personne->updated_at = new Carbon('now');
-            $model->personne->save();
+            if ($model->personne){
+                $model->personne->updated_at = new Carbon('now');
+                $model->personne->save();
+            }
+            else {
+                $model->partenaire->updated_at = new Carbon('now');
+                $model->partenaire->save();
+            }
         });
     }
 }
