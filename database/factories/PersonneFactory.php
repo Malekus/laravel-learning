@@ -23,6 +23,11 @@ $factory->define(App\Personne::class, function (Faker $faker) {
         'ville' => $faker->city ,
         'prioritaire' => $faker->boolean ,
         'matricule_caf' => $faker->randomNumber,
+<<<<<<< HEAD
         'updated_at' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now'),
+=======
+        'origine' => $faker->country ,
+        'updated_at' => $faker->dateTimeBetween($startDate = '-3 years', $endDate = 'now'),
+>>>>>>> 35396fed6bc192299020bd5c691f581f5f3adfb5
     ];
 });

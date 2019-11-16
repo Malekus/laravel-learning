@@ -11,6 +11,6 @@ class PartenaireTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Partenaire::class, 250)->create();
+        factory(\App\Partenaire::class, 300)->create();
     }
 }
