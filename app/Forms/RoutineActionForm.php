@@ -58,13 +58,15 @@ class RoutineActionForm extends Form
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
                 'choices' => [1 => 'oui', 0 => 'non'],
+                'default_value' => 0
             ])
             ->add('duree', 'select', [
                 'label' => 'Durée',
                 'wrapper' => ['class' => $wrapper],
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
-                'choices' => [1 => 'oui', 0 => 'non'],
+                'choices' => [0 => '00:00', 5 => '00:05', 10 => '00:10', 15 => '00:15', 20 => '00:20', 25 => '00:25', 30 => '00:30', 35 => '00:35', 40 => '00:40', 45 => '00:45', 50 => '00:50', 55 => '00:55', 60 => '01:00'],
+                'default_value' => 0
             ])
             ->add('information', 'select', [
                 'label' => 'Information',
@@ -72,6 +74,7 @@ class RoutineActionForm extends Form
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
                 'choices' => [1 => 'oui', 0 => 'non'],
+                'default_value' => 0
             ])
             ->add('droitOuvert', 'select', [
                 'label' => 'Ouverture de droit',
@@ -79,6 +82,7 @@ class RoutineActionForm extends Form
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
                 'choices' => [1 => 'oui', 0 => 'non'],
+                'default_value' => 0
             ])
             ->add('maintienDroit', 'select', [
                 'label' => 'Maintien de droit',
@@ -86,6 +90,7 @@ class RoutineActionForm extends Form
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
                 'choices' => [1 => 'oui', 0 => 'non'],
+                'default_value' => 0
             ])
             ->add('conflit', 'select', [
                 'label' => 'Conflit',
@@ -93,6 +98,7 @@ class RoutineActionForm extends Form
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
                 'choices' => [1 => 'oui', 0 => 'non'],
+                'default_value' => 0
             ])
             ->add('perduDeVue', 'select', [
                 'label' => 'Perdu de vue',
@@ -100,6 +106,7 @@ class RoutineActionForm extends Form
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
                 'choices' => [1 => 'oui', 0 => 'non'],
+                'default_value' => 0
             ])
             ->add('judiciarisation', 'select', [
                 'label' => 'Judiciarisation',
@@ -107,6 +114,7 @@ class RoutineActionForm extends Form
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
                 'choices' => [1 => 'oui', 0 => 'non'],
+                'default_value' => 0
             ])
             ->add('avancement', 'select', [
                 'label' => 'Avancement',
@@ -114,6 +122,7 @@ class RoutineActionForm extends Form
                 'attr' => ['class' => $attr_class],
                 'label_attr' => ['class' => $label_attr],
                 'choices' => ['en cours' => 'en cours', 'terminé' => 'terminé'],
+                'default_value' => 'terminé'
             ]);
     }
 }

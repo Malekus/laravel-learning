@@ -1,5 +1,4 @@
 @if(isset($edit))
-
     <div class="form-group row justify-content-center">
         {!! Form::label('action', 'Action', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">
@@ -151,9 +150,6 @@
             </div>
         </div>
     @endif
-
-
-
     <div class="form-group row justify-content-center">
         {!! Form::label('action', 'Action', ['class' => 'col-lg-2 col-form-label']) !!}
         <div class="col-lg-6">

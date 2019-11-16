@@ -11,7 +11,8 @@
                         </div>
 
                         <div class="col-4">
-                            <div class="float-right">
+
+                            <div class="float-right ml-2">
                                 <div class="dropdown">
                                     <button class="btn btn-success dropdown-toggle pull-right my-2" type="button"
                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -27,11 +28,8 @@
                                            href="{{ route('probleme.create', ['type' => 'personne', 'id' => $personne]) }}"><span
                                                     class="icon mr-2"><i class="fas fa-exclamation-triangle"></i></span>Ajouter
                                             un problème</a>
-                                        <a class="dropdown-item" href="{{ route('action.create', $personne) }}"><span
-                                                    class="icon mr-2"><i
-                                                        class="fas fa-cogs"></i></span>Ajouter un rendez-vous</a>
-                                        <a class="dropdown-item" href="{{ route('personne.routine', ['id' => $personne]) }}"><span class="icon mr-2"><i
-                                                        class="fas fa-redo-alt"></i></span>Ajouter une routine</a>
+                                        <a class="dropdown-item" href="{{ route('action.create', $personne) }}">
+                                            <span class="icon mr-2"><i class="fas fa-cogs"></i></span>Ajouter un rendez-vous</a>
                                         <a class="dropdown-item"
                                            href="{{ route('personne.createCafDate', ['id' => $personne]) }}"><span
                                                     class="icon mr-2"><i
@@ -39,10 +37,15 @@
                                         <a class="dropdown-item"
                                            href="{{ route('personne.addListCafDate', ['id' => $personne]) }}"><span
                                                     class="icon mr-2"><i
-                                                        class="fas fa-calendar-alt"></i></span>Ajouter à la liste Caf du
-                                            mois</a>
+                                                        class="fas fa-calendar-alt"></i></span>Ajouter à la liste Caf du mois
+                                        </a>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="float-right ml-2">
+                                <a class="btn btn-info my-2" href="{{ route('personne.routine', ['id' => $personne]) }}"><span class="icon mr-2"><i
+                                                class="fas fa-redo-alt"></i></span>Ajouter une routine</a>
                             </div>
                         </div>
                     </div>
