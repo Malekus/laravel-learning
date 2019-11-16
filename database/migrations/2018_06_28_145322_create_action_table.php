@@ -28,12 +28,10 @@ class CreateActionTable extends Migration
             $table->string('avancement')->default("en cours")->nullable();
             $table->integer('probleme_id')->unsigned()->index();
             $table->foreign('probleme_id')->references('id')->on('problemes')->onDelete('cascade');
-
             $table->integer('action_id')->unsigned()->index();
             $table->foreign('action_id')->references('id')->on('configurations')->onDelete('cascade');
             $table->integer('complement_id')->unsigned()->nullable()->index();
             $table->foreign('complement_id')->references('id')->on('configurations')->onDelete('set null');
-
             $table->timestamps();
         });
     }

@@ -18,7 +18,6 @@ class CreatePartenaireTable extends Migration
             $table->string('nom');
             $table->string('prenom')->nullable();
             $table->string('sexe')->nullable();
-
             $table->integer('structure_id')->unsigned()->index();
             $table->foreign('structure_id')->references('id')->on('configurations')->onDelete('cascade');
             $table->integer('type_id')->unsigned()->index();

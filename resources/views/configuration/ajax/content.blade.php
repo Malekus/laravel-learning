@@ -1,7 +1,6 @@
 <div class="row">
-    <div class="col-lg-8 pt-2">
+    <div class="col-lg-8 pt-2 sizeConfigScrool">
         <div class="row">
-
             @foreach($configurations as $key => $configuration)
                 @if($key == 0)
                     <div class="col-12 pt-2">
@@ -92,6 +91,12 @@
                     </div>
         </div>
     </div>
+    <div class="col-lg-4 pt-3 text-center">
+        <button type="button" class="btn btn-success addModal" data-toggle="modal">
+            Ajouter une configuration
+        </button>
+    </div>
+</div>
             {{--
              @if($title != 'Problème')
                 @foreach($configurations as $key => $configuration)
@@ -276,15 +281,15 @@
                                         </table>
                                     </div>
                                 </div>
-            @endif--}}
+            @endif
+
+
+
+
+            --}}
 
 
 
 
 
-    <div class="col-lg-4 pt-2 text-center">
-        <button type="button" class="btn btn-success addModal" data-toggle="modal">
-            Ajouter une configuration
-        </button>
-    </div>
-</div>
+

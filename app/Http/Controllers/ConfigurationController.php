@@ -7,32 +7,17 @@ use Illuminate\Http\Request;
 
 class ConfigurationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('configuration.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('configuration.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //dd($request->all());
@@ -41,37 +26,18 @@ class ConfigurationController extends Controller
         return \response()->json(\view('ajax.configuration.line')->with(['configuration' => $configuration])->render());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $configuration = Configuration::findOrFail($id);
         return \response()->json(\view('ajax.configuration.show')->with(['configuration' => $configuration, 'titleModal' => 'PersonneResource'])->render());
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $configuration = Configuration::findOrFail($id);
         return \response()->json(\view('configuration.ajax.edit')->with(['configuration' => $configuration, 'title' => $configuration->categorie])->render());
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $configuration = Configuration::findOrFail($id);
@@ -82,12 +48,6 @@ class ConfigurationController extends Controller
         return redirect(route('configuration.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $config = Configuration::find($id);

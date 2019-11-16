@@ -229,3 +229,12 @@ canvas {
 .highcharts-container, .highcharts-root {
     width: 100% !important;
 }
+
+.sizeConfigScrool {
+    height: calc(100vh - 214px);
+    overflow-y: scroll;
+}
+
+.sizeConfigScrool::-webkit-scrollbar {
+    display: none;
+}

@@ -502,7 +502,7 @@ class GrapheController extends Controller
                                   for(let i = 0; i < series.length; i++) {
                                     if(series[i].visible){
                                       for(let j = 0; j < series[i].data.length; j++) {
-                                        sum += series[i].data[j]
+                                        sum += series[i].data[j].y
                                       }
                                     }
                                   }

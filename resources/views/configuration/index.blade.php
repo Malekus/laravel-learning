@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="nav-partenaire" role="tabpanel"
                                      aria-labelledby="nav-partenaire-tab">
-                                    {!! \App\Http\Controllers\ConfigurationController::content('PartenaireExport') !!}
+                                    {!! \App\Http\Controllers\ConfigurationController::content('Partenaire') !!}
                                 </div>
                                 <div class="tab-pane fade" id="nav-probleme" role="tabpanel"
                                      aria-labelledby="nav-probleme-tab">

@@ -29,7 +29,6 @@ class CreatePersonneTable extends Migration
             $table->string('ville')->nullable();
             $table->boolean('prioritaire')->nullable();
             $table->string('matricule_caf')->nullable();
-
             $table->integer('logement_id')->nullable()->unsigned()->index();
             $table->foreign('logement_id')->references('id')->on('configurations')->onDelete('set null');
             $table->integer('csp_id')->nullable()->unsigned()->index();
