@@ -21,23 +21,6 @@ class CreateConfigTable extends Migration
             $table->timestamps();
             $table->unique(['categorie', 'champ', 'libelle']);
         });
-
-
-        /*
-
-
-
-
-        Schema::table('action', function (Blueprint $table){
-
-        });
-
-        Schema::table('action', function (Blueprint $table){
-
-        });
-
-        */
-
     }
 
     /**

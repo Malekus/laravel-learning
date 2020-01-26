@@ -6,12 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreatePersonneTable extends Migration
 {
-    /**
-     * Run tdhe migrations.
-     *
-     * @return void
-     */
-
     public function up()
     {
         Schema::create('personnes', function (Blueprint $table) {
@@ -29,10 +23,7 @@ class CreatePersonneTable extends Migration
             $table->string('ville')->nullable();
             $table->boolean('prioritaire')->nullable();
             $table->string('matricule_caf')->nullable();
-<<<<<<< HEAD
-=======
             $table->string('origine')->nullable();
->>>>>>> 35396fed6bc192299020bd5c691f581f5f3adfb5
             $table->integer('logement_id')->nullable()->unsigned()->index();
             $table->foreign('logement_id')->references('id')->on('configurations')->onDelete('set null');
             $table->integer('csp_id')->nullable()->unsigned()->index();
@@ -46,25 +37,8 @@ class CreatePersonneTable extends Migration
 
             $table->timestamps();
         });
-
-
-
-        /*
-        Schema::table('probleme', function (Blueprint $table){
-            $table->integer('personne_id')->unsigned()->index();
-        });
-
-        Schema::table('caf_date', function (Blueprint $table){
-            $table->integer('personne_id')->unsigned()->index();
-        });*/
-
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('personnes');

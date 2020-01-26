@@ -58,6 +58,9 @@ class GrapheController extends Controller
             $categories = array_values($r[0]);
             $values = $r[1];
 
+            //dd($categories, $values, $values[1] );
+
+
             $chart = "Highcharts.chart('".$idGraphe."', {
                         chart: {
                             type: 'column',
@@ -112,6 +115,7 @@ class GrapheController extends Controller
                         tooltip: { enabled: false }
                         
                         });";
+
             return view('graphe.makeChart', ['idGraphe' => $idGraphe, 'chart' => $chart]);
         }
 
