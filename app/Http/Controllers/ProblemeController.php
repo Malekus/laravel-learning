@@ -7,6 +7,7 @@ use App\Forms\ProblemeForm;
 use App\Partenaire;
 use App\Personne;
 use App\Probleme;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 
@@ -36,11 +37,10 @@ class ProblemeController extends Controller
     {
         $probleme = new Probleme();
         $dateNow = \Carbon\Carbon::now();
-        if ($type == 'personne'){
+        if ($type == 'personne') {
             $personne = Personne::find($id);
             $probleme->personne()->associate($personne);
-        }
-        else{
+        } else {
             $partenaire = Partenaire::find($id);
             $probleme->partenaire()->associate($partenaire);
         }
@@ -91,7 +91,12 @@ class ProblemeController extends Controller
         if (!$probleme) {
             return response()->json(null, 404);
         }
-        $probleme->resolu = !$probleme->resolu;
+
+        if (empty($probleme->resolu)) {
+            $probleme->resolu = Carbon::now();
+        } else {
+            $probleme->resolu = null;
+        }
         $probleme->save();
         return redirect(route('personne.show', ['personne' => $probleme->personne]));
 

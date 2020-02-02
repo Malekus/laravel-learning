@@ -138,7 +138,7 @@
                                             <td>{{ $probleme->categorie->libelle }}</td>
                                             <td>{{ isset($probleme->type->libelle) ? $probleme->type->libelle : "non renseigné" }}</td>
                                             <td>{{ \Carbon\Carbon::parse($probleme->dateProbleme)->format('d/m/Y') }}</td>
-                                            <td>{{ $probleme->resolu ? "oui" : "non" }}</td>
+                                            <td>{{ $probleme->resolu ? \Carbon\Carbon::parse($probleme->resolu)->format('d/m/Y') : "non" }}</td>
                                             <td>{{ \Carbon\Carbon::parse($probleme->updated_at)->format('d/m/Y') }}</td>
                                             <td class="text-center">
 

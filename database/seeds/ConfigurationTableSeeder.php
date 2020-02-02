@@ -141,6 +141,17 @@ class ConfigurationTableSeeder extends Seeder
         App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Secours populaire']);
         App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Resto du coeur']);
         App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'SIAO']);
+        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Avocat']);
+        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'DRAC']);
+        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Délégué du préfet']);
+        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Éducation spécialisée']);
+        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'État civil nantes']);
+        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Inspection du travail']);
+        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Maison de l\'emploi']);
+        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'PRE']);
+        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'TSL Casablanca']);
+        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Établissement scolaire']);
+        App\Configuration::create(['categorie' => 'Action', 'champ' => 'Dirigé vers', 'libelle' => 'Sécuité sociale']);
         App\Configuration::create(['categorie' => 'Partenaire', 'champ' => 'Structure', 'libelle' => 'Mairie']);
         App\Configuration::create(['categorie' => 'Partenaire', 'champ' => 'Structure', 'libelle' => 'Préfecture']);
         App\Configuration::create(['categorie' => 'Partenaire', 'champ' => 'Structure', 'libelle' => 'Association']);
@@ -240,7 +251,7 @@ class ConfigurationTableSeeder extends Seeder
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Solidarité Transport']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Améthyste Transport']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'DALO']);
-        App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'FAJ(hotel']);
+        App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'FAJ(hotel)']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'ASE(hotel)']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Litige(dette)']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Expulsion']);
@@ -251,7 +262,7 @@ class ConfigurationTableSeeder extends Seeder
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Caritatif']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'CCAS(aide)']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Conflit du W']);
-        App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'FAJ(aide)']);
+        App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'FAG(aide)']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Pole emploi']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Prime d\'activité']);
         App\Configuration::create(['categorie' => 'Problème', 'champ' => 'Type', 'libelle' => 'Retraite']);

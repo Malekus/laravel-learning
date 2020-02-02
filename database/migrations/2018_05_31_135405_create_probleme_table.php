@@ -17,7 +17,7 @@ class CreateProblemeTable extends Migration
     {
         Schema::create('problemes', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('resolu')->default(false);
+            $table->date('resolu')->nullable();
             $table->date('dateProbleme')->default(Carbon::now());
             $table->integer('personne_id')->nullable()->unsigned();
             $table->foreign('personne_id')->references('id')->on('personnes')->onDelete('set null');
