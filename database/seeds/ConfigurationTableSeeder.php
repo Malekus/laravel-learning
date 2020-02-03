@@ -337,5 +337,7 @@ class ConfigurationTableSeeder extends Seeder
         App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Vers autre mode de contrat Caf']);
         App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Autre orientation']);
         App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Commentaire ou autre action']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Vérification dossier']);
+        App\Configuration::create(['categorie' => 'Caf', 'champ' => 'Motif', 'libelle' => 'Autre mode de contrat caf']);
     }
 }
