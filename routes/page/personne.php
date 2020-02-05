@@ -1,45 +1,49 @@
 <?php
 
-Route::post('/personne', 'PersonneController@store')
-    ->name('personne.store');
+Route::middleware('auth')->group(function () {
 
-Route::get('/personne', 'PersonneController@index')
-    ->name('personne.index');
+    Route::post('/personne', 'PersonneController@store')
+        ->name('personne.store');
 
-Route::get('/personne/create', 'PersonneController@create')
-    ->name('personne.create');
+    Route::get('/personne', 'PersonneController@index')
+        ->name('personne.index');
 
-Route::put('/personne/{personne}', 'PersonneController@update')
-    ->name('personne.update');
+    Route::get('/personne/create', 'PersonneController@create')
+        ->name('personne.create');
 
-Route::delete('/personne/{personne}', 'PersonneController@destroy')
-    ->name('personne.destroy');
+    Route::put('/personne/{personne}', 'PersonneController@update')
+        ->name('personne.update');
 
-Route::get('/personne/{personne}', 'PersonneController@show')
-    ->name('personne.show')
-    ->where('personne', '[0-9]+');
+    Route::delete('/personne/{personne}', 'PersonneController@destroy')
+        ->name('personne.destroy');
 
-Route::get('/personne/{personne}/edit', 'PersonneController@edit')
-    ->name('personne.edit');
+    Route::get('/personne/{personne}', 'PersonneController@show')
+        ->name('personne.show')
+        ->where('personne', '[0-9]+');
 
-Route::get('/personne/routine/{id}', 'PersonneController@routine')
-    ->name('personne.routine');
+    Route::get('/personne/{personne}/edit', 'PersonneController@edit')
+        ->name('personne.edit');
 
-Route::post('/personne/routine/{id}', 'PersonneController@routine')
-    ->name('personne.routine');
+    Route::get('/personne/routine/{id}', 'PersonneController@routine')
+        ->name('personne.routine');
 
-Route::post('/personne/list', 'PersonneController@list_')
-    ->name('personne.list');
+    Route::post('/personne/routine/{id}', 'PersonneController@routine')
+        ->name('personne.routine');
 
-Route::get('/personne/{personne}/{action}', 'PersonneController@modal')
-    ->name('personne.modal')
-    ->where('personne', '[0-9]+');
+    Route::post('/personne/list', 'PersonneController@list_')
+        ->name('personne.list');
 
-Route::get('/personne/cafMois/{id}', 'PersonneController@createCafDate')
-    ->name('personne.createCafDate');
+    Route::get('/personne/{personne}/{action}', 'PersonneController@modal')
+        ->name('personne.modal')
+        ->where('personne', '[0-9]+');
 
-Route::post('/personne/cafMois/{id}', 'PersonneController@createCafDate')
-    ->name('personne.createCafDate');
+    Route::get('/personne/cafMois/{id}', 'PersonneController@createCafDate')
+        ->name('personne.createCafDate');
 
-Route::get('/personne/addListCafDate/{id}', 'PersonneController@addListCafDate')
-    ->name('personne.addListCafDate');
+    Route::post('/personne/cafMois/{id}', 'PersonneController@createCafDate')
+        ->name('personne.createCafDate');
+
+    Route::get('/personne/addListCafDate/{id}', 'PersonneController@addListCafDate')
+        ->name('personne.addListCafDate');
+
+});

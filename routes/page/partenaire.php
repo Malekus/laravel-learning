@@ -1,17 +1,21 @@
 <?php
 
-Route::get('/partenaire', 'PartenaireController@index')
-    ->name('partenaire.index');
+Route::middleware('auth')->group(function () {
 
-Route::get('/partenaire/create', 'PartenaireController@create')
-    ->name('partenaire.create');
+    Route::get('/partenaire', 'PartenaireController@index')
+        ->name('partenaire.index');
 
-Route::post('/partenaire/list', 'PartenaireController@list_')
-    ->name('partenaire.list');
+    Route::get('/partenaire/create', 'PartenaireController@create')
+        ->name('partenaire.create');
 
-Route::get('/partenaire/{partenaire}', 'PartenaireController@show')
-    ->name('partenaire.show')
-    ->where('partenaire', '[0-9]+');
+    Route::post('/partenaire/list', 'PartenaireController@list_')
+        ->name('partenaire.list');
 
-Route::post('/partenaire', 'PartenaireController@store')
-    ->name('partenaire.store');
+    Route::get('/partenaire/{partenaire}', 'PartenaireController@show')
+        ->name('partenaire.show')
+        ->where('partenaire', '[0-9]+');
+
+    Route::post('/partenaire', 'PartenaireController@store')
+        ->name('partenaire.store');
+
+});

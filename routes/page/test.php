@@ -1,13 +1,12 @@
 <?php
 
-Route::get('/test', 'TestController@index')
-    ->name('test.index');
-/*
-Route::post('/test', 'TestController@form')
-    ->name('test.form');
 
-*/
+Route::middleware('auth')->group(function () {
 
+    Route::get('/test', 'TestController@index')
+        ->name('test.index');
 
-Route::get('/graphe', 'GrapheController@grapheTest')
-    ->name('graphe.graphe');
+    Route::get('/graphe', 'GrapheController@grapheTest')
+        ->name('graphe.graphe');
+
+});
