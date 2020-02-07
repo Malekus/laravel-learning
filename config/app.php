@@ -147,7 +147,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         \ConsoleTVs\Charts\ChartsServiceProvider::class,
-        Illuminate\Html\HtmlServiceProvider::class,
         RezaAr\Highcharts\Provider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 

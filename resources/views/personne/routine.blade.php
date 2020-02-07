@@ -117,13 +117,6 @@
 
         $(document).ready(function () {
 
-            /*
-            var btn = "<button type=\"button\" class=\"btn btn-success add-to-collection\"><i class=\"fas fa-plus\"></i></button>";
-            $('.collection-container .form-group .row label').wrap('<div class="col-md-2 offset-md-2"></div>')
-            $('.collection-container .form-group .row select').wrap('<div class="col-md-6"></div>')
-            $('.collection-container .form-group .row input').wrap('<div class="col-md-6"></div>')
-            $('body > div.main-content > div.content > div > div > div > div > div > div.col-lg-12 > form > div.collection-container > div > div > div:nth-child(1)').append(btn);
-            */
             $('.add-to-collection').on('click', function (e) {
                 e.preventDefault();
                 var container = $('.collection-container');
@@ -139,9 +132,7 @@
                     var x = $(this);
                     x.wrap('<div class="col-md-6"></div>');
                 });
-
                 deleteSubFormAction($p);
-
                 container.append($p);
             });
         });

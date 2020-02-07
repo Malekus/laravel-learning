@@ -5,7 +5,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/personne', 'PersonneController@store')
         ->name('personne.store');
 
-    Route::get('/personne', 'PersonneController@index')
+    Route::get('/', 'PersonneController@index')
         ->name('personne.index');
 
     Route::get('/personne/create', 'PersonneController@create')
@@ -45,5 +45,4 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/personne/addListCafDate/{id}', 'PersonneController@addListCafDate')
         ->name('personne.addListCafDate');
-
 });

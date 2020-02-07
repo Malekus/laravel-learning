@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Personne extends Model
 {
-    protected $fillable = ['*'];
+    protected $fillable = ['nom', 'prenom', 'date_naissance', 'sexe', 'enfant', 'nationalite', 'telephone', 'email', 'adresse', 'code_postale', 'ville', 'prioritaire', 'matricule_caf', 'origine'];
 
     protected $table = 'personnes';
 
@@ -75,4 +75,18 @@ class Personne extends Model
         return $query->select(array_diff($this->columns, $value));
     }
 
+    public function setNomAttribute($value)
+    {
+        $this->attributes['nom'] = ucfirst($value);
+    }
+
+    public function setPrenomAttribute($value)
+    {
+        $this->attributes['prenom'] = ucfirst($value);
+    }
+
+    public function setVilleAttribute($value)
+    {
+        $this->attributes['ville'] = ucfirst($value);
+    }
 }

@@ -10,10 +10,7 @@ class Probleme extends Model
 
     protected $table = 'problemes';
 
-    protected $fillable = [
-        'personne_id',
-        'resolu'
-    ];
+    protected $fillable = ['resolu', 'dateProbleme'];
 
     public function personne()
     {

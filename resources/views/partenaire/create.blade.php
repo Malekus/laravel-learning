@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-body sizeCard">
                     <div class="row">
-                        @include('layout.title', ['title' => 'Ajouter une partenaire'])
+                        @include('layout.title', ['title' => 'Ajouter une partenaire', 'icon' => 'fa-users'])
                         <div class="col-lg-12">
                             {!! Form::open(['url' => route('partenaire.store'), 'class' => 'needs-validation', 'novalidate']) !!}
 

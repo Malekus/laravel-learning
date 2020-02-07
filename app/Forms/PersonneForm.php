@@ -20,10 +20,10 @@ class PersonneForm extends Form
         $this->formOptions = [
             'method' => $method,
             'url' => $url,
-            'novalidate'
+            'novalidate',
+            'class' => 'needs-validation'
 
         ];
-
 
         $wrapper = 'form-group row justify-content-center';
         $attr_class = 'form-control';

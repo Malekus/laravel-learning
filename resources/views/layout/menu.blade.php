@@ -1,6 +1,6 @@
 <div class="header">
     <div class="logo">
-        <a href="{{ route('index') }}">
+        <a href="{{ route('personne.index') }}">
             <i class="fa fa-tachometer-alt"></i>
             <span>APCIS 4.0</span>
         </a>

@@ -28,7 +28,7 @@
 <div class="form-group row justify-content-center">
     {!! Form::label('structure', 'Structure', ['class' => 'col-lg-2 col-form-label']) !!}
     <div class="col-lg-6">
-        {!! Form::select('structure', \App\Configuration::where(['champ' => 'Structure', 'categorie' => 'PartenaireExport'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
+        {!! Form::select('structure', \App\Configuration::where(['champ' => 'Structure', 'categorie' => 'Partenaire'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
         <div class="invalid-feedback">
             Saisir un structure
         </div>
@@ -38,7 +38,7 @@
 <div class="form-group row justify-content-center">
     {!! Form::label('type', 'Type', ['class' => 'col-lg-2 col-form-label']) !!}
     <div class="col-lg-6">
-        {!! Form::select('type', \App\Configuration::where(['champ' => 'Type', 'categorie' => 'PartenaireExport'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
+        {!! Form::select('type', \App\Configuration::where(['champ' => 'Type', 'categorie' => 'Partenaire'])->pluck('libelle', 'id'), null,['class' => 'form-control']) !!}
         <div class="invalid-feedback">
             Saisir un type
         </div>

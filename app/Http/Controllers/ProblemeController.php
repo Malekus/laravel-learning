@@ -44,13 +44,9 @@ class ProblemeController extends Controller
             $partenaire = Partenaire::find($id);
             $probleme->partenaire()->associate($partenaire);
         }
-
-        $form = $this->getForm($probleme);
-        $form->redirectIfNotValid();
         $probleme->categorie()->associate($request->get('categorie'));
         $probleme->type()->associate($request->get('type'));
         $probleme->accompagnement()->associate($request->get('accompagnement'));
-        //dd($probleme);
         $probleme->save();
         if ($type == 'personne')
             return redirect(route('personne.show', ['personne' => $id]));

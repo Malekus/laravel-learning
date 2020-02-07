@@ -30,12 +30,6 @@ class PartenaireController extends Controller
         return view('partenaire.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $partenaire = $request->isMethod('put') ? Partenaire::findOrFail($request->id) :

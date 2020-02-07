@@ -11,6 +11,6 @@ class CafDateTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\CafDate::class, 200)->create();
+        factory(\App\CafDate::class, 100)->create();
     }
 }
